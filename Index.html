@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Dastan Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscroll-behavior:none}
+#login-screen{min-height:100vh;background:#1a1a2e;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.pin-label{color:#e8c547;font-size:11px;letter-spacing:4px;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+.pin-title{color:#fff;font-size:26px;font-weight:900;margin-bottom:36px}
+.pin-dots{display:flex;gap:14px;margin-bottom:6px}
+.pin-dot{width:18px;height:18px;border-radius:50%;border:2px solid #e8c547;background:transparent;transition:background .15s}
+.pin-dot.filled{background:#e8c547}
+.pin-hint{color:#e8544a;font-size:13px;min-height:20px;margin-bottom:18px;font-weight:700}
+.pin-grid{display:grid;grid-template-columns:repeat(3,70px);gap:10px}
+.pin-btn{width:70px;height:70px;border-radius:16px;border:none;background:#16213e;color:#fff;font-size:22px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.3);transition:transform .1s;display:flex;align-items:center;justify-content:center}
+.pin-btn:active{transform:scale(.91)}
+.pin-btn.back{background:#2d2d4a;color:#aaa}
+.pin-btn.empty{background:transparent;box-shadow:none;cursor:default}
+.pin-hint-small{color:#444;font-size:12px;margin-top:28px}
+@keyframes shake{0%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}100%{transform:translateX(0)}}
+.shake{animation:shake .4s}
+#app{display:none}
+.header{background:#1a1a2e;padding:12px 14px;position:sticky;top:0;z-index:50;box-shadow:0 2px 16px rgba(0,0,0,.2)}
+.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.header-sub{color:#e8c547;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:700}
+.header-main{color:#fff;font-size:17px;font-weight:900;line-height:1.1}
+.search-box{flex:1;padding:9px 13px;border-radius:12px;border:none;background:rgba(255,255,255,.1);color:#fff;font-size:14px;font-family:'Nunito',sans-serif;outline:none;min-width:0}
+.search-box::placeholder{color:rgba(255,255,255,.4)}
+.add-btn{width:42px;height:42px;border-radius:12px;border:none;flex-shrink:0;background:linear-gradient(135deg,#e8c547,#f0a500);color:#1a1a2e;font-size:24px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(232,197,71,.4);transition:transform .15s}
+.add-btn:active{transform:scale(.9)}
+.cats-wrap{background:#fff;border-bottom:1px solid #ece8de;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.cats-wrap::-webkit-scrollbar{display:none}
+.cats-inner{display:flex;padding:0 10px;max-width:960px;margin:0 auto}
+.cat-tab{padding:12px 14px;font-size:13px;font-weight:800;color:#999;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;display:flex;align-items:center;gap:5px;flex-shrink:0}
+.cat-tab.active{color:#1a1a2e;border-bottom-color:#e8c547}
+.cat-count{background:#f0f0f0;color:#999;font-size:10px;padding:2px 5px;border-radius:10px;font-weight:700}
+.cat-tab.active .cat-count{background:#e8c547;color:#1a1a2e}
+.cat-add-btn{padding:10px 12px;color:#ccc;cursor:pointer;font-size:20px;display:flex;align-items:center;flex-shrink:0;border:none;background:none;font-family:'Nunito',sans-serif}
+.grid-wrap{max-width:960px;margin:0 auto;padding:14px 12px 90px}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:11px}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.07);cursor:pointer;transition:transform .18s;display:flex;flex-direction:column}
+.card:active{transform:scale(.97)}
+.card-img{height:125px;background:linear-gradient(135deg,#f5f0e8,#ede8d8);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.card-emoji{font-size:50px}
+.card-body{padding:9px 11px 11px;flex:1;display:flex;flex-direction:column}
+.card-name{font-weight:800;font-size:13px;color:#1a1a2e;margin-bottom:2px;line-height:1.3}
+.card-weight{color:#999;font-size:11px;margin-bottom:7px}
+.card-price{font-size:18px;font-weight:900;color:#1a1a2e;margin-top:auto}
+.empty{text-align:center;color:#bbb;font-size:15px;padding-top:50px}
+.empty-icon{font-size:48px;margin-bottom:10px}
+.bottom-bar{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#888;font-size:12px;font-weight:600;padding:7px 18px;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.2);white-space:nowrap;z-index:40}
+.logout-btn{color:#e8c547;cursor:pointer;margin-left:8px}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:100;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:18px 18px 30px;max-height:92vh;overflow-y:auto;animation:slideUp .25s ease}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-handle{width:40px;height:4px;background:#e0e0e0;border-radius:2px;margin:0 auto 16px}
+.modal-title{font-size:19px;font-weight:900;color:#1a1a2e;margin-bottom:16px}
+.img-upload-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px}
+.img-preview{width:84px;height:84px;border-radius:14px;background:#f5f0e8;border:2px dashed #ddd;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0;position:relative;font-size:38px}
+.img-preview img{width:100%;height:100%;object-fit:cover}
+.img-overlay{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;font-size:20px}
+.img-preview:hover .img-overlay,.img-preview:active .img-overlay{opacity:1}
+.emoji-picker-label{font-size:11px;color:#888;margin-bottom:5px;font-weight:700}
+.emoji-grid{display:flex;flex-wrap:wrap;gap:5px}
+.emoji-opt{width:32px;height:32px;border-radius:8px;border:2px solid #eee;background:#fff;font-size:16px;cursor:pointer;transition:border .15s;display:flex;align-items:center;justify-content:center}
+.emoji-opt.active{border-color:#e8c547;background:#fff9e6}
+.field{margin-bottom:12px}
+.field label{font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:4px}
+.field input,.field select{width:100%;padding:10px 12px;border-radius:11px;border:2px solid #f0f0f0;font-size:14px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;transition:border .15s;background:#fff}
+.field input:focus,.field select:focus{border-color:#e8c547}
+.price-label{font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:5px}
+.price-row{display:flex;align-items:center;gap:7px;margin-bottom:18px}
+.price-adj{width:40px;height:40px;border-radius:10px;border:2px solid #f0f0f0;background:#fff;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Nunito',sans-serif}
+.price-adj.minus{color:#e8544a}
+.price-adj.plus{color:#2d9e6e}
+.price-adj:active{background:#f5f5f5}
+.price-input{flex:1;padding:10px 8px;border-radius:11px;border:2px solid #f0f0f0;font-size:19px;font-family:'Nunito',sans-serif;font-weight:900;text-align:center;outline:none;transition:border .15s}
+.price-input:focus{border-color:#e8c547}
+.upload-status{text-align:center;color:#888;font-size:13px;font-weight:700;margin-bottom:12px;display:none}
+.progress-bar{height:4px;background:#f0f0f0;border-radius:2px;margin-bottom:14px;overflow:hidden;display:none}
+.progress-fill{height:100%;background:linear-gradient(90deg,#e8c547,#f0a500);width:0%;transition:width .3s}
+.save-btn{width:100%;padding:13px;border-radius:13px;border:none;background:linear-gradient(135deg,#e8c547,#f0a500);color:#1a1a2e;font-size:15px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 16px rgba(232,197,71,.4);transition:transform .15s}
+.save-btn:active{transform:scale(.97)}
+.save-btn:disabled{background:#eee;color:#bbb;box-shadow:none;cursor:default}
+.delete-btn{width:100%;padding:11px;border-radius:13px;border:2px solid #fee;background:#fff;color:#e8544a;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:10px}
+.delete-btn:active{background:#fee}
+.toast{display:none;position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#e8c547;padding:9px 20px;border-radius:12px;font-size:13px;font-weight:800;box-shadow:0 4px 20px rgba(0,0,0,.2);z-index:200;white-space:nowrap}
+.toast.show{display:block;animation:fadeT .2s}
+@keyframes fadeT{from{opacity:0;transform:translate(-50%,-8px)}to{opacity:1;transform:translate(-50%,0)}}
+.loading{text-align:center;color:#bbb;padding:50px 20px;font-size:14px}
+.spinner{width:30px;height:30px;border:3px solid #e8c547;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="pin-label">Dastan Shop</div>
+  <div class="pin-title">🔐 Введите PIN</div>
+  <div class="pin-dots" id="pin-dots">
+    <div class="pin-dot" id="d0"></div><div class="pin-dot" id="d1"></div>
+    <div class="pin-dot" id="d2"></div><div class="pin-dot" id="d3"></div>
+  </div>
+  <div class="pin-hint" id="pin-hint"></div>
+  <div class="pin-grid">
+    <button class="pin-btn" onclick="pinPress('1')">1</button>
+    <button class="pin-btn" onclick="pinPress('2')">2</button>
+    <button class="pin-btn" onclick="pinPress('3')">3</button>
+    <button class="pin-btn" onclick="pinPress('4')">4</button>
+    <button class="pin-btn" onclick="pinPress('5')">5</button>
+    <button class="pin-btn" onclick="pinPress('6')">6</button>
+    <button class="pin-btn" onclick="pinPress('7')">7</button>
+    <button class="pin-btn" onclick="pinPress('8')">8</button>
+    <button class="pin-btn" onclick="pinPress('9')">9</button>
+    <button class="pin-btn empty" disabled></button>
+    <button class="pin-btn" onclick="pinPress('0')">0</button>
+    <button class="pin-btn back" onclick="pinBack()">⌫</button>
+  </div>
+  <div class="pin-hint-small">PIN: 1234</div>
+</div>
+
+<div id="app">
+  <div class="header">
+    <div class="header-inner">
+      <div style="flex:0 0 auto">
+        <div class="header-sub">Dastan Shop</div>
+        <div class="header-main">Каталог товаров</div>
+      </div>
+      <input class="search-box" id="search-input" placeholder="🔍 Поиск..." oninput="renderProducts()">
+      <button class="add-btn" onclick="openProductModal(null)">+</button>
+    </div>
+  </div>
+
+  <div class="cats-wrap">
+    <div class="cats-inner" id="cats-inner"></div>
+  </div>
+
+  <div class="grid-wrap">
+    <div id="loading" class="loading"><div class="spinner"></div>Загрузка...</div>
+    <div class="product-grid" id="product-grid" style="display:none"></div>
+    <div class="empty" id="empty-state" style="display:none">
+      <div class="empty-icon">🛒</div>
+      <div id="empty-text">Нет товаров. Нажмите + чтобы добавить</div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <span id="count-label">0 товаров</span>
+    <span class="logout-btn" onclick="logout()">Выйти</span>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="prod-modal" onclick="closeIfOutside(event,'prod-modal')">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="prod-modal-title">Новый товар</div>
+    <div class="img-upload-row">
+      <div class="img-preview" id="img-preview" onclick="document.getElementById('file-input').click()">
+        <span id="preview-emoji">📦</span>
+        <img id="preview-img" style="display:none">
+        <div class="img-overlay">📷</div>
+      </div>
+      <input type="file" id="file-input" accept="image/*" capture="environment" style="display:none" onchange="handleFile(event)">
+      <div style="flex:1">
+        <div class="emoji-picker-label">Или выберите иконку</div>
+        <div class="emoji-grid" id="emoji-grid"></div>
+      </div>
+    </div>
+    <div class="field"><label>Название товара</label><input type="text" id="f-name" placeholder="Например: Пломбир"></div>
+    <div class="field"><label>Вес / объём</label><input type="text" id="f-weight" placeholder="Например: 100 г"></div>
+    <div class="field"><label>Категория</label><select id="f-cat"></select></div>
+    <label class="price-label">Цена (₽)</label>
+    <div class="price-row">
+      <button class="price-adj minus" onclick="adjPrice(-10)">−10</button>
+      <button class="price-adj minus" onclick="adjPrice(-1)">−1</button>
+      <input type="number" class="price-input" id="f-price" placeholder="0">
+      <button class="price-adj plus" onclick="adjPrice(1)">+1</button>
+      <button class="price-adj plus" onclick="adjPrice(10)">+10</button>
+    </div>
+    <div class="upload-status" id="upload-status"></div>
+    <div class="progress-bar" id="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    <button class="save-btn" id="save-btn" onclick="saveProduct()">Добавить товар</button>
+    <button class="delete-btn" id="delete-btn" style="display:none" onclick="deleteProduct()">🗑 Удалить товар</button>
+  </div>
+</div>
+
+<!-- CATEGORY MODAL -->
+<div class="modal-overlay" id="cat-modal" onclick="closeIfOutside(event,'cat-modal')">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Новая категория</div>
+    <div class="img-upload-row" style="align-items:center">
+      <div style="font-size:44px;width:70px;text-align:center" id="cat-emoji-preview">🗂️</div>
+      <div style="flex:1">
+        <div class="emoji-picker-label">Иконка категории</div>
+        <div class="emoji-grid" id="cat-emoji-grid"></div>
+      </div>
+    </div>
+    <div class="field"><label>Название категории</label><input type="text" id="cat-name-input" placeholder="Например: Мороженое"></div>
+    <button class="save-btn" onclick="saveCategory()">Добавить категорию</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, onValue, set, remove, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const app = initializeApp({
+  apiKey: "AIzaSyCLvX7Rx83A2Z0P2Jjs4XaCV1wFEEyvFuM",
+  authDomain: "dastan-shop-catalogue.firebaseapp.com",
+  databaseURL: "https://dastan-shop-catalogue-default-rtdb.firebaseio.com",
+  projectId: "dastan-shop-catalogue",
+  storageBucket: "dastan-shop-catalogue.firebasestorage.app",
+  messagingSenderId: "435593086596",
+  appId: "1:435593086596:web:1cb0c60fcda8a70d5924d1"
+});
+
+const db = getDatabase(app);
+window._db=db; window._ref=ref; window._set=set; window._remove=remove; window._push=push;
+
+onValue(ref(db,'products'), snap => { window._products=snap.val()||{}; renderProducts(); renderCats(); });
+onValue(ref(db,'categories'), snap => { window._categories=snap.val()||{}; renderCats(); renderProducts(); });
+</script>
+
+<script>
+const PIN="1234";
+const CL_CLOUD="dv9zm4x4o";
+const CL_PRESET="dastan_shop";
+const P_EMOJIS=["📦","🍦","🧃","🍞","🥛","🧈","🥩","🍎","🥦","🧀","🍗","🥚","🍫","🥤","🫙","🧂","🍬","🍪","🥜","🍋","🧁","🎂","🍕","🥗","🫐"];
+const C_EMOJIS=["🗂️","🍦","🧃","🍞","🥛","🥩","🍎","🥦","🍫","🥤","🍬","🍪","🧁","🎂","🍕","🛒","⭐","🔥","🆕","🧂","🥜","🍋","🥗","🫙","🧀"];
+
+let pinDigits=[], currentCat='all', editingId=null, selFile=null, curEmoji="📦", catEmoji="🗂️";
+window._products={}; window._categories={};
+
+// PIN
+function pinPress(d){
+  if(pinDigits.length>=4)return;
+  pinDigits.push(d); updateDots();
+  if(pinDigits.length===4){
+    if(pinDigits.join('')===PIN){
+      document.getElementById('login-screen').style.display='none';
+      document.getElementById('app').style.display='block';
+    } else {
+      document.getElementById('pin-hint').textContent='Неверный PIN';
+      document.getElementById('pin-dots').classList.add('shake');
+      setTimeout(()=>{pinDigits=[];updateDots();document.getElementById('pin-hint').textContent='';document.getElementById('pin-dots').classList.remove('shake');},700);
+    }
+  }
+}
+function pinBack(){pinDigits.pop();updateDots();}
+function updateDots(){for(let i=0;i<4;i++)document.getElementById('d'+i).classList.toggle('filled',i<pinDigits.length);}
+function logout(){document.getElementById('app').style.display='none';document.getElementById('login-screen').style.display='flex';pinDigits=[];updateDots();}
+
+// CATEGORIES
+function renderCats(){
+  const cats=window._categories, prods=window._products;
+  const counts={all:Object.keys(prods).length};
+  Object.values(prods).forEach(p=>{if(p.catId){counts[p.catId]=(counts[p.catId]||0)+1;}});
+  let html=`<div class="cat-tab ${currentCat==='all'?'active':''}" onclick="selectCat('all')">Все <span class="cat-count">${counts.all||0}</span></div>`;
+  Object.entries(cats).forEach(([id,c])=>{
+    html+=`<div class="cat-tab ${currentCat===id?'active':''}" onclick="selectCat('${id}')">${c.emoji||'🗂️'} ${c.name} <span class="cat-count">${counts[id]||0}</span></div>`;
+  });
+  html+=`<button class="cat-add-btn" onclick="openCatModal()">＋</button>`;
+  document.getElementById('cats-inner').innerHTML=html;
+  buildCatSelect();
+}
+
+function selectCat(id){currentCat=id;renderCats();renderProducts();}
+
+function buildCatSelect(){
+  const sel=document.getElementById('f-cat');
+  if(!sel)return;
+  let html='<option value="">— Без категории —</option>';
+  Object.entries(window._categories).forEach(([id,c])=>{html+=`<option value="${id}">${c.emoji||''} ${c.name}</option>`;});
+  sel.innerHTML=html;
+}
+
+// CAT MODAL
+function openCatModal(){
+  catEmoji="🗂️";
+  document.getElementById('cat-name-input').value='';
+  document.getElementById('cat-emoji-preview').textContent=catEmoji;
+  const grid=document.getElementById('cat-emoji-grid');
+  grid.innerHTML='';
+  C_EMOJIS.forEach(e=>{
+    const b=document.createElement('button');
+    b.className='emoji-opt'+(e===catEmoji?' active':'');
+    b.textContent=e;
+    b.onclick=()=>{catEmoji=e;document.getElementById('cat-emoji-preview').textContent=e;document.querySelectorAll('#cat-emoji-grid .emoji-opt').forEach(x=>x.classList.toggle('active',x.textContent===e));};
+    grid.appendChild(b);
+  });
+  document.getElementById('cat-modal').classList.add('open');
+}
+
+async function saveCategory(){
+  const name=document.getElementById('cat-name-input').value.trim();
+  if(!name){showToast('Введите название!');return;}
+  const nr=window._push(window._ref(window._db,'categories'));
+  await window._set(nr,{name,emoji:catEmoji});
+  document.getElementById('cat-modal').classList.remove('open');
+  showToast('Категория добавлена ✓');
+}
+
+// PRODUCT MODAL
+function openProductModal(p){
+  editingId=p?p.id:null; selFile=null; curEmoji=p?(p.emoji||"📦"):"📦";
+  document.getElementById('prod-modal-title').textContent=p?'Редактировать':'Новый товар';
+  document.getElementById('f-name').value=p?p.name:'';
+  document.getElementById('f-weight').value=p?p.weight:'';
+  document.getElementById('f-price').value=p?p.price:'';
+  buildCatSelect();
+  if(p&&p.catId)setTimeout(()=>{document.getElementById('f-cat').value=p.catId;},50);
+  const img=document.getElementById('preview-img'), emo=document.getElementById('preview-emoji');
+  if(p&&p.imageUrl){img.src=p.imageUrl;img.style.display='block';emo.style.display='none';}
+  else{img.style.display='none';emo.style.display='';emo.textContent=curEmoji;}
+  document.getElementById('upload-status').style.display='none';
+  document.getElementById('progress-bar').style.display='none';
+  document.getElementById('save-btn').disabled=false;
+  document.getElementById('save-btn').textContent=p?'Сохранить изменения':'Добавить товар';
+  document.getElementById('delete-btn').style.display=p?'block':'none';
+  const grid=document.getElementById('emoji-grid');
+  grid.innerHTML='';
+  P_EMOJIS.forEach(e=>{
+    const b=document.createElement('button');
+    b.className='emoji-opt'+(e===curEmoji?' active':'');
+    b.textContent=e;
+    b.onclick=()=>{curEmoji=e;selFile=null;document.getElementById('preview-img').style.display='none';document.getElementById('preview-emoji').style.display='';document.getElementById('preview-emoji').textContent=e;document.querySelectorAll('#emoji-grid .emoji-opt').forEach(x=>x.classList.toggle('active',x.textContent===e));};
+    grid.appendChild(b);
+  });
+  document.getElementById('file-input').value='';
+  document.getElementById('prod-modal').classList.add('open');
+}
+
+function handleFile(e){
+  const file=e.target.files[0]; if(!file)return;
+  selFile=file;
+  const r=new FileReader();
+  r.onload=ev=>{document.getElementById('preview-emoji').style.display='none';const img=document.getElementById('preview-img');img.src=ev.target.result;img.style.display='block';document.querySelectorAll('#emoji-grid .emoji-opt').forEach(b=>b.classList.remove('active'));};
+  r.readAsDataURL(file);
+}
+
+function adjPrice(d){const i=document.getElementById('f-price');i.value=Math.max(0,(parseFloat(i.value)||0)+d);}
+
+async function saveProduct(){
+  const name=document.getElementById('f-name').value.trim();
+  const weight=document.getElementById('f-weight').value.trim();
+  const price=parseFloat(document.getElementById('f-price').value);
+  const catId=document.getElementById('f-cat').value;
+  if(!name||isNaN(price)){showToast('Заполните название и цену!');return;}
+  const btn=document.getElementById('save-btn');
+  btn.disabled=true;btn.textContent='Сохранение...';
+  let imageUrl=editingId&&window._products[editingId]?window._products[editingId].imageUrl||null:null;
+  if(selFile){
+    try{imageUrl=await uploadCloudinary(selFile);}
+    catch(err){showToast('Ошибка фото: '+err.message);btn.disabled=false;btn.textContent='Сохранить';return;}
+  }
+  const data={name,weight,price,catId:catId||'',emoji:curEmoji,imageUrl:imageUrl||null,updatedAt:Date.now()};
+  try{
+    if(editingId){await window._set(window._ref(window._db,'products/'+editingId),data);showToast('Товар обновлён ✓');}
+    else{const nr=window._push(window._ref(window._db,'products'));await window._set(nr,data);showToast('Товар добавлен ✓');}
+    document.getElementById('prod-modal').classList.remove('open');
+  }catch(e){showToast('Ошибка: '+e.message);btn.disabled=false;btn.textContent='Сохранить';}
+}
+
+async function deleteProduct(){
+  if(!editingId||!confirm('Удалить товар?'))return;
+  await window._remove(window._ref(window._db,'products/'+editingId));
+  document.getElementById('prod-modal').classList.remove('open');
+  showToast('Товар удалён');
+}
+
+function uploadCloudinary(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onload=ev=>{
+      const img=new Image();
+      img.onload=()=>{
+        const c=document.createElement('canvas');
+        const MAX=900; let w=img.width,h=img.height;
+        if(w>MAX){h=h*MAX/w;w=MAX;} if(h>MAX){w=w*MAX/h;h=MAX;}
+        c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
+        c.toBlob(blob=>{
+          const fd=new FormData();
+          fd.append('file',blob,'photo.jpg');
+          fd.append('upload_preset',CL_PRESET);
+          fd.append('folder','dastan-shop');
+          const st=document.getElementById('upload-status');
+          const pb=document.getElementById('progress-bar');
+          const pf=document.getElementById('progress-fill');
+          st.style.display='block';st.textContent='⏳ Загрузка фото...';
+          pb.style.display='block';
+          const xhr=new XMLHttpRequest();
+          xhr.upload.onprogress=e=>{if(e.lengthComputable){const p=Math.round(e.loaded/e.total*100);pf.style.width=p+'%';st.textContent='⏳ Загрузка '+p+'%';}};
+          xhr.onload=()=>{st.style.display='none';pb.style.display='none';if(xhr.status===200){resolve(JSON.parse(xhr.responseText).secure_url);}else{reject(new Error('Статус '+xhr.status));}};
+          xhr.onerror=()=>reject(new Error('Нет сети'));
+          xhr.open('POST',`https://api.cloudinary.com/v1_1/${CL_CLOUD}/image/upload`);
+          xhr.send(fd);
+        },'image/jpeg',0.85);
+      };
+      img.src=ev.target.result;
+    };
+    r.readAsDataURL(file);
+  });
+}
+
+function renderProducts(){
+  document.getElementById('loading').style.display='none';
+  const search=(document.getElementById('search-input')?.value||'').toLowerCase();
+  const prods=Object.entries(window._products).map(([id,p])=>({id,...p}));
+  const filtered=prods.filter(p=>(!search||p.name?.toLowerCase().includes(search))&&(currentCat==='all'||p.catId===currentCat));
+  const total=prods.length;
+  document.getElementById('count-label').textContent=total+' '+(total%10===1&&total!==11?'товар':total%10<5&&(total<11||total>14)?'товара':'товаров');
+  const grid=document.getElementById('product-grid'), empty=document.getElementById('empty-state');
+  if(filtered.length===0){grid.style.display='none';empty.style.display='block';document.getElementById('empty-text').textContent=search?'Ничего не найдено':'Нет товаров. Нажмите + чтобы добавить';return;}
+  empty.style.display='none';grid.style.display='grid';grid.innerHTML='';
+  filtered.forEach(p=>{
+    const card=document.createElement('div');
+    card.className='card';
+    card.innerHTML=`<div class="card-img">${p.imageUrl?`<img src="${p.imageUrl}" alt="${p.name}" loading="lazy">`:`<span class="card-emoji">${p.emoji||'📦'}</span>`}</div><div class="card-body"><div class="card-name">${p.name||''}</div><div class="card-weight">${p.weight||'—'}</div><div class="card-price">${p.price||0} ₽</div></div>`;
+    card.onclick=()=>openProductModal(p);
+    grid.appendChild(card);
+  });
+}
+
+function closeIfOutside(e,id){if(e.target===document.getElementById(id))document.getElementById(id).classList.remove('open');}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+
+window.pinPress=pinPress;window.pinBack=pinBack;window.logout=logout;
+window.selectCat=selectCat;window.openCatModal=openCatModal;window.saveCategory=saveCategory;
+window.openProductModal=openProductModal;window.saveProduct=saveProduct;window.deleteProduct=deleteProduct;
+window.adjPrice=adjPrice;window.handleFile=handleFile;
+window.renderProducts=renderProducts;window.closeIfOutside=closeIfOutside;
+</script>
+</body>
+</html>
