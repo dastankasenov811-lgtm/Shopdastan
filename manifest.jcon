@@ -1,0 +1,25 @@
+{
+  "name": "Dastan Shop",
+  "short_name": "Dastan Shop",
+  "description": "Каталог товаров магазина",
+  "start_url": "/Shopdastan/",
+  "scope": "/Shopdastan/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "icons": [
+    {
+      "src": "https://api.dicebear.com/7.x/shapes/svg?seed=dastan&backgroundColor=1a1a2e&shapeColor=e8c547",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://api.dicebear.com/7.x/shapes/svg?seed=dastan&backgroundColor=1a1a2e&shapeColor=e8c547",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
