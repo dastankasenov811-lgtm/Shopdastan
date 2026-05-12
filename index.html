@@ -308,7 +308,7 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <div class="field"><label>Название товара</label><input type="text" id="f-name" placeholder="Например: Пломбир"></div>
     <div class="field"><label>Вес / объём</label><input type="text" id="f-weight" placeholder="Например: 100 г"></div>
     <div class="field"><label>Категория</label><select id="f-cat"></select></div>
-    <label class="price-label">Цена (₽)</label>
+    <label class="price-label">Цена (₸)</label>
     <div class="price-row">
       <button class="price-adj minus" onclick="adjPrice(-10)">−10</button>
       <button class="price-adj minus" onclick="adjPrice(-1)">−1</button>
@@ -360,7 +360,7 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <div class="modal-title" id="del-modal-title">Новая поставка</div>
     <div class="field"><label>Название компании</label><input type="text" id="d-company" placeholder="Например: ООО Восток"></div>
     <div class="field"><label>Дата поставки</label><input type="date" id="d-date"></div>
-    <div class="field"><label>Сумма поставки (₽)</label><input type="number" id="d-amount" placeholder="Например: 50000"></div>
+    <div class="field"><label>Сумма поставки (₸)</label><input type="number" id="d-amount" placeholder="Например: 50000"></div>
     <div class="field"><label>Заметка (необязательно)</label><input type="text" id="d-note" placeholder="Например: Молочная продукция"></div>
     <button class="save-btn" id="del-save-btn" onclick="saveDelivery()">Добавить поставку</button>
     <button class="notify-btn" id="del-notify-btn" style="display:none" onclick="sendDeliveryNotification()">🔔 Уведомить всех кассиров</button>
@@ -540,7 +540,7 @@ function onHomeSearch(){
       html+=`<div class="search-prod-item" onclick="openProductModal(JSON.parse(decodeURIComponent('${enc}')))">
         <div class="search-prod-img">${img}</div>
         <div style="flex:1;min-width:0"><div class="search-prod-name">${p.name||''}</div><div class="search-prod-info">${p.weight||''}${catName?' · '+catName:''}</div></div>
-        <div class="search-prod-price">${p.price||0} ₽</div>
+        <div class="search-prod-price">${p.price||0} ₸</div>
       </div>`;
     });
   }
@@ -558,16 +558,16 @@ function getSubcatsOf(parentCatId){
 
 function renderSubcatStrip(){
   const cur=navStack[navStack.length-1];
-  if(cur.type!=='products')return;
+  if(cur.type!=='products'||cur.catId==='all'){document.getElementById('subcat-strip').style.display='none';return;}
+  document.getElementById('subcat-strip').style.display='block';
   const strip=document.getElementById('subcat-strip-inner');
   const subcats=getSubcatsOf(cur.catId);
-  if(subcats.length===0){document.getElementById('subcat-strip').style.display='none';return;}
-  document.getElementById('subcat-strip').style.display='block';
 
-  // Count products per subcat
+  // Count products
   const counts={all:0};
   Object.values(window._products).forEach(p=>{
-    if(p.catId===cur.catId||(p.catId&&subcats.find(([id])=>id===p.catId))){
+    const subcatIds=subcats.map(([id])=>id);
+    if(p.catId===cur.catId||subcatIds.includes(p.catId)){
       counts.all++;
       if(p.catId!==cur.catId) counts[p.catId]=(counts[p.catId]||0)+1;
     }
@@ -776,7 +776,7 @@ function renderProducts(){
   prods.forEach(p=>{
     const card=document.createElement('div');
     card.className='card';
-    card.innerHTML=`<div class="card-img">${p.imageUrl?`<img src="${p.imageUrl}" alt="${p.name}" loading="lazy">`:`<span class="card-emoji">${p.emoji||'📦'}</span>`}</div><div class="card-body"><div class="card-name">${p.name||''}</div><div class="card-weight">${p.weight||'—'}</div><div class="card-price">${p.price||0} ₽</div></div>`;
+    card.innerHTML=`<div class="card-img">${p.imageUrl?`<img src="${p.imageUrl}" alt="${p.name}" loading="lazy">`:`<span class="card-emoji">${p.emoji||'📦'}</span>`}</div><div class="card-body"><div class="card-name">${p.name||''}</div><div class="card-weight">${p.weight||'—'}</div><div class="card-price">${p.price||0} ₸</div></div>`;
     card.onclick=()=>openProductModal(p);
     grid.appendChild(card);
   });
@@ -886,8 +886,8 @@ function checkTodayDeliveries(){
     const names=todayOnes.map(d=>d.company).join(', ');
     const total=todayOnes.reduce((s,d)=>s+(parseFloat(d.amount)||0),0);
     document.getElementById('banner-title').textContent=`🚚 Сегодня поставка: ${names}`;
-    document.getElementById('banner-sub').textContent=`Сумма: ${fmt(total)} ₽`;
-    sendPush('🚚 Поставка сегодня!',`${names} — ${fmt(total)} ₽`);
+    document.getElementById('banner-sub').textContent=`Сумма: ${fmt(total)} ₸`;
+    sendPush('🚚 Поставка сегодня!',`${names} — ${fmt(total)} ₸`);
   } else {badge.style.display='none';document.getElementById('delivery-banner').style.display='none';}
 }
 
@@ -910,7 +910,7 @@ function delCard(d,type){
   return `<div class="delivery-card ${type}" onclick="openDeliveryModal(JSON.parse(decodeURIComponent('${enc}')))">
     <div style="font-size:28px">🚚</div>
     <div class="del-info"><div class="del-company">${d.company||'—'}</div><div class="del-date">${formatDate(d.date)}${d.note?' · '+d.note:''}</div><span class="del-badge ${type}">${badge}</span></div>
-    <div class="del-amount">${fmt(d.amount||0)} ₽</div>
+    <div class="del-amount">${fmt(d.amount||0)} ₸</div>
   </div>`;
 }
 function openDeliveryModal(d){
@@ -933,7 +933,7 @@ async function saveDelivery(){
   if(!company||!date||isNaN(amount)){showToast('Заполните все поля!');return;}
   const data={company,date,amount,note,updatedAt:Date.now()};
   if(editingDeliveryId){await window._set(window._ref(window._db,'deliveries/'+editingDeliveryId),data);showToast('Поставка обновлена ✓');}
-  else{const nr=window._push(window._ref(window._db,'deliveries'));await window._set(nr,data);showToast('Поставка добавлена ✓');if(date===getTodayStr())sendPush('🚚 Новая поставка!',`${company} — ${fmt(amount)} ₽`);}
+  else{const nr=window._push(window._ref(window._db,'deliveries'));await window._set(nr,data);showToast('Поставка добавлена ✓');if(date===getTodayStr())sendPush('🚚 Новая поставка!',`${company} — ${fmt(amount)} ₸`);}
   document.getElementById('delivery-modal').classList.remove('open');
 }
 async function deleteDelivery(){
@@ -945,7 +945,7 @@ function sendDeliveryNotification(){
   const company=document.getElementById('d-company').value.trim()||'Компания';
   const amount=document.getElementById('d-amount').value||'0';
   const date=document.getElementById('d-date').value;
-  sendPush('🚚 Поставка '+formatDate(date),`${company} — ${fmt(amount)} ₽`);
+  sendPush('🚚 Поставка '+formatDate(date),`${company} — ${fmt(amount)} ₸`);
   showToast('🔔 Уведомление отправлено!');
 }
 
