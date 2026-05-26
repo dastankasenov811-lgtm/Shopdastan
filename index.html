@@ -52,6 +52,9 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .add-btn:active{transform:scale(.9)}
 .delivery-btn{width:42px;height:42px;border-radius:12px;border:none;background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
 .delivery-badge{position:absolute;top:-4px;right:-4px;background:#e8544a;color:#fff;font-size:10px;font-weight:900;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center}
+/* CAMERA SEARCH BUTTON */
+.cam-search-btn{width:42px;height:42px;border-radius:12px;border:none;background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
+.cam-search-btn:active{background:rgba(255,255,255,.2)}
 
 /* BREADCRUMB */
 #breadcrumb{display:none;background:#fff;border-bottom:1px solid #ece8de;padding:8px 16px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
@@ -192,6 +195,69 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .loading{text-align:center;color:#bbb;padding:50px 20px;font-size:14px}
 .spinner{width:30px;height:30px;border:3px solid #e8c547;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 10px}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===================== CAMERA SEARCH MODAL ===================== */
+#cam-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:150;align-items:flex-end;justify-content:center}
+#cam-modal.open{display:flex}
+.cam-sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:0 0 30px;max-height:95vh;overflow-y:auto;animation:slideUp .25s ease;display:flex;flex-direction:column}
+
+/* Camera live view */
+#cam-live-wrap{display:none;position:fixed;inset:0;background:#000;z-index:200;flex-direction:column}
+#cam-live-wrap.open{display:flex}
+#cam-video{width:100%;flex:1;object-fit:cover}
+.cam-viewfinder{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);width:260px;height:260px;border:3px solid rgba(232,197,71,.85);border-radius:20px;box-shadow:0 0 0 2000px rgba(0,0,0,.45);pointer-events:none}
+.cam-hint{position:absolute;top:50%;left:50%;transform:translate(-50%, 80px);color:rgba(255,255,255,.75);font-size:13px;font-weight:700;font-family:'Nunito',sans-serif;text-align:center;pointer-events:none}
+.cam-controls{position:absolute;bottom:0;left:0;right:0;padding:28px 32px 40px;display:flex;align-items:center;justify-content:center;gap:24px}
+.cam-close-btn{width:52px;height:52px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:22px;cursor:pointer}
+.cam-shoot-btn{width:72px;height:72px;border-radius:50%;border:4px solid rgba(255,255,255,.5);background:#e8c547;color:#1a1a2e;font-size:26px;cursor:pointer;font-weight:900;display:flex;align-items:center;justify-content:center}
+.cam-shoot-btn:active{transform:scale(.92)}
+.cam-gallery-btn{width:52px;height:52px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:22px;cursor:pointer}
+
+/* Cam sheet states */
+.cam-idle{padding:28px 20px 10px;text-align:center}
+.cam-idle-icon{font-size:64px;margin-bottom:12px}
+.cam-idle-title{font-size:20px;font-weight:900;color:#1a1a2e;margin-bottom:6px}
+.cam-idle-sub{font-size:14px;color:#999;font-weight:600;margin-bottom:28px;line-height:1.5}
+.cam-open-btn{width:100%;padding:15px;border-radius:16px;border:none;background:linear-gradient(135deg,#e8c547,#f0a500);color:#1a1a2e;font-size:16px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;margin-bottom:10px;box-shadow:0 5px 18px rgba(232,197,71,.4)}
+.cam-gallery-open-btn{width:100%;padding:13px;border-radius:16px;border:2px solid #e0dbd0;background:#fff;color:#666;font-size:15px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
+
+.cam-preview-wrap{padding:0}
+.cam-preview-img{width:100%;max-height:300px;object-fit:cover;border-radius:24px 24px 0 0}
+.cam-preview-actions{padding:16px 18px 0;display:flex;gap:10px}
+.cam-analyze-btn{flex:1;padding:14px;border-radius:14px;border:none;background:linear-gradient(135deg,#e8c547,#f0a500);color:#1a1a2e;font-size:15px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 14px rgba(232,197,71,.35)}
+.cam-retake-btn{padding:14px 16px;border-radius:14px;border:2px solid #e0dbd0;background:#fff;color:#666;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
+
+.cam-analyzing{padding:40px 20px;text-align:center}
+.cam-analyzing-img{width:100%;max-height:200px;object-fit:cover;border-radius:24px 24px 0 0;opacity:.65}
+.cam-spin{width:52px;height:52px;border:4px solid #e8c547;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;margin:20px auto 14px}
+.cam-analyzing-title{font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:4px}
+.cam-analyzing-sub{font-size:13px;color:#999;font-weight:600}
+
+.cam-results{padding:0}
+.cam-results-img{width:100%;max-height:180px;object-fit:cover;border-radius:24px 24px 0 0}
+.cam-ai-tag{margin:14px 16px 0;background:#f0fff7;border:2px solid #d4f5e6;border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.cam-ai-label{font-size:11px;font-weight:700;color:#1a6e3c;text-transform:uppercase;letter-spacing:1px}
+.cam-ai-name{font-size:15px;font-weight:900;color:#1a1a2e}
+.cam-results-title{padding:12px 16px 6px;font-size:11px;font-weight:900;color:#999;text-transform:uppercase;letter-spacing:2px}
+.cam-result-item{padding:12px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;border-bottom:1px solid #f0f0f0}
+.cam-result-item:last-child{border-bottom:none}
+.cam-result-item:active{background:#fafafa}
+.cam-result-img{width:48px;height:48px;border-radius:12px;background:#f5f0e8;display:flex;align-items:center;justify-content:center;font-size:24px;overflow:hidden;flex-shrink:0}
+.cam-result-img img{width:100%;height:100%;object-fit:cover}
+.cam-result-info{flex:1;min-width:0}
+.cam-result-name{font-size:14px;font-weight:900;color:#1a1a2e}
+.cam-result-sub{font-size:12px;color:#999;font-weight:600}
+.cam-result-price{font-size:17px;font-weight:900;color:#1a1a2e;flex-shrink:0}
+.cam-new-search{margin:14px 16px 0;width:calc(100% - 32px);padding:13px;border-radius:14px;border:none;background:#1a1a2e;color:#e8c547;font-size:14px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif}
+
+.cam-notfound{padding:28px 20px;text-align:center}
+.cam-notfound-img{width:100%;max-height:180px;object-fit:cover;border-radius:24px 24px 0 0;opacity:.65}
+.cam-notfound-icon{font-size:52px;margin:20px 0 10px}
+.cam-notfound-title{font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:6px}
+.cam-notfound-ai{font-size:14px;color:#999;font-weight:600;margin-bottom:4px}
+.cam-notfound-ai strong{color:#1a1a2e}
+.cam-notfound-sub{font-size:13px;color:#bbb;font-weight:600;margin-bottom:20px}
+.cam-err{padding:16px;background:#fff0f0;border:2px solid #fdd;border-radius:12px;color:#e8544a;font-size:13px;font-weight:800;margin:10px 16px 0;display:none}
 </style>
 </head>
 <body>
@@ -233,6 +299,7 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     </div>
     <input class="search-box" id="header-search" placeholder="🔍 Поиск..." oninput="onHeaderSearch()" style="display:none">
     <div class="header-btns">
+      <button class="cam-search-btn" id="cam-search-btn" onclick="openCamModal()" title="Поиск по фото">📷</button>
       <button class="delivery-btn" id="delivery-nav-btn" onclick="switchView('deliveries')" title="Поставки">
         🚚<div class="delivery-badge" id="delivery-badge"></div>
       </button>
@@ -246,7 +313,7 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
   <div class="breadcrumb-inner" id="breadcrumb-inner"></div>
 </div>
 
-<!-- SUBCATEGORY STRIP (inside products view) -->
+<!-- SUBCATEGORY STRIP -->
 <div class="subcat-strip" id="subcat-strip" style="display:none">
   <div class="subcat-strip-inner" id="subcat-strip-inner"></div>
 </div>
@@ -288,6 +355,31 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 
 <div class="bottom-bar"><span id="count-label">Выберите категорию</span></div>
 
+<!-- ===================== CAMERA LIVE VIEW ===================== -->
+<div id="cam-live-wrap" onclick="">
+  <video id="cam-video" autoplay playsinline></video>
+  <div class="cam-viewfinder"></div>
+  <div class="cam-hint">Наведите на товар</div>
+  <div class="cam-controls">
+    <button class="cam-close-btn" onclick="stopCamLive()">✕</button>
+    <button class="cam-shoot-btn" onclick="shootPhoto()">📷</button>
+    <button class="cam-gallery-btn" onclick="document.getElementById('cam-file-input').click()">🖼</button>
+  </div>
+</div>
+
+<!-- ===================== CAMERA SEARCH MODAL ===================== -->
+<div id="cam-modal" onclick="camModalOutside(event)">
+  <div class="cam-sheet" id="cam-sheet">
+    <div style="padding:10px 18px 0;display:flex;align-items:center;justify-content:space-between">
+      <div style="width:40px;height:4px;background:#e0e0e0;border-radius:2px;margin:8px auto 0;flex:1"></div>
+      <button onclick="closeCamModal()" style="background:none;border:none;color:#bbb;font-size:22px;cursor:pointer;padding:6px;margin-top:2px">✕</button>
+    </div>
+    <div id="cam-body"></div>
+  </div>
+</div>
+
+<input type="file" id="cam-file-input" accept="image/*" style="display:none" onchange="camHandleFile(event)">
+
 <!-- PRODUCT MODAL -->
 <div class="modal-overlay" id="prod-modal" onclick="closeIfOutside(event,'prod-modal')">
   <div class="modal-sheet">
@@ -328,8 +420,6 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
   <div class="modal-sheet">
     <div class="modal-handle"></div>
     <div class="modal-title" id="cat-modal-title">Новая категория</div>
-
-    <!-- Photo preview -->
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
       <div style="width:80px;height:80px;border-radius:14px;background:#f5f0e8;border:2px solid #eee;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:36px" id="cat-img-preview-box">
         <span id="cat-emoji-show">🗂️</span>
@@ -343,10 +433,8 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
         <button onclick="clearCatPhoto()" style="padding:9px;border-radius:11px;border:2px solid #eee;background:#fff;color:#999;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;width:100%">Убрать фото</button>
       </div>
     </div>
-
     <div style="font-size:11px;font-weight:700;color:#888;margin-bottom:6px">ИЛИ ВЫБЕРИТЕ ИКОНКУ</div>
     <div class="emoji-grid" id="cat-emoji-grid" style="margin-bottom:14px"></div>
-
     <div class="field"><label>Название категории</label><input type="text" id="cat-name-input" placeholder="Например: Сладости"></div>
     <button class="save-btn" id="cat-save-btn" onclick="saveCategory()">Добавить категорию</button>
     <button class="delete-btn" id="cat-delete-btn" style="display:none" onclick="deleteCategory()">🗑 Удалить категорию</button>
@@ -399,17 +487,22 @@ onValue(ref(db,'deliveries'),snap=>{window._deliveries=snap.val()||{};renderDeli
 
 <script>
 const CL_CLOUD="dv9zm4x4o",CL_PRESET="dastan_shop";
+const ANTHROPIC_API="https://api.anthropic.com/v1/messages";
 const P_EMOJIS=["📦","🍦","🧃","🍞","🥛","🧈","🥩","🍎","🥦","🧀","🍗","🥚","🍫","🥤","🫙","🧂","🍬","🍪","🥜","🍋","🧁","🎂","🍕","🥗","🫐"];
 const C_EMOJIS=["🗂️","🍦","🧃","🍞","🥛","🥩","🍎","🥦","🍫","🥤","🍬","🍪","🧁","🎂","🍕","🛒","⭐","🔥","🆕","🧂","🥜","🍋","🥗","🫙","🧀"];
 
-// Navigation stack: [{type:'categories'}, {type:'products', catId, catName}, ...]
 let navStack=[{type:'categories'}];
-let currentSubCatId='all'; // subcat filter inside products view
+let currentSubCatId='all';
 let editingId=null,selFile=null,curEmoji="📦";
 let catSelFile=null,editingCatId=null,catEmoji="🗂️";
 let editingDeliveryId=null;
 let deferredInstallPrompt=null;
 window._products={};window._categories={};window._deliveries={};
+
+// ---- CAMERA SEARCH STATE ----
+let camPhase='idle'; // idle | preview | analyzing | results | notfound
+let camImageB64=null;
+let camStream=null;
 
 // ---- PWA ----
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;document.getElementById('install-banner').style.display='block';});
@@ -432,30 +525,18 @@ function onDataUpdate(){
 
 // ---- NAV ----
 function currentView(){return navStack[navStack.length-1].type;}
-
 function switchView(type,catId,catName){
-  if(type==='deliveries'){
-    navStack=[{type:'categories'},{type:'deliveries'}];
-  } else if(type==='categories'){
-    navStack=[{type:'categories'}];
-  } else if(type==='products'){
-    // Check if already in products of same cat — if so, go deeper (subcategory)
-    navStack.push({type:'products',catId,catName});
-    currentSubCatId='all';
-  }
+  if(type==='deliveries'){navStack=[{type:'categories'},{type:'deliveries'}];}
+  else if(type==='categories'){navStack=[{type:'categories'}];}
+  else if(type==='products'){navStack.push({type:'products',catId,catName});currentSubCatId='all';}
   renderView();
 }
-
-function goBack(){
-  if(navStack.length>1){navStack.pop();renderView();}
-}
-
+function goBack(){if(navStack.length>1){navStack.pop();renderView();}}
 function renderView(){
   const cur=navStack[navStack.length-1];
   const isHome=cur.type==='categories';
   const isProducts=cur.type==='products';
   const isDeliveries=cur.type==='deliveries';
-
   document.getElementById('categories-home').style.display=isHome?'block':'none';
   document.getElementById('products-view').style.display=isProducts?'block':'none';
   document.getElementById('deliveries-view').style.display=isDeliveries?'block':'none';
@@ -466,37 +547,26 @@ function renderView(){
   document.getElementById('delivery-nav-btn').style.display=isDeliveries?'none':'flex';
   document.getElementById('subcat-strip').style.display=isProducts?'block':'none';
   document.getElementById('breadcrumb').style.display=navStack.length>1?'block':'none';
-
-  // Header title
   if(isHome) document.getElementById('header-title').textContent='Каталог';
   else if(isDeliveries) document.getElementById('header-title').textContent='🚚 Поставки';
   else if(isProducts) document.getElementById('header-title').textContent=cur.catName||'Товары';
-
-  // Add btn
   document.getElementById('main-add-btn').textContent='+';
-
-  // Breadcrumb
   renderBreadcrumb();
-
   if(isHome){renderCatsHome();document.getElementById('count-label').textContent='Выберите категорию';}
   else if(isProducts){currentSubCatId='all';renderSubcatStrip();renderProducts();}
   else if(isDeliveries){renderDeliveries();document.getElementById('count-label').textContent='Поставки';}
 }
-
 function renderBreadcrumb(){
-  const inner=document.getElementById('breadcrumb-inner');
-  inner.innerHTML='';
+  const inner=document.getElementById('breadcrumb-inner');inner.innerHTML='';
   navStack.forEach((item,i)=>{
     if(i>0){const sep=document.createElement('span');sep.className='bc-sep';sep.textContent='›';inner.appendChild(sep);}
-    const el=document.createElement('span');
-    const isLast=i===navStack.length-1;
+    const el=document.createElement('span');const isLast=i===navStack.length-1;
     el.className=isLast?'bc-item bc-current':'bc-item';
     el.textContent=item.type==='categories'?'Главная':item.type==='deliveries'?'Поставки':item.catName;
     if(!isLast){const idx=i;el.onclick=()=>{navStack=navStack.slice(0,idx+1);currentSubCatId='all';renderView();};}
     inner.appendChild(el);
   });
 }
-
 function onAddBtn(){
   const cur=navStack[navStack.length-1];
   if(cur.type==='deliveries') openDeliveryModal(null);
@@ -508,27 +578,17 @@ function onHomeSearch(){
   const q=document.getElementById('home-search-input').value.trim().toLowerCase();
   const results=document.getElementById('search-results');
   if(!q){results.style.display='none';document.getElementById('categories-home').style.display='block';return;}
-  document.getElementById('categories-home').style.display='none';
-  results.style.display='block';
-
-  const cats=window._categories, prods=window._products;
-  const counts={};
-  Object.values(prods).forEach(p=>{if(p.catId){counts[p.catId]=(counts[p.catId]||0)+1;}});
-
-  // Match categories
+  document.getElementById('categories-home').style.display='none';results.style.display='block';
+  const cats=window._categories,prods=window._products;
+  const counts={};Object.values(prods).forEach(p=>{if(p.catId){counts[p.catId]=(counts[p.catId]||0)+1;}});
   const matchCats=Object.entries(cats).filter(([id,c])=>c.name?.toLowerCase().includes(q));
-  // Match products
   const matchProds=Object.entries(prods).filter(([id,p])=>p.name?.toLowerCase().includes(q));
-
   let html='';
   if(matchCats.length){
     html+=`<div class="search-section-title">📂 Категории</div>`;
     matchCats.forEach(([id,c])=>{
       const img=c.imageUrl?`<img src="${c.imageUrl}" style="width:100%;height:100%;object-fit:cover">`:`<span>${c.emoji||'🗂️'}</span>`;
-      html+=`<div class="search-cat-item" onclick="switchView('products','${id}','${c.name}')">
-        <div class="search-cat-img">${img}</div>
-        <div><div class="search-cat-name">${c.name}</div><div class="search-cat-count">${counts[id]||0} товаров</div></div>
-      </div>`;
+      html+=`<div class="search-cat-item" onclick="switchView('products','${id}','${c.name}')"><div class="search-cat-img">${img}</div><div><div class="search-cat-name">${c.name}</div><div class="search-cat-count">${counts[id]||0} товаров</div></div></div>`;
     });
   }
   if(matchProds.length){
@@ -537,248 +597,130 @@ function onHomeSearch(){
       const img=p.imageUrl?`<img src="${p.imageUrl}" style="width:100%;height:100%;object-fit:cover">`:`<span>${p.emoji||'📦'}</span>`;
       const catName=p.catId&&cats[p.catId]?cats[p.catId].name:'';
       const enc=encodeURIComponent(JSON.stringify({id,...p}));
-      html+=`<div class="search-prod-item" onclick="openProductModal(JSON.parse(decodeURIComponent('${enc}')))">
-        <div class="search-prod-img">${img}</div>
-        <div style="flex:1;min-width:0"><div class="search-prod-name">${p.name||''}</div><div class="search-prod-info">${p.weight||''}${catName?' · '+catName:''}</div></div>
-        <div class="search-prod-price">${p.price||0} ₸</div>
-      </div>`;
+      html+=`<div class="search-prod-item" onclick="openProductModal(JSON.parse(decodeURIComponent('${enc}')))"><div class="search-prod-img">${img}</div><div style="flex:1;min-width:0"><div class="search-prod-name">${p.name||''}</div><div class="search-prod-info">${p.weight||''}${catName?' · '+catName:''}</div></div><div class="search-prod-price">${p.price||0} ₸</div></div>`;
     });
   }
   if(!matchCats.length&&!matchProds.length) html='<div class="empty"><div class="empty-icon">🔍</div><div>Ничего не найдено</div></div>';
   results.innerHTML=html;
 }
-
 function onHeaderSearch(){renderProducts();}
 
 // ---- SUBCATEGORIES STRIP ----
-function getSubcatsOf(parentCatId){
-  // Subcategories = categories that have parentId === parentCatId
-  return Object.entries(window._categories).filter(([id,c])=>c.parentId===parentCatId);
-}
-
+function getSubcatsOf(parentCatId){return Object.entries(window._categories).filter(([id,c])=>c.parentId===parentCatId);}
 function renderSubcatStrip(){
   const cur=navStack[navStack.length-1];
   if(cur.type!=='products'||cur.catId==='all'){document.getElementById('subcat-strip').style.display='none';return;}
   document.getElementById('subcat-strip').style.display='block';
   const strip=document.getElementById('subcat-strip-inner');
   const subcats=getSubcatsOf(cur.catId);
-
-  // Count products
   const counts={all:0};
   Object.values(window._products).forEach(p=>{
     const subcatIds=subcats.map(([id])=>id);
-    if(p.catId===cur.catId||subcatIds.includes(p.catId)){
-      counts.all++;
-      if(p.catId!==cur.catId) counts[p.catId]=(counts[p.catId]||0)+1;
-    }
+    if(p.catId===cur.catId||subcatIds.includes(p.catId)){counts.all++;if(p.catId!==cur.catId)counts[p.catId]=(counts[p.catId]||0)+1;}
   });
-
   let html=`<div class="subcat-chip ${currentSubCatId==='all'?'active':''}" onclick="selectSubcat('all')">Все (${counts.all})</div>`;
-  subcats.forEach(([id,c])=>{
-    html+=`<div class="subcat-chip ${currentSubCatId===id?'active':''}" onclick="selectSubcat('${id}')">${c.emoji||''} ${c.name} (${counts[id]||0})</div>`;
-  });
+  subcats.forEach(([id,c])=>{html+=`<div class="subcat-chip ${currentSubCatId===id?'active':''}" onclick="selectSubcat('${id}')">${c.emoji||''} ${c.name} (${counts[id]||0})</div>`;});
   html+=`<div class="subcat-chip add-subcat" onclick="openCatModalAsSub()">＋ Подкатегория</div>`;
   strip.innerHTML=html;
 }
-
 function selectSubcat(id){currentSubCatId=id;renderSubcatStrip();renderProducts();}
-
-function openCatModalAsSub(){
-  const cur=navStack[navStack.length-1];
-  openCatModal(null,cur.catId);
-}
+function openCatModalAsSub(){const cur=navStack[navStack.length-1];openCatModal(null,cur.catId);}
 
 // ---- CATEGORIES HOME ----
 function renderCatsHome(){
   const grid=document.getElementById('cats-home-grid');
-  document.getElementById('loading-cats').style.display='none';
-  grid.style.display='grid';
-
-  const cats=window._categories, prods=window._products;
-  const counts={all:0};
-  // Only count products directly in top-level cats (no parentId)
-  Object.values(prods).forEach(p=>{
-    if(p.catId){counts.all++;counts[p.catId]=(counts[p.catId]||0)+1;}
-    else counts.all++;
-  });
-
-  // Top-level categories only (no parentId)
+  document.getElementById('loading-cats').style.display='none';grid.style.display='grid';
+  const cats=window._categories,prods=window._products;
   const topCats=Object.entries(cats).filter(([id,c])=>!c.parentId);
-
-  let html=`<div class="cat-home-card all-card" onclick="switchView('products','all','Все товары')">
-    <div class="cat-card-img"><span class="cat-card-emoji">🛒</span></div>
-    <div class="cat-card-body"><div class="cat-card-name">Все товары</div><div class="cat-card-count">${Object.keys(prods).length} товаров</div></div>
-  </div>`;
-
+  let html=`<div class="cat-home-card all-card" onclick="switchView('products','all','Все товары')"><div class="cat-card-img"><span class="cat-card-emoji">🛒</span></div><div class="cat-card-body"><div class="cat-card-name">Все товары</div><div class="cat-card-count">${Object.keys(prods).length} товаров</div></div></div>`;
   topCats.forEach(([id,c])=>{
-    // Count: direct products + products in subcategories
     const subcatIds=Object.entries(cats).filter(([sid,sc])=>sc.parentId===id).map(([sid])=>sid);
     let cnt=Object.values(prods).filter(p=>p.catId===id||subcatIds.includes(p.catId)).length;
-    const imgContent=c.imageUrl
-      ?`<img src="${c.imageUrl}" style="width:100%;height:100%;object-fit:cover">`
-      :`<span class="cat-card-emoji">${c.emoji||'🗂️'}</span>`;
-    html+=`<div class="cat-home-card" onclick="switchView('products','${id}','${c.name}')">
-      <div class="cat-card-img">${imgContent}</div>
-      <div class="cat-card-body"><div class="cat-card-name">${c.name}</div><div class="cat-card-count">${cnt} товаров</div></div>
-      <button class="cat-card-edit" onclick="event.stopPropagation();openCatModal('${id}',null)">✏️</button>
-    </div>`;
+    const imgContent=c.imageUrl?`<img src="${c.imageUrl}" style="width:100%;height:100%;object-fit:cover">`:`<span class="cat-card-emoji">${c.emoji||'🗂️'}</span>`;
+    html+=`<div class="cat-home-card" onclick="switchView('products','${id}','${c.name}')"><div class="cat-card-img">${imgContent}</div><div class="cat-card-body"><div class="cat-card-name">${c.name}</div><div class="cat-card-count">${cnt} товаров</div></div><button class="cat-card-edit" onclick="event.stopPropagation();openCatModal('${id}',null)">✏️</button></div>`;
   });
-
-  html+=`<div class="cat-home-card add-cat-card" onclick="openCatModal(null,null)">
-    <div class="cat-card-img"><span style="font-size:36px;color:#ccc">＋</span></div>
-    <div class="cat-card-body"><div class="cat-card-name" style="color:#bbb">Добавить</div><div class="cat-card-count">категорию</div></div>
-  </div>`;
-
-  grid.innerHTML=html;
-  buildCatSelect();
+  html+=`<div class="cat-home-card add-cat-card" onclick="openCatModal(null,null)"><div class="cat-card-img"><span style="font-size:36px;color:#ccc">＋</span></div><div class="cat-card-body"><div class="cat-card-name" style="color:#bbb">Добавить</div><div class="cat-card-count">категорию</div></div></div>`;
+  grid.innerHTML=html;buildCatSelect();
 }
 
 // ---- CATEGORY MODAL ----
-function openCatModal(catId, parentId){
-  editingCatId=catId||null;
-  catSelFile=null;
-  catEmoji="🗂️";
+function openCatModal(catId,parentId){
+  editingCatId=catId||null;catSelFile=null;catEmoji="🗂️";
   const existing=catId&&window._categories[catId]?window._categories[catId]:null;
-  const isEdit=!!existing;
-  const isSub=!!parentId;
-
+  const isEdit=!!existing;const isSub=!!parentId;
   document.getElementById('cat-modal-title').textContent=isEdit?'Редактировать категорию':isSub?'Новая подкатегория':'Новая категория';
   document.getElementById('cat-name-input').value=existing?existing.name:'';
   document.getElementById('cat-save-btn').textContent=isEdit?'Сохранить':'Добавить';
   document.getElementById('cat-delete-btn').style.display=isEdit?'block':'none';
   document.getElementById('cat-file-input').value='';
-
-  // Store parentId for saving
   window._catModalParentId=existing?existing.parentId||null:parentId||null;
-
-  // Image
-  const img=document.getElementById('cat-img-show');
-  const emo=document.getElementById('cat-emoji-show');
+  const img=document.getElementById('cat-img-show'),emo=document.getElementById('cat-emoji-show');
   if(existing&&existing.imageUrl){img.src=existing.imageUrl;img.style.display='block';emo.style.display='none';}
   else{img.style.display='none';emo.style.display='';catEmoji=existing?existing.emoji||'🗂️':'🗂️';emo.textContent=catEmoji;}
-
-  // Emoji grid
-  const grid=document.getElementById('cat-emoji-grid');
-  grid.innerHTML='';
+  const grid=document.getElementById('cat-emoji-grid');grid.innerHTML='';
   C_EMOJIS.forEach(e=>{
-    const b=document.createElement('button');
-    b.className='emoji-opt'+(e===catEmoji?' active':'');
-    b.textContent=e;
+    const b=document.createElement('button');b.className='emoji-opt'+(e===catEmoji?' active':'');b.textContent=e;
     b.onclick=()=>{catEmoji=e;catSelFile=null;document.getElementById('cat-img-show').style.display='none';document.getElementById('cat-emoji-show').style.display='';document.getElementById('cat-emoji-show').textContent=e;document.querySelectorAll('#cat-emoji-grid .emoji-opt').forEach(x=>x.classList.toggle('active',x.textContent===e));};
     grid.appendChild(b);
   });
   document.getElementById('cat-modal').classList.add('open');
 }
-
 function handleCatFile(e){
-  const file=e.target.files[0];if(!file)return;
-  catSelFile=file;
-  const r=new FileReader();
-  r.onload=ev=>{
-    document.getElementById('cat-emoji-show').style.display='none';
-    const img=document.getElementById('cat-img-show');
-    img.src=ev.target.result;img.style.display='block';
-    document.querySelectorAll('#cat-emoji-grid .emoji-opt').forEach(b=>b.classList.remove('active'));
-  };
+  const file=e.target.files[0];if(!file)return;catSelFile=file;
+  const r=new FileReader();r.onload=ev=>{document.getElementById('cat-emoji-show').style.display='none';const img=document.getElementById('cat-img-show');img.src=ev.target.result;img.style.display='block';document.querySelectorAll('#cat-emoji-grid .emoji-opt').forEach(b=>b.classList.remove('active'));};
   r.readAsDataURL(file);
 }
-
-function clearCatPhoto(){
-  catSelFile=null;
-  document.getElementById('cat-img-show').style.display='none';
-  document.getElementById('cat-img-show').src='';
-  document.getElementById('cat-emoji-show').style.display='';
-  document.getElementById('cat-emoji-show').textContent=catEmoji;
-  document.getElementById('cat-file-input').value='';
-}
-
+function clearCatPhoto(){catSelFile=null;document.getElementById('cat-img-show').style.display='none';document.getElementById('cat-img-show').src='';document.getElementById('cat-emoji-show').style.display='';document.getElementById('cat-emoji-show').textContent=catEmoji;document.getElementById('cat-file-input').value='';}
 async function saveCategory(){
-  const name=document.getElementById('cat-name-input').value.trim();
-  if(!name){showToast('Введите название!');return;}
-  const btn=document.getElementById('cat-save-btn');
-  btn.disabled=true;btn.textContent='Сохранение...';
-
-  let imageUrl=null;
-  if(editingCatId&&window._categories[editingCatId]) imageUrl=window._categories[editingCatId].imageUrl||null;
-  if(catSelFile){
-    try{imageUrl=await uploadCloudinary(catSelFile);}
-    catch(err){showToast('Ошибка фото: '+err.message);btn.disabled=false;btn.textContent='Сохранить';return;}
-  }
-  // If clearCatPhoto was called and no new file
-  if(!catSelFile&&!document.getElementById('cat-img-show').src) imageUrl=null;
-
+  const name=document.getElementById('cat-name-input').value.trim();if(!name){showToast('Введите название!');return;}
+  const btn=document.getElementById('cat-save-btn');btn.disabled=true;btn.textContent='Сохранение...';
+  let imageUrl=null;if(editingCatId&&window._categories[editingCatId])imageUrl=window._categories[editingCatId].imageUrl||null;
+  if(catSelFile){try{imageUrl=await uploadCloudinary(catSelFile);}catch(err){showToast('Ошибка фото: '+err.message);btn.disabled=false;btn.textContent='Сохранить';return;}}
+  if(!catSelFile&&!document.getElementById('cat-img-show').src)imageUrl=null;
   const data={name,emoji:catEmoji,imageUrl:imageUrl||null};
-  if(window._catModalParentId) data.parentId=window._catModalParentId;
-
-  if(editingCatId){
-    await window._set(window._ref(window._db,'categories/'+editingCatId),data);
-    showToast('Категория обновлена ✓');
-  } else {
-    const nr=window._push(window._ref(window._db,'categories'));
-    await window._set(nr,data);
-    showToast('Категория добавлена ✓');
-  }
-  btn.disabled=false;
-  document.getElementById('cat-modal').classList.remove('open');
+  if(window._catModalParentId)data.parentId=window._catModalParentId;
+  if(editingCatId){await window._set(window._ref(window._db,'categories/'+editingCatId),data);showToast('Категория обновлена ✓');}
+  else{const nr=window._push(window._ref(window._db,'categories'));await window._set(nr,data);showToast('Категория добавлена ✓');}
+  btn.disabled=false;document.getElementById('cat-modal').classList.remove('open');
 }
-
 async function deleteCategory(){
   if(!editingCatId||!confirm('Удалить категорию?'))return;
   await window._remove(window._ref(window._db,'categories/'+editingCatId));
-  document.getElementById('cat-modal').classList.remove('open');
-  showToast('Категория удалена');
+  document.getElementById('cat-modal').classList.remove('open');showToast('Категория удалена');
 }
-
 function buildCatSelect(){
-  const sel=document.getElementById('f-cat');
-  if(!sel)return;
-  const cats=window._categories;
-  let html='<option value="">— Без категории —</option>';
-  // Top level
+  const sel=document.getElementById('f-cat');if(!sel)return;
+  const cats=window._categories;let html='<option value="">— Без категории —</option>';
   const top=Object.entries(cats).filter(([id,c])=>!c.parentId);
   top.forEach(([id,c])=>{
     html+=`<option value="${id}">${c.emoji||''} ${c.name}</option>`;
-    // Subcats
-    Object.entries(cats).filter(([sid,sc])=>sc.parentId===id).forEach(([sid,sc])=>{
-      html+=`<option value="${sid}">&nbsp;&nbsp;↳ ${sc.emoji||''} ${sc.name}</option>`;
-    });
+    Object.entries(cats).filter(([sid,sc])=>sc.parentId===id).forEach(([sid,sc])=>{html+=`<option value="${sid}">&nbsp;&nbsp;↳ ${sc.emoji||''} ${sc.name}</option>`;});
   });
   sel.innerHTML=html;
 }
 
 // ---- PRODUCTS ----
 function renderProducts(){
-  const cur=navStack[navStack.length-1];
-  if(cur.type!=='products')return;
+  const cur=navStack[navStack.length-1];if(cur.type!=='products')return;
   const search=(document.getElementById('header-search')?.value||'').toLowerCase();
-  const cats=window._categories;
-  const catId=cur.catId;
-
-  // Get all catIds to include (cat itself + subcats)
+  const cats=window._categories;const catId=cur.catId;
   const subcatIds=Object.entries(cats).filter(([id,c])=>c.parentId===catId).map(([id])=>id);
-
   let prods=Object.entries(window._products).map(([id,p])=>({id,...p}));
-
   prods=prods.filter(p=>{
-    if(catId==='all') return true;
-    if(currentSubCatId!=='all') return p.catId===currentSubCatId;
+    if(catId==='all')return true;
+    if(currentSubCatId!=='all')return p.catId===currentSubCatId;
     return p.catId===catId||subcatIds.includes(p.catId);
   });
-
-  if(search) prods=prods.filter(p=>p.name?.toLowerCase().includes(search));
-
+  if(search)prods=prods.filter(p=>p.name?.toLowerCase().includes(search));
   const total=prods.length;
   document.getElementById('count-label').textContent=total+' '+(total%10===1&&total!==11?'товар':total%10<5&&(total<11||total>14)?'товара':'товаров');
-
   const grid=document.getElementById('product-grid'),empty=document.getElementById('empty-state');
   if(prods.length===0){grid.style.display='none';empty.style.display='block';document.getElementById('empty-text').textContent=search?'Ничего не найдено':'Нет товаров';return;}
   empty.style.display='none';grid.style.display='grid';grid.innerHTML='';
   prods.forEach(p=>{
-    const card=document.createElement('div');
-    card.className='card';
+    const card=document.createElement('div');card.className='card';
     card.innerHTML=`<div class="card-img">${p.imageUrl?`<img src="${p.imageUrl}" alt="${p.name}" loading="lazy">`:`<span class="card-emoji">${p.emoji||'📦'}</span>`}</div><div class="card-body"><div class="card-name">${p.name||''}</div><div class="card-weight">${p.weight||'—'}</div><div class="card-price">${p.price||0} ₸</div></div>`;
-    card.onclick=()=>openProductModal(p);
-    grid.appendChild(card);
+    card.onclick=()=>openProductModal(p);grid.appendChild(card);
   });
 }
 
@@ -786,46 +728,32 @@ function renderProducts(){
 function openProductModal(p){
   editingId=p?p.id:null;selFile=null;curEmoji=p?(p.emoji||"📦"):"📦";
   document.getElementById('prod-modal-title').textContent=p?'Редактировать':'Новый товар';
-  document.getElementById('f-name').value=p?p.name:'';
-  document.getElementById('f-weight').value=p?p.weight:'';
-  document.getElementById('f-price').value=p?p.price:'';
+  document.getElementById('f-name').value=p?p.name:'';document.getElementById('f-weight').value=p?p.weight:'';document.getElementById('f-price').value=p?p.price:'';
   buildCatSelect();
-  const cur=navStack[navStack.length-1];
-  const defCat=p?p.catId:(cur.type==='products'&&cur.catId!=='all'?cur.catId:'');
+  const cur=navStack[navStack.length-1];const defCat=p?p.catId:(cur.type==='products'&&cur.catId!=='all'?cur.catId:'');
   if(defCat)setTimeout(()=>{document.getElementById('f-cat').value=defCat;},50);
   const img=document.getElementById('preview-img'),emo=document.getElementById('preview-emoji');
   if(p&&p.imageUrl){img.src=p.imageUrl;img.style.display='block';emo.style.display='none';}
   else{img.style.display='none';emo.style.display='';emo.textContent=curEmoji;}
-  document.getElementById('upload-status').style.display='none';
-  document.getElementById('progress-bar').style.display='none';
-  document.getElementById('save-btn').disabled=false;
-  document.getElementById('save-btn').textContent=p?'Сохранить изменения':'Добавить товар';
+  document.getElementById('upload-status').style.display='none';document.getElementById('progress-bar').style.display='none';
+  document.getElementById('save-btn').disabled=false;document.getElementById('save-btn').textContent=p?'Сохранить изменения':'Добавить товар';
   document.getElementById('delete-btn').style.display=p?'block':'none';
   const grid=document.getElementById('emoji-grid');grid.innerHTML='';
   P_EMOJIS.forEach(e=>{
-    const b=document.createElement('button');
-    b.className='emoji-opt'+(e===curEmoji?' active':'');
-    b.textContent=e;
+    const b=document.createElement('button');b.className='emoji-opt'+(e===curEmoji?' active':'');b.textContent=e;
     b.onclick=()=>{curEmoji=e;selFile=null;document.getElementById('preview-img').style.display='none';document.getElementById('preview-emoji').style.display='';document.getElementById('preview-emoji').textContent=e;document.querySelectorAll('#emoji-grid .emoji-opt').forEach(x=>x.classList.toggle('active',x.textContent===e));};
     grid.appendChild(b);
   });
-  document.getElementById('file-input').value='';
-  document.getElementById('prod-modal').classList.add('open');
+  document.getElementById('file-input').value='';document.getElementById('prod-modal').classList.add('open');
 }
-
 function handleFile(e){
   const file=e.target.files[0];if(!file)return;selFile=file;
-  const r=new FileReader();
-  r.onload=ev=>{document.getElementById('preview-emoji').style.display='none';const img=document.getElementById('preview-img');img.src=ev.target.result;img.style.display='block';document.querySelectorAll('#emoji-grid .emoji-opt').forEach(b=>b.classList.remove('active'));};
+  const r=new FileReader();r.onload=ev=>{document.getElementById('preview-emoji').style.display='none';const img=document.getElementById('preview-img');img.src=ev.target.result;img.style.display='block';document.querySelectorAll('#emoji-grid .emoji-opt').forEach(b=>b.classList.remove('active'));};
   r.readAsDataURL(file);
 }
 function adjPrice(d){const i=document.getElementById('f-price');i.value=Math.max(0,(parseFloat(i.value)||0)+d);}
-
 async function saveProduct(){
-  const name=document.getElementById('f-name').value.trim();
-  const weight=document.getElementById('f-weight').value.trim();
-  const price=parseFloat(document.getElementById('f-price').value);
-  const catId=document.getElementById('f-cat').value;
+  const name=document.getElementById('f-name').value.trim();const weight=document.getElementById('f-weight').value.trim();const price=parseFloat(document.getElementById('f-price').value);const catId=document.getElementById('f-cat').value;
   if(!name||isNaN(price)){showToast('Заполните название и цену!');return;}
   const btn=document.getElementById('save-btn');btn.disabled=true;btn.textContent='Сохранение...';
   let imageUrl=editingId&&window._products[editingId]?window._products[editingId].imageUrl||null:null;
@@ -837,65 +765,233 @@ async function saveProduct(){
     document.getElementById('prod-modal').classList.remove('open');
   }catch(e){showToast('Ошибка: '+e.message);btn.disabled=false;btn.textContent='Сохранить';}
 }
-
 async function deleteProduct(){
   if(!editingId||!confirm('Удалить товар?'))return;
   await window._remove(window._ref(window._db,'products/'+editingId));
-  document.getElementById('prod-modal').classList.remove('open');
-  showToast('Товар удалён');
+  document.getElementById('prod-modal').classList.remove('open');showToast('Товар удалён');
 }
 
 // ---- CLOUDINARY ----
 function uploadCloudinary(file){
   return new Promise((resolve,reject)=>{
-    const r=new FileReader();
-    r.onload=ev=>{
-      const img=new Image();
-      img.onload=()=>{
-        const c=document.createElement('canvas');
-        const MAX=900;let w=img.width,h=img.height;
+    const r=new FileReader();r.onload=ev=>{
+      const img=new Image();img.onload=()=>{
+        const c=document.createElement('canvas');const MAX=900;let w=img.width,h=img.height;
         if(w>MAX){h=h*MAX/w;w=MAX;}if(h>MAX){w=w*MAX/h;h=MAX;}
         c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
         c.toBlob(blob=>{
-          const fd=new FormData();
-          fd.append('file',blob,'photo.jpg');fd.append('upload_preset',CL_PRESET);fd.append('folder','dastan-shop');
+          const fd=new FormData();fd.append('file',blob,'photo.jpg');fd.append('upload_preset',CL_PRESET);fd.append('folder','dastan-shop');
           const st=document.getElementById('upload-status'),pb=document.getElementById('progress-bar'),pf=document.getElementById('progress-fill');
           st.style.display='block';st.textContent='⏳ Загрузка фото...';pb.style.display='block';
           const xhr=new XMLHttpRequest();
           xhr.upload.onprogress=e=>{if(e.lengthComputable){const p=Math.round(e.loaded/e.total*100);pf.style.width=p+'%';st.textContent='⏳ '+p+'%';}};
           xhr.onload=()=>{st.style.display='none';pb.style.display='none';if(xhr.status===200){resolve(JSON.parse(xhr.responseText).secure_url);}else{reject(new Error('Ошибка '+xhr.status));}};
           xhr.onerror=()=>reject(new Error('Нет сети'));
-          xhr.open('POST',`https://api.cloudinary.com/v1_1/${CL_CLOUD}/image/upload`);
-          xhr.send(fd);
+          xhr.open('POST',`https://api.cloudinary.com/v1_1/${CL_CLOUD}/image/upload`);xhr.send(fd);
         },'image/jpeg',0.85);
-      };
-      img.src=ev.target.result;
-    };
-    r.readAsDataURL(file);
+      };img.src=ev.target.result;
+    };r.readAsDataURL(file);
   });
+}
+
+// ===================== CAMERA SEARCH =====================
+
+function openCamModal(){
+  camPhase='idle';camImageB64=null;
+  document.getElementById('cam-modal').classList.add('open');
+  renderCamBody();
+}
+function closeCamModal(){
+  stopCamLive();
+  document.getElementById('cam-modal').classList.remove('open');
+}
+function camModalOutside(e){if(e.target===document.getElementById('cam-modal'))closeCamModal();}
+
+function renderCamBody(){
+  const body=document.getElementById('cam-body');
+  if(camPhase==='idle'){
+    body.innerHTML=`
+      <div class="cam-idle">
+        <div class="cam-idle-icon">📷</div>
+        <div class="cam-idle-title">Поиск по фото</div>
+        <div class="cam-idle-sub">Сфотографируйте товар — система найдёт его в каталоге автоматически</div>
+        <button class="cam-open-btn" onclick="startCamLive()">📷 Открыть камеру</button>
+        <button class="cam-gallery-open-btn" onclick="document.getElementById('cam-file-input').click()">🖼 Выбрать из галереи</button>
+      </div>`;
+  } else if(camPhase==='preview'){
+    body.innerHTML=`
+      <div class="cam-preview-wrap">
+        <img class="cam-preview-img" src="data:image/jpeg;base64,${camImageB64}">
+        <div id="cam-err" class="cam-err"></div>
+        <div class="cam-preview-actions">
+          <button class="cam-analyze-btn" onclick="runCamAnalysis()">🔍 Найти товар</button>
+          <button class="cam-retake-btn" onclick="camRetake()">📷 Переснять</button>
+        </div>
+        <div style="height:16px"></div>
+      </div>`;
+  } else if(camPhase==='analyzing'){
+    body.innerHTML=`
+      <div class="cam-preview-wrap">
+        <img class="cam-preview-img" src="data:image/jpeg;base64,${camImageB64}" style="opacity:.6">
+      </div>
+      <div class="cam-analyzing">
+        <div class="cam-spin"></div>
+        <div class="cam-analyzing-title">Анализирую фото...</div>
+        <div class="cam-analyzing-sub">Claude определяет товар</div>
+      </div>`;
+  }
+  // results and notfound rendered separately after async
+}
+
+async function startCamLive(){
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}}});
+    camStream=stream;
+    const wrap=document.getElementById('cam-live-wrap');
+    wrap.classList.add('open');
+    document.getElementById('cam-video').srcObject=stream;
+  }catch(e){
+    // Fallback to file picker
+    document.getElementById('cam-file-input').click();
+  }
+}
+
+function stopCamLive(){
+  if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}
+  document.getElementById('cam-live-wrap').classList.remove('open');
+}
+
+function shootPhoto(){
+  const video=document.getElementById('cam-video');
+  const canvas=document.createElement('canvas');
+  canvas.width=video.videoWidth;canvas.height=video.videoHeight;
+  canvas.getContext('2d').drawImage(video,0,0);
+  camImageB64=canvas.toDataURL('image/jpeg',0.85).split(',')[1];
+  stopCamLive();
+  camPhase='preview';
+  renderCamBody();
+}
+
+function camHandleFile(e){
+  const file=e.target.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    camImageB64=ev.target.result.split(',')[1];
+    camPhase='preview';
+    renderCamBody();
+    // Open modal if not open
+    document.getElementById('cam-modal').classList.add('open');
+  };
+  r.readAsDataURL(file);
+  e.target.value='';
+}
+
+function camRetake(){
+  camImageB64=null;camPhase='idle';renderCamBody();
+}
+
+async function runCamAnalysis(){
+  if(!camImageB64)return;
+  camPhase='analyzing';renderCamBody();
+
+  try{
+    // Step 1: Ask Claude what the product is
+    const resp=await fetch(ANTHROPIC_API,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{
+          role:'user',
+          content:[
+            {type:'image',source:{type:'base64',media_type:'image/jpeg',data:camImageB64}},
+            {type:'text',text:`Ты помощник кассира в магазине. Посмотри на фото и определи что за товар.
+Ответь ТОЛЬКО JSON без markdown:
+{"name":"точное название по-русски","keywords":["слово1","слово2","слово3"],"confidence":"high/medium/low"}
+Примеры: молоко, хлеб, сыр, яблоки, сок. Будь конкретен.`}
+          ]
+        }]
+      })
+    });
+    const data=await resp.json();
+    const text=data.content?.[0]?.text||'';
+    const clean=text.replace(/```json|```/g,'').trim();
+    const parsed=JSON.parse(clean);
+    const aiName=parsed.name||'';
+    const keywords=[aiName,...(parsed.keywords||[])].map(k=>k.toLowerCase());
+
+    // Step 2: Search in Firebase products
+    const allProds=Object.entries(window._products).map(([id,p])=>({id,...p}));
+    const found=allProds.filter(p=>{
+      if(!p.name)return false;
+      const pName=p.name.toLowerCase();
+      return keywords.some(kw=>pName.includes(kw)||kw.includes(pName.split(' ')[0]));
+    });
+
+    // Render results
+    const body=document.getElementById('cam-body');
+    if(found.length>0){
+      const cats=window._categories;
+      let itemsHtml=found.map(p=>{
+        const catName=p.catId&&cats[p.catId]?cats[p.catId].name:'';
+        const imgHtml=p.imageUrl?`<img src="${p.imageUrl}">`:`<span>${p.emoji||'📦'}</span>`;
+        const enc=encodeURIComponent(JSON.stringify(p));
+        return `<div class="cam-result-item" onclick="closeCamModal();openProductModal(JSON.parse(decodeURIComponent('${enc}')))">
+          <div class="cam-result-img">${imgHtml}</div>
+          <div class="cam-result-info">
+            <div class="cam-result-name">${p.name}</div>
+            <div class="cam-result-sub">${p.weight||''}${catName?' · '+catName:''}</div>
+          </div>
+          <div class="cam-result-price">${p.price||0} ₸</div>
+        </div>`;
+      }).join('');
+      body.innerHTML=`
+        <div class="cam-results">
+          <img class="cam-results-img" src="data:image/jpeg;base64,${camImageB64}">
+          <div class="cam-ai-tag">
+            <span style="font-size:20px">🤖</span>
+            <div><div class="cam-ai-label">Claude определил</div><div class="cam-ai-name">${aiName}</div></div>
+          </div>
+          <div class="cam-results-title">Найдено в каталоге — ${found.length}</div>
+          ${itemsHtml}
+          <button class="cam-new-search" onclick="camRetake()">📷 Новый поиск</button>
+          <div style="height:16px"></div>
+        </div>`;
+    } else {
+      body.innerHTML=`
+        <div>
+          <img class="cam-preview-img" src="data:image/jpeg;base64,${camImageB64}" style="opacity:.65;width:100%;max-height:200px;object-fit:cover;border-radius:24px 24px 0 0">
+          <div class="cam-notfound">
+            <div class="cam-notfound-icon">🔍</div>
+            <div class="cam-notfound-title">Товар не найден</div>
+            ${aiName?`<div class="cam-notfound-ai">Claude определил: <strong>${aiName}</strong></div>`:''}
+            <div class="cam-notfound-sub">Этого товара нет в базе</div>
+            <button class="cam-open-btn" onclick="camRetake()">📷 Попробовать снова</button>
+          </div>
+        </div>`;
+    }
+  }catch(err){
+    camPhase='preview';renderCamBody();
+    const errEl=document.getElementById('cam-err');
+    if(errEl){errEl.style.display='block';errEl.textContent='⚠️ Ошибка анализа: '+err.message;}
+  }
 }
 
 // ---- DELIVERIES ----
 function checkTodayDeliveries(){
-  const today=getTodayStr();
-  const todayOnes=Object.values(window._deliveries).filter(d=>d.date===today);
+  const today=getTodayStr();const todayOnes=Object.values(window._deliveries).filter(d=>d.date===today);
   const badge=document.getElementById('delivery-badge');
   if(todayOnes.length>0){
-    badge.style.display='flex';badge.textContent=todayOnes.length;
-    document.getElementById('delivery-banner').style.display='block';
-    const names=todayOnes.map(d=>d.company).join(', ');
-    const total=todayOnes.reduce((s,d)=>s+(parseFloat(d.amount)||0),0);
-    document.getElementById('banner-title').textContent=`🚚 Сегодня поставка: ${names}`;
-    document.getElementById('banner-sub').textContent=`Сумма: ${fmt(total)} ₸`;
+    badge.style.display='flex';badge.textContent=todayOnes.length;document.getElementById('delivery-banner').style.display='block';
+    const names=todayOnes.map(d=>d.company).join(', ');const total=todayOnes.reduce((s,d)=>s+(parseFloat(d.amount)||0),0);
+    document.getElementById('banner-title').textContent=`🚚 Сегодня поставка: ${names}`;document.getElementById('banner-sub').textContent=`Сумма: ${fmt(total)} ₸`;
     sendPush('🚚 Поставка сегодня!',`${names} — ${fmt(total)} ₸`);
-  } else {badge.style.display='none';document.getElementById('delivery-banner').style.display='none';}
+  }else{badge.style.display='none';document.getElementById('delivery-banner').style.display='none';}
 }
-
 function renderDeliveries(){
-  const today=getTodayStr();
-  const list=document.getElementById('deliveries-list');
-  const all=Object.entries(window._deliveries).map(([id,d])=>({id,...d}));
-  all.sort((a,b)=>a.date>b.date?1:-1);
+  const today=getTodayStr();const list=document.getElementById('deliveries-list');
+  const all=Object.entries(window._deliveries).map(([id,d])=>({id,...d}));all.sort((a,b)=>a.date>b.date?1:-1);
   if(all.length===0){list.innerHTML='<div class="empty"><div class="empty-icon">🚚</div><div>Поставок нет</div></div>';return;}
   const todayL=all.filter(d=>d.date===today),upcoming=all.filter(d=>d.date>today),past=all.filter(d=>d.date<today);
   let html='';
@@ -907,29 +1003,19 @@ function renderDeliveries(){
 function delCard(d,type){
   const badge=type==='today'?'🟢 Сегодня':type==='upcoming'?'🟡 Ожидается':'✅ Выполнена';
   const enc=encodeURIComponent(JSON.stringify(d));
-  return `<div class="delivery-card ${type}" onclick="openDeliveryModal(JSON.parse(decodeURIComponent('${enc}')))">
-    <div style="font-size:28px">🚚</div>
-    <div class="del-info"><div class="del-company">${d.company||'—'}</div><div class="del-date">${formatDate(d.date)}${d.note?' · '+d.note:''}</div><span class="del-badge ${type}">${badge}</span></div>
-    <div class="del-amount">${fmt(d.amount||0)} ₸</div>
-  </div>`;
+  return `<div class="delivery-card ${type}" onclick="openDeliveryModal(JSON.parse(decodeURIComponent('${enc}')))"><div style="font-size:28px">🚚</div><div class="del-info"><div class="del-company">${d.company||'—'}</div><div class="del-date">${formatDate(d.date)}${d.note?' · '+d.note:''}</div><span class="del-badge ${type}">${badge}</span></div><div class="del-amount">${fmt(d.amount||0)} ₸</div></div>`;
 }
 function openDeliveryModal(d){
   editingDeliveryId=d?d.id:null;
   document.getElementById('del-modal-title').textContent=d?'Редактировать поставку':'Новая поставка';
-  document.getElementById('d-company').value=d?d.company:'';
-  document.getElementById('d-date').value=d?d.date:getTodayStr();
-  document.getElementById('d-amount').value=d?d.amount:'';
-  document.getElementById('d-note').value=d?d.note||'':'';
+  document.getElementById('d-company').value=d?d.company:'';document.getElementById('d-date').value=d?d.date:getTodayStr();
+  document.getElementById('d-amount').value=d?d.amount:'';document.getElementById('d-note').value=d?d.note||'':'';
   document.getElementById('del-save-btn').textContent=d?'Сохранить':'Добавить поставку';
-  document.getElementById('del-delete-btn').style.display=d?'block':'none';
-  document.getElementById('del-notify-btn').style.display=d?'block':'none';
+  document.getElementById('del-delete-btn').style.display=d?'block':'none';document.getElementById('del-notify-btn').style.display=d?'block':'none';
   document.getElementById('delivery-modal').classList.add('open');
 }
 async function saveDelivery(){
-  const company=document.getElementById('d-company').value.trim();
-  const date=document.getElementById('d-date').value;
-  const amount=parseFloat(document.getElementById('d-amount').value);
-  const note=document.getElementById('d-note').value.trim();
+  const company=document.getElementById('d-company').value.trim();const date=document.getElementById('d-date').value;const amount=parseFloat(document.getElementById('d-amount').value);const note=document.getElementById('d-note').value.trim();
   if(!company||!date||isNaN(amount)){showToast('Заполните все поля!');return;}
   const data={company,date,amount,note,updatedAt:Date.now()};
   if(editingDeliveryId){await window._set(window._ref(window._db,'deliveries/'+editingDeliveryId),data);showToast('Поставка обновлена ✓');}
@@ -942,11 +1028,8 @@ async function deleteDelivery(){
   document.getElementById('delivery-modal').classList.remove('open');showToast('Поставка удалена');
 }
 function sendDeliveryNotification(){
-  const company=document.getElementById('d-company').value.trim()||'Компания';
-  const amount=document.getElementById('d-amount').value||'0';
-  const date=document.getElementById('d-date').value;
-  sendPush('🚚 Поставка '+formatDate(date),`${company} — ${fmt(amount)} ₸`);
-  showToast('🔔 Уведомление отправлено!');
+  const company=document.getElementById('d-company').value.trim()||'Компания';const amount=document.getElementById('d-amount').value||'0';const date=document.getElementById('d-date').value;
+  sendPush('🚚 Поставка '+formatDate(date),`${company} — ${fmt(amount)} ₸`);showToast('🔔 Уведомление отправлено!');
 }
 
 // ---- UTILS ----
@@ -967,6 +1050,9 @@ window.adjPrice=adjPrice;window.handleFile=handleFile;
 window.openDeliveryModal=openDeliveryModal;window.saveDelivery=saveDelivery;
 window.deleteDelivery=deleteDelivery;window.sendDeliveryNotification=sendDeliveryNotification;
 window.closeIfOutside=closeIfOutside;
+window.openCamModal=openCamModal;window.closeCamModal=closeCamModal;window.camModalOutside=camModalOutside;
+window.startCamLive=startCamLive;window.stopCamLive=stopCamLive;window.shootPhoto=shootPhoto;
+window.camHandleFile=camHandleFile;window.camRetake=camRetake;window.runCamAnalysis=runCamAnalysis;
 </script>
 </body>
 </html>
