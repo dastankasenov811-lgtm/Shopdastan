@@ -895,7 +895,11 @@ async function runCamAnalysis(){
   camPhase='analyzing';renderCamBody();
 
   try{
-    // Step 1: Ask Claude what the product is
+    // Собираем все товары из базы для передачи Claude
+    const allProds=Object.entries(window._products).map(([id,p])=>({id,...p}));
+    const prodList=allProds.map((p,i)=>`${i+1}. [ID:${p.id}] ${p.name}${p.weight?' ('+p.weight+')':''}`).join('\n');
+
+    // Один запрос: Claude видит фото + список товаров и сам сопоставляет
     const resp=await fetch(ANTHROPIC_API,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
@@ -906,10 +910,20 @@ async function runCamAnalysis(){
           role:'user',
           content:[
             {type:'image',source:{type:'base64',media_type:'image/jpeg',data:camImageB64}},
-            {type:'text',text:`Ты помощник кассира в магазине. Посмотри на фото и определи что за товар.
+            {type:'text',text:`Ты сканер товаров для кассира. Внимательно изучи фото упаковки:
+- Прочитай весь текст на упаковке (название, бренд, состав, вес)
+- Запомни цвет упаковки, логотип, дизайн
+- Определи тип товара
+
+Вот список товаров в нашем каталоге:
+${prodList}
+
+Найди все товары из списка которые могут соответствовать товару на фото. Сопоставляй по: названию, бренду, типу товара, весу/объёму.
+
 Ответь ТОЛЬКО JSON без markdown:
-{"name":"точное название по-русски","keywords":["слово1","слово2","слово3"],"confidence":"high/medium/low"}
-Примеры: молоко, хлеб, сыр, яблоки, сок. Будь конкретен.`}
+{"detected":"что ты видишь на фото (бренд, название, вес)","matches":[{"id":"ID товара из списка","score":95,"reason":"почему совпадает"}],"confidence":"high/medium/low"}
+
+matches отсортируй по score от высокого к низкому. Если ничего не подходит — matches пустой массив.`}
           ]
         }]
       })
@@ -918,16 +932,14 @@ async function runCamAnalysis(){
     const text=data.content?.[0]?.text||'';
     const clean=text.replace(/```json|```/g,'').trim();
     const parsed=JSON.parse(clean);
-    const aiName=parsed.name||'';
-    const keywords=[aiName,...(parsed.keywords||[])].map(k=>k.toLowerCase());
+    const aiName=parsed.detected||'';
 
-    // Step 2: Search in Firebase products
-    const allProds=Object.entries(window._products).map(([id,p])=>({id,...p}));
-    const found=allProds.filter(p=>{
-      if(!p.name)return false;
-      const pName=p.name.toLowerCase();
-      return keywords.some(kw=>pName.includes(kw)||kw.includes(pName.split(' ')[0]));
-    });
+    // Берём ID совпадений от Claude и находим товары
+    const matchIds=(parsed.matches||[]).map(m=>m.id);
+    const matchMap={};(parsed.matches||[]).forEach(m=>{matchMap[m.id]={score:m.score,reason:m.reason};});
+    const found=allProds
+      .filter(p=>matchIds.includes(p.id))
+      .sort((a,b)=>(matchMap[b.id]?.score||0)-(matchMap[a.id]?.score||0));
 
     // Render results
     const body=document.getElementById('cam-body');
@@ -937,13 +949,20 @@ async function runCamAnalysis(){
         const catName=p.catId&&cats[p.catId]?cats[p.catId].name:'';
         const imgHtml=p.imageUrl?`<img src="${p.imageUrl}">`:`<span>${p.emoji||'📦'}</span>`;
         const enc=encodeURIComponent(JSON.stringify(p));
+        const score=matchMap[p.id]?.score||0;
+        const reason=matchMap[p.id]?.reason||'';
+        const scoreColor=score>=80?'#1a6e3c':score>=60?'#856404':'#999';
         return `<div class="cam-result-item" onclick="closeCamModal();openProductModal(JSON.parse(decodeURIComponent('${enc}')))">
           <div class="cam-result-img">${imgHtml}</div>
           <div class="cam-result-info">
             <div class="cam-result-name">${p.name}</div>
-            <div class="cam-result-sub">${p.weight||''}${catName?' · '+catName:''}</div>
+            <div class="cam-result-sub" style="margin-bottom:2px">${p.weight||''}${catName?' · '+catName:''}</div>
+            ${reason?`<div style="font-size:11px;color:#aaa;font-weight:600">${reason}</div>`:''}
           </div>
-          <div class="cam-result-price">${p.price||0} ₸</div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">
+            <div class="cam-result-price">${p.price||0} ₸</div>
+            <div style="font-size:11px;font-weight:900;color:${scoreColor}">${score}%</div>
+          </div>
         </div>`;
       }).join('');
       body.innerHTML=`
