@@ -13,7 +13,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscroll-behavior:none}
+/* Изменен фон на глубокий темный оттенок */
+body{font-family:'Nunito',sans-serif;background:#121214;color:#e1e1e6;min-height:100vh;overscroll-behavior:none}
 
 /* BANNERS */
 #install-banner{display:none;background:linear-gradient(135deg,#1a1a2e,#16213e);padding:11px 16px;border-bottom:1px solid rgba(232,197,71,.2)}
@@ -52,159 +53,160 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .add-btn:active{transform:scale(.9)}
 .delivery-btn{width:42px;height:42px;border-radius:12px;border:none;background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
 .delivery-badge{position:absolute;top:-4px;right:-4px;background:#e8544a;color:#fff;font-size:10px;font-weight:900;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center}
-/* CAMERA SEARCH BUTTON (now barcode) */
 .cam-search-btn{width:42px;height:42px;border-radius:12px;border:none;background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
 .cam-search-btn:active{background:rgba(255,255,255,.2)}
 
 /* BREADCRUMB */
-#breadcrumb{display:none;background:#fff;border-bottom:1px solid #ece8de;padding:8px 16px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+#breadcrumb{display:none;background:#202024;border-bottom:1px solid #29292e;padding:8px 16px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
 #breadcrumb::-webkit-scrollbar{display:none}
 .breadcrumb-inner{max-width:960px;margin:0 auto;display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700}
-.bc-item{color:#999;cursor:pointer;padding:2px 4px;border-radius:6px}
-.bc-item:hover{color:#1a1a2e}
-.bc-sep{color:#ddd}
-.bc-current{color:#1a1a2e}
+.bc-item{color:#888;cursor:pointer;padding:2px 4px;border-radius:6px}
+.bc-item:hover{color:#fff}
+.bc-sep{color:#444}
+.bc-current{color:#fff}
 
 /* HOME SEARCH */
 .home-search-wrap{padding:14px 12px 0;max-width:960px;margin:0 auto}
-.home-search{width:100%;padding:11px 16px;border-radius:14px;border:2px solid #e8e4da;background:#fff;font-size:15px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;transition:border .15s}
+.home-search{width:100%;padding:11px 16px;border-radius:14px;border:2px solid #29292e;background:#202024;color:#fff;font-size:15px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;transition:border .15s}
 .home-search:focus{border-color:#e8c547}
 
 /* SEARCH RESULTS */
 #search-results{display:none;max-width:960px;margin:0 auto;padding:10px 12px 90px}
 .search-section-title{font-size:11px;font-weight:900;color:#999;text-transform:uppercase;letter-spacing:2px;margin:12px 0 8px}
-.search-cat-item{background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.06)}
-.search-cat-item:active{background:#f5f5f5}
-.search-cat-img{width:44px;height:44px;border-radius:10px;background:#f5f0e8;display:flex;align-items:center;justify-content:center;font-size:24px;overflow:hidden;flex-shrink:0}
+.search-cat-item{background:#202024;border-radius:12px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.search-cat-item:active{background:#29292e}
+.search-cat-img{width:44px;height:44px;border-radius:10px;background:#121214;display:flex;align-items:center;justify-content:center;font-size:24px;overflow:hidden;flex-shrink:0}
 .search-cat-img img{width:100%;height:100%;object-fit:cover}
-.search-cat-name{font-size:15px;font-weight:800;color:#1a1a2e}
+.search-cat-name{font-size:15px;font-weight:800;color:#fff}
 .search-cat-count{font-size:12px;color:#999;font-weight:600}
-.search-prod-item{background:#fff;border-radius:12px;padding:10px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.06)}
-.search-prod-img{width:44px;height:44px;border-radius:10px;background:#f5f0e8;display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden;flex-shrink:0}
+.search-prod-item{background:#202024;border-radius:12px;padding:10px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.search-prod-img{width:44px;height:44px;border-radius:10px;background:#121214;display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden;flex-shrink:0}
 .search-prod-img img{width:100%;height:100%;object-fit:cover}
-.search-prod-name{font-size:14px;font-weight:800;color:#1a1a2e}
+.search-prod-name{font-size:14px;font-weight:800;color:#fff}
 .search-prod-info{font-size:12px;color:#999;font-weight:600}
-.search-prod-price{font-size:16px;font-weight:900;color:#1a1a2e;margin-left:auto;flex-shrink:0}
+.search-prod-price{font-size:16px;font-weight:900;color:#00b37e;margin-left:auto;flex-shrink:0}
 
 /* CATEGORIES HOME */
 #categories-home{display:block}
 .cats-home-wrap{max-width:960px;margin:0 auto;padding:12px 12px 90px}
 .cats-home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-.cat-home-card{background:#fff;border-radius:18px;overflow:hidden;cursor:pointer;box-shadow:0 3px 14px rgba(0,0,0,.07);transition:transform .18s;position:relative;display:flex;flex-direction:column}
+.cat-home-card{background:#202024;border-radius:18px;overflow:hidden;cursor:pointer;box-shadow:0 3px 14px rgba(0,0,0,.2);transition:transform .18s;position:relative;display:flex;flex-direction:column}
 .cat-home-card:active{transform:scale(.96)}
-.cat-card-img{height:110px;background:linear-gradient(135deg,#f5f0e8,#ede8d8);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.cat-card-img{height:110px;background:linear-gradient(135deg,#29292e,#121214);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
 .cat-card-img img{width:100%;height:100%;object-fit:cover}
 .cat-card-emoji{font-size:48px}
 .cat-card-body{padding:10px 12px 12px;flex:1}
-.cat-card-name{font-size:14px;font-weight:900;color:#1a1a2e;line-height:1.2;margin-bottom:2px}
+.cat-card-name{font-size:14px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:2px}
 .cat-card-count{font-size:11px;color:#999;font-weight:600}
-.cat-card-edit{position:absolute;top:7px;right:7px;width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.9);border:none;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.cat-card-edit{position:absolute;top:7px;right:7px;width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.9);border:none;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.15);color:#1a1a2e}
 .cat-home-card.all-card .cat-card-img{background:linear-gradient(135deg,#1a1a2e,#2d2d4a)}
-.cat-home-card.add-cat-card{border:2px dashed #ddd;box-shadow:none;background:#fff}
+.cat-home-card.add-cat-card{border:2px dashed #444;box-shadow:none;background:transparent}
 .cat-home-card.add-cat-card .cat-card-img{background:transparent}
 
 /* PRODUCTS VIEW */
 #products-view{display:none}
 .grid-wrap{max-width:960px;margin:0 auto;padding:14px 12px 90px}
-.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:11px}
 
-/* SUBCATEGORY STRIP inside products view */
-.subcat-strip{background:#fff;border-bottom:1px solid #ece8de;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.subcat-strip::-webkit-scrollbar{display:none}
-.subcat-strip-inner{display:flex;padding:8px 12px;gap:8px;max-width:960px;margin:0 auto}
-.subcat-chip{padding:7px 14px;border-radius:20px;border:2px solid #eee;background:#fff;font-size:13px;font-weight:800;color:#999;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
-.subcat-chip.active{background:#1a1a2e;border-color:#1a1a2e;color:#e8c547}
-.subcat-chip.add-subcat{border-style:dashed;color:#ccc}
+/* 🔥 ОБНОВЛЕННЫЙ РАЗМЕР КАРТОЧЕК И АДАПТИВНАЯ СЕТКА */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
 
-/* CARD */
-.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.07);cursor:pointer;transition:transform .18s;display:flex;flex-direction:column}
+.card{background:#202024;border-radius:16px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.3);cursor:pointer;transition:transform .18s;display:flex;flex-direction:column;min-height:420px;border:1px solid #29292e}
 .card:active{transform:scale(.97)}
-.card-img{height:125px;background:linear-gradient(135deg,#f5f0e8,#ede8d8);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+
+/* Зафиксированная область изображения */
+.card-img{height:220px;background:linear-gradient(135deg,#29292e,#121214);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
 .card-img img{width:100%;height:100%;object-fit:cover}
 .card-emoji{font-size:50px}
-.card-body{padding:9px 11px 11px;flex:1;display:flex;flex-direction:column}
-.card-name{font-weight:800;font-size:13px;color:#1a1a2e;margin-bottom:2px;line-height:1.3}
-.card-weight{color:#999;font-size:11px;margin-bottom:7px}
-.card-price{font-size:18px;font-weight:900;color:#1a1a2e;margin-top:auto}
+
+.card-body{padding:14px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+.card-name{font-weight:800;font-size:15px;color:#fff;margin-bottom:4px;line-height:1.3}
+.card-weight{color:#999;font-size:12px;margin-bottom:8px}
+
+/* Новый стиль для вкуса товара */
+.card-flavor-badge{align-self:flex-start;background:#29292e;color:#ffb86c;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;margin-bottom:12px}
+
+.card-price{font-size:20px;font-weight:900;color:#00b37e;margin-top:auto}
 .card-variants{display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap}
 .card-variant-chip{font-size:9px;font-weight:800;color:#8a8a8a;background:#f5f0e8;border-radius:6px;padding:2px 6px}
+
+/* SUBCATEGORY STRIP */
+.subcat-strip{background:#202024;border-bottom:1px solid #29292e;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.subcat-strip::-webkit-scrollbar{display:none}
+.subcat-strip-inner{display:flex;padding:8px 12px;gap:8px;max-width:960px;margin:0 auto}
+.subcat-chip{padding:7px 14px;border-radius:20px;border:2px solid #29292e;background:#121214;font-size:13px;font-weight:800;color:#888;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.subcat-chip.active{background:#e8c547;border-color:#e8c547;color:#1a1a2e}
+.subcat-chip.add-subcat{border-style:dashed;color:#555}
 
 /* DELIVERIES */
 #deliveries-view{display:none;max-width:960px;margin:0 auto;padding:14px 12px 90px}
 .section-title{font-size:12px;font-weight:900;color:#999;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;margin-top:4px}
-.delivery-card{background:#fff;border-radius:16px;padding:14px 16px;margin-bottom:10px;box-shadow:0 3px 14px rgba(0,0,0,.06);display:flex;align-items:center;gap:12px;cursor:pointer}
-.delivery-card.today{border-left:4px solid #2d9e6e;background:linear-gradient(135deg,#f0fff7,#fff)}
+.delivery-card{background:#202024;border-radius:16px;padding:14px 16px;margin-bottom:10px;box-shadow:0 3px 14px rgba(0,0,0,.2);display:flex;align-items:center;gap:12px;cursor:pointer;border:1px solid #29292e}
+.delivery-card.today{border-left:4px solid #2d9e6e;background:linear-gradient(135deg,#163324,#202024)}
 .delivery-card.upcoming{border-left:4px solid #e8c547}
-.delivery-card.past{border-left:4px solid #ddd;opacity:.7}
+.delivery-card.past{border-left:4px solid #444;opacity:.5}
 .del-info{flex:1}
-.del-company{font-size:15px;font-weight:900;color:#1a1a2e}
+.del-company{font-size:15px;font-weight:900;color:#fff}
 .del-date{font-size:12px;color:#999;font-weight:600;margin-top:1px}
-.del-amount{font-size:17px;font-weight:900;color:#1a1a2e;flex-shrink:0}
+.del-amount{font-size:17px;font-weight:900;color:#00b37e;flex-shrink:0}
 .del-badge{font-size:11px;font-weight:800;padding:3px 8px;border-radius:8px;margin-top:3px;display:inline-block}
-.del-badge.today{background:#d4f5e6;color:#1a6e3c}
-.del-badge.upcoming{background:#fff3cd;color:#856404}
-.del-badge.past{background:#f0f0f0;color:#999}
-.add-delivery-btn{width:100%;padding:14px;border-radius:14px;border:2px dashed #ddd;background:#fff;color:#999;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px}
+.del-badge.today{background:#163324;color:#2d9e6e}
+.del-badge.upcoming{background:#3a321d;color:#e8c547}
+.del-badge.past{background:#29292e;color:#888}
+.add-delivery-btn{width:100%;padding:14px;border-radius:14px;border:2px dashed #444;background:transparent;color:#888;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px}
 
 /* EMPTY */
-.empty{text-align:center;color:#bbb;font-size:15px;padding-top:50px}
+.empty{text-align:center;color:#666;font-size:15px;padding-top:50px}
 .empty-icon{font-size:48px;margin-bottom:10px}
 
 /* BOTTOM BAR */
-.bottom-bar{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#888;font-size:12px;font-weight:600;padding:7px 18px;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.2);white-space:nowrap;z-index:40}
+.bottom-bar{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#e8c547;font-size:12px;font-weight:600;padding:7px 18px;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.4);white-space:nowrap;z-index:40}
 
 /* MODALS */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:100;align-items:flex-end;justify-content:center}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:100;align-items:flex-end;justify-content:center}
 .modal-overlay.open{display:flex}
-.modal-sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:18px 18px 30px;max-height:92vh;overflow-y:auto;animation:slideUp .25s ease}
+.modal-sheet{background:#202024;color:#fff;border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:18px 18px 30px;max-height:92vh;overflow-y:auto;animation:slideUp .25s ease}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-handle{width:40px;height:4px;background:#e0e0e0;border-radius:2px;margin:0 auto 16px}
-.modal-title{font-size:19px;font-weight:900;color:#1a1a2e;margin-bottom:16px}
-.img-upload-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px}
-.img-preview{width:84px;height:84px;border-radius:14px;background:#f5f0e8;border:2px dashed #ddd;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0;position:relative;font-size:38px}
-.img-preview img{width:100%;height:100%;object-fit:cover}
-.img-overlay{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;font-size:20px}
-.img-preview:hover .img-overlay,.img-preview:active .img-overlay{opacity:1}
+.modal-handle{width:40px;height:4px;background:#333;border-radius:2px;margin:0 auto 16px}
+.modal-title{font-size:19px;font-weight:900;color:#fff;margin-bottom:16px}
 .img-upload-row-big{margin-bottom:16px}
-.img-preview-big{width:100%;height:190px;border-radius:16px;background:#f5f0e8;border:2px dashed #ddd;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;font-size:60px}
+.img-preview-big{width:100%;height:190px;border-radius:16px;background:#121214;border:2px dashed #444;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;font-size:60px}
 .img-preview-big img{width:100%;height:100%;object-fit:cover}
-.img-overlay-big{position:absolute;left:0;right:0;bottom:0;padding:9px;background:rgba(26,26,46,.72);color:#fff;font-size:13px;font-weight:800;text-align:center}
-.emoji-picker-label{font-size:11px;color:#888;margin-bottom:5px;font-weight:700}
+.img-overlay-big{position:absolute;left:0;right:0;bottom:0;padding:9px;background:rgba(26,26,46,.85);color:#fff;font-size:13px;font-weight:800;text-align:center}
 .emoji-grid{display:flex;flex-wrap:wrap;gap:5px}
-.emoji-opt{width:32px;height:32px;border-radius:8px;border:2px solid #eee;background:#fff;font-size:16px;cursor:pointer;transition:border .15s;display:flex;align-items:center;justify-content:center}
-.emoji-opt.active{border-color:#e8c547;background:#fff9e6}
+.emoji-opt{width:32px;height:32px;border-radius:8px;border:2px solid #29292e;background:#121214;font-size:16px;cursor:pointer;transition:border .15s;display:flex;align-items:center;justify-content:center}
+.emoji-opt.active{border-color:#e8c547;background:#3a321d}
 .field{margin-bottom:12px}
 .field label{font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:4px}
-.field input,.field select{width:100%;padding:10px 12px;border-radius:11px;border:2px solid #f0f0f0;font-size:14px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;transition:border .15s;background:#fff}
+.field input,.field select{width:100%;padding:10px 12px;border-radius:11px;border:2px solid #29292e;font-size:14px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;transition:border .15s;background:#121214;color:#fff}
 .field input:focus,.field select:focus{border-color:#e8c547}
 .unit-chip-row{display:flex;gap:6px;margin-top:6px}
-.unit-chip{flex:1;padding:7px 0;border-radius:9px;border:2px solid #f0f0f0;background:#fff;color:#888;font-size:12px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;text-align:center}
-.unit-chip:active{background:#fff9e6;border-color:#e8c547;color:#1a1a2e}
+.unit-chip{flex:1;padding:7px 0;border-radius:9px;border:2px solid #29292e;background:#121214;color:#888;font-size:12px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;text-align:center}
+.unit-chip:active{background:#3a321d;border-color:#e8c547;color:#fff}
 .price-label{font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:5px}
 .price-row{display:flex;align-items:center;gap:7px;margin-bottom:18px}
-.price-input{flex:1;padding:12px 8px;border-radius:11px;border:2px solid #f0f0f0;font-size:22px;font-family:'Nunito',sans-serif;font-weight:900;text-align:center;outline:none;transition:border .15s}
+.price-input{flex:1;padding:12px 8px;border-radius:11px;border:2px solid #29292e;background:#121214;color:#fff;font-size:22px;font-family:'Nunito',sans-serif;font-weight:900;text-align:center;outline:none;transition:border .15s}
 .price-input:focus{border-color:#e8c547}
 .upload-status{text-align:center;color:#888;font-size:13px;font-weight:700;margin-bottom:12px;display:none}
-.progress-bar{height:4px;background:#f0f0f0;border-radius:2px;margin-bottom:14px;overflow:hidden;display:none}
+.progress-bar{height:4px;background:#29292e;border-radius:2px;margin-bottom:14px;overflow:hidden;display:none}
 .progress-fill{height:100%;background:linear-gradient(90deg,#e8c547,#f0a500);width:0%;transition:width .3s}
 .save-btn{width:100%;padding:13px;border-radius:13px;border:none;background:linear-gradient(135deg,#e8c547,#f0a500);color:#1a1a2e;font-size:15px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 16px rgba(232,197,71,.4)}
-.save-btn:disabled{background:#eee;color:#bbb;box-shadow:none;cursor:default}
-.delete-btn{width:100%;padding:11px;border-radius:13px;border:2px solid #fee;background:#fff;color:#e8544a;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:10px}
-.notify-btn{width:100%;padding:11px;border-radius:13px;border:2px solid #d4f5e6;background:#f0fff7;color:#1a6e3c;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:10px}
-.photo-upload-label{display:block;width:100%;padding:11px;border-radius:13px;border:2px solid #e8c547;background:#fff9e6;color:#1a1a2e;font-size:14px;font-weight:800;cursor:pointer;text-align:center;font-family:'Nunito',sans-serif;margin-bottom:10px}
+.save-btn:disabled{background:#444;color:#888;box-shadow:none;cursor:default}
+.delete-btn{width:100%;padding:11px;border-radius:13px;border:2px solid #411;background:#202024;color:#e8544a;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:10px}
+.notify-btn{width:100%;padding:11px;border-radius:13px;border:2px solid #163324;background:#163324;color:#2d9e6e;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:10px}
+.photo-upload-label{display:block;width:100%;padding:11px;border-radius:13px;border:2px solid #e8c547;background:#3a321d;color:#e8c547;font-size:14px;font-weight:800;cursor:pointer;text-align:center;font-family:'Nunito',sans-serif;margin-bottom:10px}
 
 /* TOAST */
-.toast{display:none;position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#e8c547;padding:9px 20px;border-radius:12px;font-size:13px;font-weight:800;box-shadow:0 4px 20px rgba(0,0,0,.2);z-index:200;white-space:nowrap}
+.toast{display:none;position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#e8c547;padding:9px 20px;border-radius:12px;font-size:13px;font-weight:800;box-shadow:0 4px 20px rgba(0,0,0,.4);z-index:200;white-space:nowrap}
 .toast.show{display:block;animation:fadeT .2s}
 @keyframes fadeT{from{opacity:0;transform:translate(-50%,-8px)}to{opacity:1;transform:translate(-50%,0)}}
-.loading{text-align:center;color:#bbb;padding:50px 20px;font-size:14px}
+.loading{text-align:center;color:#666;padding:50px 20px;font-size:14px}
 .spinner{width:30px;height:30px;border:3px solid #e8c547;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 10px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ===================== CAMERA SEARCH MODAL (AI photo, secondary) ===================== */
+/* ===================== CAMERA SEARCH MODAL И ИСПРАВЛЕНИЕ ОШИБКИ СТИЛЕЙ ===================== */
 #cam-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:150;align-items:flex-end;justify-content:center}
 #cam-modal.open{display:flex}
-.cam-sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:0 0 30px;max-height:95vh;overflow-y:auto;animation:slideUp .25s ease;display:flex;flex-direction:column}
+.cam-sheet{background:#202024;border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:0 0 30px;max-height:95vh;overflow-y:auto;animation:slideUp .25s ease;display:flex;flex-direction:column}
 
 #cam-live-wrap{display:none;position:fixed;inset:0;background:#000;z-index:200;flex-direction:column}
 #cam-live-wrap.open{display:flex}
@@ -219,1338 +221,162 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 
 .cam-idle{padding:28px 20px 10px;text-align:center}
 .cam-idle-icon{font-size:64px;margin-bottom:12px}
-.cam-idle-title{font-size:20px;font-weight:900;color:#1a1a2e;margin-bottom:6px}
+.cam-idle-title{font-size:20px;font-weight:900;color:#fff;margin-bottom:6px}
 .cam-idle-sub{font-size:14px;color:#999;font-weight:600;margin-bottom:28px;line-height:1.5}
 .cam-open-btn{width:100%;padding:15px;border-radius:16px;border:none;background:linear-gradient(135deg,#e8c547,#f0a500);color:#1a1a2e;font-size:16px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;margin-bottom:10px;box-shadow:0 5px 18px rgba(232,197,71,.4)}
-.cam-gallery-open-btn{width:100%;padding:13px;border-radius:16px;border:2px solid #e0dbd0;background:#fff;color:#666;font-size:15px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
+.cam-gallery-open-btn{width:100%;padding:13px;border-radius:16px;border:2px solid #29292e;background:transparent;color:#888;font-size:15px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
 
 .cam-preview-wrap{padding:0}
 .cam-preview-img{width:100%;max-height:300px;object-fit:cover;border-radius:24px 24px 0 0}
 .cam-preview-actions{padding:16px 18px 0;display:flex;gap:10px}
 .cam-analyze-btn{flex:1;padding:14px;border-radius:14px;border:none;background:linear-gradient(135deg,#e8c547,#f0a500);color:#1a1a2e;font-size:15px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 14px rgba(232,197,71,.35)}
-.cam-retake-btn{padding:14px 16px;border-radius:14px;border:2px solid #e0dbd0;background:#fff;color:#666;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
+.cam-retake-btn{padding:14px 16px;border-radius:14px;border:2px solid #29292e;background:transparent;color:#888;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
 
 .cam-analyzing{padding:40px 20px;text-align:center}
-.cam-analyzing-img{width:100%;max-height:200px;object-fit:cover;border-radius:24px 24px 0 0;opacity:.65}
 .cam-spin{width:52px;height:52px;border:4px solid #e8c547;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;margin:20px auto 14px}
-.cam-analyzing-title{font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:4px}
-.cam-analyzing-sub{font-size:13px;color:#999;font-weight:600}
-
-.cam-results{padding:0}
-.cam-results-img{width:100%;max-height:180px;object-fit:cover;border-radius:24px 24px 0 0}
-.cam-ai-tag{margin:14px 16px 0;background:#f0fff7;border:2px solid #d4f5e6;border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px}
-.cam-ai-label{font-size:11px;font-weight:700;color:#1a6e3c;text-transform:uppercase;letter-spacing:1px}
-.cam-ai-name{font-size:15px;font-weight:900;color:#1a1a2e}
-.cam-results-title{padding:12px 16px 6px;font-size:11px;font-weight:900;color:#999;text-transform:uppercase;letter-spacing:2px}
-.cam-result-item{padding:12px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;border-bottom:1px solid #f0f0f0}
-.cam-result-item:last-child{border-bottom:none}
-.cam-result-item:active{background:#fafafa}
-.cam-result-img{width:48px;height:48px;border-radius:12px;background:#f5f0e8;display:flex;align-items:center;justify-content:center;font-size:24px;overflow:hidden;flex-shrink:0}
-.cam-result-img img{width:100%;height:100%;object-fit:cover}
-.cam-result-info{flex:1;min-width:0}
-.cam-result-name{font-size:14px;font-weight:900;color:#1a1a2e}
-.cam-result-sub{font-size:12px;color:#999;font-weight:600}
-.cam-result-price{font-size:17px;font-weight:900;color:#1a1a2e;flex-shrink:0}
-.cam-new-search{margin:14px 16px 0;width:calc(100% - 32px);padding:13px;border-radius:14px;border:none;background:#1a1a2e;color:#e8c547;font-size:14px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif}
-
-.cam-notfound{padding:28px 20px;text-align:center}
-.cam-notfound-img{width:100%;max-height:180px;object-fit:cover;border-radius:24px 24px 0 0;opacity:.65}
-.cam-notfound-icon{font-size:52px;margin:20px 0 10px}
-.cam-notfound-title{font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:6px}
-.cam-notfound-ai{font-size:14px;color:#999;font-weight:600;margin-bottom:4px}
-.cam-notfound-ai strong{color:#1a1a2e}
-.cam-notfound-sub{font-size:13px;color:#bbb;font-weight:600;margin-bottom:20px}
-.cam-err{padding:16px;background:#fff0f0;border:2px solid #fdd;border-radius:12px;color:#e8544a;font-size:13px;font-weight:800;margin:10px 16px 0;display:none}
-
-/* ===================== BARCODE SCANNER ===================== */
-#barcode-overlay{display:none;position:fixed;inset:0;background:#000;z-index:250;flex-direction:column}
-#barcode-overlay.open{display:flex}
-#bc-video{width:100%;flex:1;object-fit:cover;background:#000}
-.bc-frame{position:absolute;top:50%;left:50%;transform:translate(-50%,-58%);width:280px;height:150px;border:3px solid #e8c547;border-radius:16px;box-shadow:0 0 0 2000px rgba(0,0,0,.45);pointer-events:none}
-.bc-status{position:absolute;top:50%;left:50%;transform:translate(-50%,72px);color:#fff;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;text-align:center;pointer-events:none;width:82%}
-.bc-topbar{position:absolute;top:0;left:0;right:0;padding:16px;display:flex;justify-content:space-between;align-items:center;z-index:2;gap:10px}
-.bc-close-btn{width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:20px;cursor:pointer;flex-shrink:0}
-.bc-manual-btn{padding:9px 12px;border-radius:20px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap}
-.bc-res-img{width:100%;height:150px;border-radius:16px;object-fit:cover;background:#f5f0e8;margin-bottom:12px}
-.bc-res-name{font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:2px}
-.bc-res-sub{font-size:13px;color:#999;font-weight:700;margin-bottom:6px}
-
-/* BARCODE FOUND CARD (big photo style) */
-.bc-card{margin:-18px -18px 0}
-.bc-card-imgwrap{position:relative}
-.bc-big-img{width:100%;height:230px;object-fit:cover;display:block;background:#f5f0e8}
-.bc-big-emoji{display:flex;align-items:center;justify-content:center;font-size:80px}
-.bc-edit-fab{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:12px;border:none;background:#e8c547;color:#1a1a2e;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.25)}
-.bc-card-body{padding:18px}
-.bc-card-name{font-size:21px;font-weight:900;color:#1a1a2e;line-height:1.25}
-.bc-card-sub{font-size:13px;color:#999;font-weight:700;margin-top:3px}
-.bc-card-price{font-size:32px;font-weight:900;color:#1a1a2e;margin-top:10px}
-
-/* BARCODE FIELD IN PRODUCT MODAL */
-.barcode-field-row{display:flex;gap:8px}
-.barcode-field-row input{flex:1}
-.barcode-scan-mini{width:44px;height:44px;border-radius:11px;border:2px solid #e8c547;background:#fff9e6;color:#1a1a2e;font-size:18px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.barcode-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;background:#f9f7f2;border-radius:12px;padding:8px 10px}
-.barcode-row input{flex:1;padding:8px 10px;border-radius:9px;border:2px solid #eee;font-size:13px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;background:#fff}
-.barcode-row input:focus{border-color:#e8c547}
-.barcode-row-del{width:32px;height:32px;border-radius:8px;border:none;background:#fee;color:#e8544a;font-size:14px;cursor:pointer;flex-shrink:0}
-.barcode-row-scan{width:32px;height:32px;border-radius:8px;border:none;background:#fff9e6;color:#1a1a2e;font-size:14px;cursor:pointer;flex-shrink:0}
-
-/* VARIANTS */
-.variants-toggle{font-size:12px;font-weight:800;color:#1a6e3c;background:#f0fff7;border:2px solid #d4f5e6;border-radius:10px;padding:9px 12px;text-align:center;cursor:pointer;margin-bottom:12px}
-.variant-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;background:#f9f7f2;border-radius:12px;padding:8px 10px}
-.variant-row input{flex:1;padding:8px 10px;border-radius:9px;border:2px solid #eee;font-size:13px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;background:#fff}
-.variant-row input:focus{border-color:#e8c547}
-.variant-del{width:32px;height:32px;border-radius:8px;border:none;background:#fee;color:#e8544a;font-size:14px;cursor:pointer;flex-shrink:0}
-.variant-add-btn{width:100%;padding:11px;border-radius:11px;border:2px dashed #ddd;background:#fff;color:#999;font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-bottom:16px}
+.cam-analyzing-title{font-size:16px;font-weight:800;color:#fff}
 </style>
 </head>
 <body>
 
-<div id="install-banner">
-  <div class="install-inner">
-    <div class="install-text">📲 Установить <span>Dastan Shop</span> на рабочий стол</div>
-    <button class="install-yes" onclick="installApp()">Установить</button>
-    <button class="install-no" onclick="document.getElementById('install-banner').style.display='none'">✕</button>
-  </div>
-</div>
-
-<div id="push-ask">
-  <div class="push-ask-inner">
-    <div class="push-text">🔔 Уведомления о <span>поставках</span>?</div>
-    <button class="push-yes" onclick="allowPush()">Включить</button>
-    <button class="push-no" onclick="document.getElementById('push-ask').style.display='none'">Нет</button>
-  </div>
-</div>
-
-<div id="delivery-banner" onclick="switchView('deliveries')">
-  <div class="banner-inner">
-    <div style="font-size:24px;flex-shrink:0">🚚</div>
-    <div class="banner-text">
-      <div class="banner-title" id="banner-title">Сегодня поставка!</div>
-      <div class="banner-sub" id="banner-sub">Нажмите чтобы посмотреть</div>
-    </div>
-    <div class="banner-close" onclick="event.stopPropagation();document.getElementById('delivery-banner').style.display='none'">✕</div>
-  </div>
-</div>
-
-<!-- HEADER -->
-<div class="header">
-  <div class="header-inner">
-    <button class="back-btn" id="back-btn" onclick="goBack()">←</button>
-    <div class="header-titles">
-      <div class="header-sub">Dastan Shop</div>
-      <div class="header-main" id="header-title">Каталог</div>
-    </div>
-    <input class="search-box" id="header-search" placeholder="🔍 Поиск..." oninput="onHeaderSearch()" style="display:none">
-    <div class="header-btns">
-      <button class="cam-search-btn" id="cam-search-btn" onclick="openBarcodeScanner('lookup')" title="Поиск по штрихкоду">📷</button>
-      <button class="delivery-btn" id="delivery-nav-btn" onclick="switchView('deliveries')" title="Поставки">
-        🚚<div class="delivery-badge" id="delivery-badge"></div>
-      </button>
-      <button class="add-btn" id="main-add-btn" onclick="onAddBtn()">+</button>
-    </div>
-  </div>
-</div>
-
-<!-- BREADCRUMB -->
-<div id="breadcrumb">
-  <div class="breadcrumb-inner" id="breadcrumb-inner"></div>
-</div>
-
-<!-- SUBCATEGORY STRIP -->
-<div class="subcat-strip" id="subcat-strip" style="display:none">
-  <div class="subcat-strip-inner" id="subcat-strip-inner"></div>
-</div>
-
-<!-- HOME SEARCH -->
-<div class="home-search-wrap" id="home-search-wrap">
-  <input class="home-search" id="home-search-input" placeholder="🔍 Поиск по товарам и категориям..." oninput="onHomeSearch()">
-</div>
-
-<!-- SEARCH RESULTS -->
-<div id="search-results"></div>
-
-<!-- CATEGORIES HOME -->
-<div id="categories-home">
-  <div class="cats-home-wrap">
-    <div id="loading-cats" class="loading"><div class="spinner"></div>Загрузка...</div>
-    <div class="cats-home-grid" id="cats-home-grid" style="display:none"></div>
-  </div>
-</div>
-
-<!-- PRODUCTS VIEW -->
-<div id="products-view">
-  <div class="grid-wrap">
-    <div class="product-grid" id="product-grid"></div>
-    <div class="empty" id="empty-state" style="display:none">
-      <div class="empty-icon">🛒</div>
-      <div id="empty-text">Нет товаров</div>
-    </div>
-  </div>
-</div>
-
-<!-- DELIVERIES -->
-<div id="deliveries-view">
-  <div style="padding:14px 12px 4px;max-width:960px;margin:0 auto">
-    <button class="add-delivery-btn" onclick="openDeliveryModal(null)">➕ Добавить поставку</button>
-  </div>
-  <div id="deliveries-list" style="max-width:960px;margin:0 auto;padding:0 12px 90px"></div>
-</div>
-
-<div class="bottom-bar"><span id="count-label">Выберите категорию</span></div>
-
-<!-- ===================== BARCODE SCANNER OVERLAY ===================== -->
-<div id="barcode-overlay">
-  <div class="bc-topbar">
-    <button class="bc-close-btn" onclick="closeBarcodeScanner()">✕</button>
-    <button class="bc-manual-btn" onclick="closeBarcodeScanner();openCamModal()">🤖 Фото-поиск</button>
-    <button class="bc-manual-btn" onclick="barcodeManualEntry()">✏️ Вручную</button>
-  </div>
-  <video id="bc-video" autoplay playsinline muted></video>
-  <div class="bc-frame"></div>
-  <div class="bc-status" id="bc-status">Наведите камеру на штрихкод…</div>
-</div>
-
-<!-- BARCODE RESULT MODAL -->
-<div class="modal-overlay" id="bc-result-modal" onclick="closeIfOutside(event,'bc-result-modal')">
-  <div class="modal-sheet">
-    <div class="modal-handle"></div>
-    <div class="modal-title" id="bc-result-title">Поиск товара</div>
-    <div id="bc-result-body"></div>
-  </div>
-</div>
-
-<!-- ===================== CAMERA LIVE VIEW (AI photo search) ===================== -->
-<div id="cam-live-wrap" onclick="">
-  <video id="cam-video" autoplay playsinline></video>
-  <div class="cam-viewfinder"></div>
-  <div class="cam-hint">Наведите на товар</div>
-  <div class="cam-controls">
-    <button class="cam-close-btn" onclick="stopCamLive()">✕</button>
-    <button class="cam-shoot-btn" onclick="shootPhoto()">📷</button>
-    <button class="cam-gallery-btn" onclick="document.getElementById('cam-file-input').click()">🖼</button>
-  </div>
-</div>
-
-<!-- ===================== CAMERA SEARCH MODAL (AI photo search) ===================== -->
-<div id="cam-modal" onclick="camModalOutside(event)">
-  <div class="cam-sheet" id="cam-sheet">
-    <div style="padding:10px 18px 0;display:flex;align-items:center;justify-content:space-between">
-      <div style="width:40px;height:4px;background:#e0e0e0;border-radius:2px;margin:8px auto 0;flex:1"></div>
-      <button onclick="closeCamModal()" style="background:none;border:none;color:#bbb;font-size:22px;cursor:pointer;padding:6px;margin-top:2px">✕</button>
-    </div>
-    <div id="cam-body"></div>
-  </div>
-</div>
-
-<input type="file" id="cam-file-input" accept="image/*" style="display:none" onchange="camHandleFile(event)">
-
-<!-- PRODUCT MODAL -->
-<div class="modal-overlay" id="prod-modal" onclick="closeIfOutside(event,'prod-modal')">
-  <div class="modal-sheet">
-    <div class="modal-handle"></div>
-    <div class="modal-title" id="prod-modal-title">Новый товар</div>
-    <button type="button" class="cam-gallery-open-btn" id="bc-quickfill-btn" style="display:none;margin-bottom:14px;border-color:#e8c547;background:#fff9e6;color:#1a1a2e" onclick="scanBarcodeIntoForm()">📷 Заполнить по штрихкоду</button>
-    <div class="img-upload-row-big">
-      <div class="img-preview-big" id="img-preview" onclick="document.getElementById('file-input').click()">
-        <span id="preview-emoji">📦</span>
-        <img id="preview-img" style="display:none">
-        <div class="img-overlay-big" id="preview-overlay-label">📷 Добавить фото товара</div>
-      </div>
-      <input type="file" id="file-input" accept="image/*" style="display:none" onchange="handleFile(event)">
-    </div>
-    <div class="field"><label>Название товара</label><input type="text" id="f-name" placeholder="Например: Пломбир"></div>
-    <div class="field"><label>Вес / объём</label><input type="text" id="f-weight" placeholder="Например: 100 г">
-      <div class="unit-chip-row">
-        <button type="button" class="unit-chip" onclick="setWeightUnit('мл')">мл</button>
-        <button type="button" class="unit-chip" onclick="setWeightUnit('л')">л</button>
-        <button type="button" class="unit-chip" onclick="setWeightUnit('г')">г</button>
-        <button type="button" class="unit-chip" onclick="setWeightUnit('кг')">кг</button>
-      </div>
-    </div>
-    <div class="field"><label>Категория</label><select id="f-cat"></select></div>
-    <div class="field">
-      <label>Штрихкоды (можно несколько — для разных вкусов с одной ценой)</label>
-      <div id="barcodes-list"></div>
-      <button type="button" class="variant-add-btn" onclick="addBarcodeRow()">＋ Добавить штрихкод</button>
-    </div>
-    <label class="price-label">Цена (₸)</label>
-    <div class="price-row">
-      <input type="number" class="price-input" id="f-price" placeholder="0">
-    </div>
-    <div class="variants-toggle" id="variants-toggle" onclick="toggleVariants()">➕ Добавить несколько вариантов (вес/цена)</div>
-    <div id="variants-section" style="display:none">
-      <div id="variants-list"></div>
-      <button type="button" class="variant-add-btn" onclick="addVariantRow()">＋ Добавить вариант</button>
-    </div>
-    <div class="upload-status" id="upload-status"></div>
-    <div class="progress-bar" id="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-    <button class="save-btn" id="save-btn" onclick="saveProduct()">Добавить товар</button>
-    <button class="delete-btn" id="delete-btn" style="display:none" onclick="deleteProduct()">🗑 Удалить товар</button>
-  </div>
-</div>
-
-<!-- CATEGORY MODAL -->
-<div class="modal-overlay" id="cat-modal" onclick="closeIfOutside(event,'cat-modal')">
-  <div class="modal-sheet">
-    <div class="modal-handle"></div>
-    <div class="modal-title" id="cat-modal-title">Новая категория</div>
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
-      <div style="width:80px;height:80px;border-radius:14px;background:#f5f0e8;border:2px solid #eee;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:36px" id="cat-img-preview-box">
-        <span id="cat-emoji-show">🗂️</span>
-        <img id="cat-img-show" style="display:none;width:100%;height:100%;object-fit:cover">
-      </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:8px">
-        <label class="photo-upload-label">
-          📷 Загрузить фото из галереи
-          <input type="file" id="cat-file-input" accept="image/*" style="display:none" onchange="handleCatFile(event)">
-        </label>
-        <button onclick="clearCatPhoto()" style="padding:9px;border-radius:11px;border:2px solid #eee;background:#fff;color:#999;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;width:100%">Убрать фото</button>
-      </div>
-    </div>
-    <div style="font-size:11px;font-weight:700;color:#888;margin-bottom:6px">ИЛИ ВЫБЕРИТЕ ИКОНКУ</div>
-    <div class="emoji-grid" id="cat-emoji-grid" style="margin-bottom:14px"></div>
-    <div class="field"><label>Название категории</label><input type="text" id="cat-name-input" placeholder="Например: Сладости"></div>
-    <button class="save-btn" id="cat-save-btn" onclick="saveCategory()">Добавить категорию</button>
-    <button class="delete-btn" id="cat-delete-btn" style="display:none" onclick="deleteCategory()">🗑 Удалить категорию</button>
-  </div>
-</div>
-
-<!-- DELIVERY MODAL -->
-<div class="modal-overlay" id="delivery-modal" onclick="closeIfOutside(event,'delivery-modal')">
-  <div class="modal-sheet">
-    <div class="modal-handle"></div>
-    <div class="modal-title" id="del-modal-title">Новая поставка</div>
-    <div class="field"><label>Название компании</label><input type="text" id="d-company" placeholder="Например: ООО Восток"></div>
-    <div class="field"><label>Дата поставки</label><input type="date" id="d-date"></div>
-    <div class="field"><label>Сумма поставки (₸)</label><input type="number" id="d-amount" placeholder="Например: 50000"></div>
-    <div class="field"><label>Заметка (необязательно)</label><input type="text" id="d-note" placeholder="Например: Молочная продукция"></div>
-    <button class="save-btn" id="del-save-btn" onclick="saveDelivery()">Добавить поставку</button>
-    <button class="notify-btn" id="del-notify-btn" style="display:none" onclick="sendDeliveryNotification()">🔔 Уведомить всех кассиров</button>
-    <button class="delete-btn" id="del-delete-btn" style="display:none" onclick="deleteDelivery()">🗑 Удалить поставку</button>
-  </div>
-</div>
-
-<!-- EXIT CONFIRM MODAL -->
-<div class="modal-overlay" id="exit-confirm-modal">
-  <div class="modal-sheet" style="text-align:center">
-    <div class="modal-handle"></div>
-    <div style="font-size:44px;margin-bottom:8px">🚪</div>
-    <div class="modal-title" style="text-align:center">Покинуть Dastan Shop?</div>
-    <div style="font-size:14px;color:#999;font-weight:600;margin-bottom:20px;line-height:1.4">Несохранённые изменения могут быть потеряны</div>
-    <button class="save-btn" onclick="confirmExitYes()">Да, выйти</button>
-    <button class="delete-btn" style="border-color:#eee;color:#666;margin-top:10px" onclick="confirmExitNo()">Остаться</button>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('/Shopdastan/sw.js').catch(e=>console.log('SW:',e));
-  });
-}
-</script>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, onValue, set, remove, push, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-const app=initializeApp({
-  apiKey:"AIzaSyCLvX7Rx83A2Z0P2Jjs4XaCV1wFEEyvFuM",
-  authDomain:"dastan-shop-catalogue.firebaseapp.com",
-  databaseURL:"https://dastan-shop-catalogue-default-rtdb.firebaseio.com",
-  projectId:"dastan-shop-catalogue",
-  storageBucket:"dastan-shop-catalogue.firebasestorage.app",
-  messagingSenderId:"435593086596",
-  appId:"1:435593086596:web:1cb0c60fcda8a70d5924d1"
-});
-const db=getDatabase(app);
-window._db=db;window._ref=ref;window._set=set;window._remove=remove;window._push=push;window._get=get;
-onValue(ref(db,'products'),snap=>{window._products=snap.val()||{};onDataUpdate();});
-onValue(ref(db,'categories'),snap=>{window._categories=snap.val()||{};onDataUpdate();});
-onValue(ref(db,'deliveries'),snap=>{window._deliveries=snap.val()||{};renderDeliveries();checkTodayDeliveries();});
-</script>
-
-<script>
-const CL_CLOUD="dv9zm4x4o",CL_PRESET="dastan_shop";
-const ANTHROPIC_API="https://api.anthropic.com/v1/messages";
-const BARCODE_LOOKUP_URL="https://id-preview--86a93b32-22ec-4ee4-8b42-a47783797301.lovable.app/api/public/product-lookup";
-const P_EMOJIS=["📦","🍦","🧃","🍞","🥛","🧈","🥩","🍎","🥦","🧀","🍗","🥚","🍫","🥤","🫙","🧂","🍬","🍪","🥜","🍋","🧁","🎂","🍕","🥗","🫐"];
-const C_EMOJIS=["🗂️","🍦","🧃","🍞","🥛","🥩","🍎","🥦","🍫","🥤","🍬","🍪","🧁","🎂","🍕","🛒","⭐","🔥","🆕","🧂","🥜","🍋","🥗","🫙","🧀"];
-
-let navStack=[{type:'categories'}];
-let currentSubCatId='all';
-let editingId=null,selFile=null,curEmoji="📦";
-let catSelFile=null,editingCatId=null,catEmoji="🗂️";
-let editingDeliveryId=null;
-let deferredInstallPrompt=null;
-window._products={};window._categories={};window._deliveries={};
-
-// ---- CAMERA (AI photo) SEARCH STATE ----
-let camPhase='idle'; // idle | preview | analyzing | results | notfound
-let camImageB64=null;
-let camStream=null;
-
-// ---- BARCODE STATE ----
-let bcStream=null,bcDetector=null,bcRunning=false,bcRafId=null,barcodeScanMode=null;
-let pendingLookupImageUrl=null;
-let pendingBarcodeRowId=null; // which barcode row in the product form is currently being scanned into
-window._pendingBarcodeLookup=null;
-
-// ---- VARIANTS STATE ----
-let currentVariants=[];
-let variantsExpanded=false;
-
-// ---- BARCODES (multi) STATE ----
-let currentBarcodes=[];
-
-// ---- PWA ----
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;document.getElementById('install-banner').style.display='block';});
-window.addEventListener('appinstalled',()=>{document.getElementById('install-banner').style.display='none';showToast('✅ Приложение установлено!');});
-function installApp(){if(!deferredInstallPrompt)return;deferredInstallPrompt.prompt();deferredInstallPrompt.userChoice.then(()=>{deferredInstallPrompt=null;document.getElementById('install-banner').style.display='none';});}
-
-// ---- PUSH ----
-window.addEventListener('load',()=>{if('Notification'in window&&Notification.permission==='default'){setTimeout(()=>{document.getElementById('push-ask').style.display='block';},3000);}});
-function allowPush(){Notification.requestPermission().then(p=>{document.getElementById('push-ask').style.display='none';if(p==='granted')showToast('🔔 Уведомления включены!');});}
-function sendPush(title,body){if(Notification.permission==='granted'){new Notification(title,{body,icon:'icon-192.png'});}}
-
-// ---- DATA UPDATE ----
-function onDataUpdate(){
-  const cur=navStack[navStack.length-1];
-  if(cur.type==='categories') renderCatsHome();
-  else if(cur.type==='products') renderProducts();
-  const q=document.getElementById('home-search-input').value;
-  if(q) onHomeSearch();
-}
-
-// ---- NAV ----
-function currentView(){return navStack[navStack.length-1].type;}
-function switchView(type,catId,catName){
-  if(type==='categories'&&navStack.length>1){
-    // уходим на главную с глубины — через реальный "назад" в истории браузера,
-    // чтобы аппаратная кнопка "назад" на телефоне осталась синхронизирована
-    history.back();
-    return;
-  }
-  const prevLen=navStack.length;
-  if(type==='deliveries'){navStack=[{type:'categories'},{type:'deliveries'}];}
-  else if(type==='categories'){navStack=[{type:'categories'}];}
-  else if(type==='products'){navStack.push({type:'products',catId,catName});currentSubCatId='all';}
-  renderView();
-  if(navStack.length>prevLen){for(let i=prevLen;i<navStack.length;i++)history.pushState({dastanShop:true},'');}
-}
-function goBack(){
-  // сам переход делает popstate-обработчик — так экранная "←" и аппаратная
-  // кнопка "назад" на телефоне всегда работают одинаково
-  if(navStack.length>1)history.back();
-}
-function renderView(){
-  const cur=navStack[navStack.length-1];
-  const isHome=cur.type==='categories';
-  const isProducts=cur.type==='products';
-  const isDeliveries=cur.type==='deliveries';
-  document.getElementById('categories-home').style.display=isHome?'block':'none';
-  document.getElementById('products-view').style.display=isProducts?'block':'none';
-  document.getElementById('deliveries-view').style.display=isDeliveries?'block':'none';
-  document.getElementById('home-search-wrap').style.display=isHome?'block':'none';
-  document.getElementById('search-results').style.display='none';
-  document.getElementById('header-search').style.display=isProducts?'':'none';
-  document.getElementById('back-btn').style.display=navStack.length>1?'flex':'none';
-  document.getElementById('delivery-nav-btn').style.display=isDeliveries?'none':'flex';
-  document.getElementById('subcat-strip').style.display=isProducts?'block':'none';
-  document.getElementById('breadcrumb').style.display=navStack.length>1?'block':'none';
-  if(isHome) document.getElementById('header-title').textContent='Каталог';
-  else if(isDeliveries) document.getElementById('header-title').textContent='🚚 Поставки';
-  else if(isProducts) document.getElementById('header-title').textContent=cur.catName||'Товары';
-  document.getElementById('main-add-btn').textContent='+';
-  renderBreadcrumb();
-  if(isHome){renderCatsHome();document.getElementById('count-label').textContent='Выберите категорию';}
-  else if(isProducts){currentSubCatId='all';renderSubcatStrip();renderProducts();}
-  else if(isDeliveries){renderDeliveries();document.getElementById('count-label').textContent='Поставки';}
-}
-function renderBreadcrumb(){
-  const inner=document.getElementById('breadcrumb-inner');inner.innerHTML='';
-  navStack.forEach((item,i)=>{
-    if(i>0){const sep=document.createElement('span');sep.className='bc-sep';sep.textContent='›';inner.appendChild(sep);}
-    const el=document.createElement('span');const isLast=i===navStack.length-1;
-    el.className=isLast?'bc-item bc-current':'bc-item';
-    el.textContent=item.type==='categories'?'Главная':item.type==='deliveries'?'Поставки':item.catName;
-    if(!isLast){const idx=i;el.onclick=()=>{const delta=navStack.length-1-idx;if(delta>0)history.go(-delta);};}
-    inner.appendChild(el);
-  });
-}
-function onAddBtn(){
-  const cur=navStack[navStack.length-1];
-  if(cur.type==='deliveries') openDeliveryModal(null);
-  else openProductModal(null);
-}
-
-// ---- HOME SEARCH ----
-function onHomeSearch(){
-  const q=document.getElementById('home-search-input').value.trim().toLowerCase();
-  const results=document.getElementById('search-results');
-  if(!q){results.style.display='none';document.getElementById('categories-home').style.display='block';return;}
-  document.getElementById('categories-home').style.display='none';results.style.display='block';
-  const cats=window._categories,prods=window._products;
-  const counts={};Object.values(prods).forEach(p=>{if(p.catId){counts[p.catId]=(counts[p.catId]||0)+1;}});
-  const matchCats=Object.entries(cats).filter(([id,c])=>c.name?.toLowerCase().includes(q));
-  const matchProds=Object.entries(prods).filter(([id,p])=>p.name?.toLowerCase().includes(q));
-  let html='';
-  if(matchCats.length){
-    html+=`<div class="search-section-title">📂 Категории</div>`;
-    matchCats.forEach(([id,c])=>{
-      const img=c.imageUrl?`<img src="${c.imageUrl}" style="width:100%;height:100%;object-fit:cover">`:`<span>${c.emoji||'🗂️'}</span>`;
-      html+=`<div class="search-cat-item" onclick="switchView('products','${id}','${c.name}')"><div class="search-cat-img">${img}</div><div><div class="search-cat-name">${c.name}</div><div class="search-cat-count">${counts[id]||0} товаров</div></div></div>`;
-    });
-  }
-  if(matchProds.length){
-    html+=`<div class="search-section-title">🛍 Товары</div>`;
-    matchProds.forEach(([id,p])=>{
-      const img=p.imageUrl?`<img src="${p.imageUrl}" style="width:100%;height:100%;object-fit:cover">`:`<span>${p.emoji||'📦'}</span>`;
-      const catName=p.catId&&cats[p.catId]?cats[p.catId].name:'';
-      const enc=encodeURIComponent(JSON.stringify({id,...p}));
-      html+=`<div class="search-prod-item" onclick="openProductModal(JSON.parse(decodeURIComponent('${enc}')))"><div class="search-prod-img">${img}</div><div style="flex:1;min-width:0"><div class="search-prod-name">${p.name||''}</div><div class="search-prod-info">${p.weight||''}${catName?' · '+catName:''}</div></div><div class="search-prod-price">${p.price||0} ₸</div></div>`;
-    });
-  }
-  if(!matchCats.length&&!matchProds.length) html='<div class="empty"><div class="empty-icon">🔍</div><div>Ничего не найдено</div></div>';
-  results.innerHTML=html;
-}
-function onHeaderSearch(){renderProducts();}
-
-// ---- SUBCATEGORIES STRIP ----
-function getSubcatsOf(parentCatId){return Object.entries(window._categories).filter(([id,c])=>c.parentId===parentCatId);}
-function renderSubcatStrip(){
-  const cur=navStack[navStack.length-1];
-  if(cur.type!=='products'||cur.catId==='all'){document.getElementById('subcat-strip').style.display='none';return;}
-  document.getElementById('subcat-strip').style.display='block';
-  const strip=document.getElementById('subcat-strip-inner');
-  const subcats=getSubcatsOf(cur.catId);
-  const counts={all:0};
-  Object.values(window._products).forEach(p=>{
-    const subcatIds=subcats.map(([id])=>id);
-    if(p.catId===cur.catId||subcatIds.includes(p.catId)){counts.all++;if(p.catId!==cur.catId)counts[p.catId]=(counts[p.catId]||0)+1;}
-  });
-  let html=`<div class="subcat-chip ${currentSubCatId==='all'?'active':''}" onclick="selectSubcat('all')">Все (${counts.all})</div>`;
-  subcats.forEach(([id,c])=>{html+=`<div class="subcat-chip ${currentSubCatId===id?'active':''}" onclick="selectSubcat('${id}')">${c.emoji||''} ${c.name} (${counts[id]||0})</div>`;});
-  html+=`<div class="subcat-chip add-subcat" onclick="openCatModalAsSub()">＋ Подкатегория</div>`;
-  strip.innerHTML=html;
-}
-function selectSubcat(id){currentSubCatId=id;renderSubcatStrip();renderProducts();}
-function openCatModalAsSub(){const cur=navStack[navStack.length-1];openCatModal(null,cur.catId);}
-
-// ---- CATEGORIES HOME (топ-категории, "Все товары" — в самом конце) ----
-function renderCatsHome(){
-  const grid=document.getElementById('cats-home-grid');
-  document.getElementById('loading-cats').style.display='none';grid.style.display='grid';
-  const cats=window._categories,prods=window._products;
-  const topCats=Object.entries(cats).filter(([id,c])=>!c.parentId);
-  let html='';
-  topCats.forEach(([id,c])=>{
-    const subcatIds=Object.entries(cats).filter(([sid,sc])=>sc.parentId===id).map(([sid])=>sid);
-    let cnt=Object.values(prods).filter(p=>p.catId===id||subcatIds.includes(p.catId)).length;
-    const imgContent=c.imageUrl?`<img src="${c.imageUrl}" style="width:100%;height:100%;object-fit:cover">`:`<span class="cat-card-emoji">${c.emoji||'🗂️'}</span>`;
-    html+=`<div class="cat-home-card" onclick="switchView('products','${id}','${c.name}')"><div class="cat-card-img">${imgContent}</div><div class="cat-card-body"><div class="cat-card-name">${c.name}</div><div class="cat-card-count">${cnt} товаров</div></div><button class="cat-card-edit" onclick="event.stopPropagation();openCatModal('${id}',null)">✏️</button></div>`;
-  });
-  html+=`<div class="cat-home-card all-card" onclick="switchView('products','all','Все товары')"><div class="cat-card-img"><span class="cat-card-emoji">🛒</span></div><div class="cat-card-body"><div class="cat-card-name">Все товары</div><div class="cat-card-count">${Object.keys(prods).length} товаров</div></div></div>`;
-  html+=`<div class="cat-home-card add-cat-card" onclick="openCatModal(null,null)"><div class="cat-card-img"><span style="font-size:36px;color:#ccc">＋</span></div><div class="cat-card-body"><div class="cat-card-name" style="color:#bbb">Добавить</div><div class="cat-card-count">категорию</div></div></div>`;
-  grid.innerHTML=html;buildCatSelect();
-}
-
-// ---- CATEGORY MODAL ----
-function openCatModal(catId,parentId){
-  editingCatId=catId||null;catSelFile=null;catEmoji="🗂️";
-  const existing=catId&&window._categories[catId]?window._categories[catId]:null;
-  const isEdit=!!existing;const isSub=!!parentId;
-  document.getElementById('cat-modal-title').textContent=isEdit?'Редактировать категорию':isSub?'Новая подкатегория':'Новая категория';
-  document.getElementById('cat-name-input').value=existing?existing.name:'';
-  document.getElementById('cat-save-btn').textContent=isEdit?'Сохранить':'Добавить';
-  document.getElementById('cat-delete-btn').style.display=isEdit?'block':'none';
-  document.getElementById('cat-file-input').value='';
-  window._catModalParentId=existing?existing.parentId||null:parentId||null;
-  const img=document.getElementById('cat-img-show'),emo=document.getElementById('cat-emoji-show');
-  if(existing&&existing.imageUrl){img.src=existing.imageUrl;img.style.display='block';emo.style.display='none';}
-  else{img.style.display='none';emo.style.display='';catEmoji=existing?existing.emoji||'🗂️':'🗂️';emo.textContent=catEmoji;}
-  const grid=document.getElementById('cat-emoji-grid');grid.innerHTML='';
-  C_EMOJIS.forEach(e=>{
-    const b=document.createElement('button');b.className='emoji-opt'+(e===catEmoji?' active':'');b.textContent=e;
-    b.onclick=()=>{catEmoji=e;catSelFile=null;document.getElementById('cat-img-show').style.display='none';document.getElementById('cat-emoji-show').style.display='';document.getElementById('cat-emoji-show').textContent=e;document.querySelectorAll('#cat-emoji-grid .emoji-opt').forEach(x=>x.classList.toggle('active',x.textContent===e));};
-    grid.appendChild(b);
-  });
-  document.getElementById('cat-modal').classList.add('open');
-}
-function handleCatFile(e){
-  const file=e.target.files[0];if(!file)return;catSelFile=file;
-  const r=new FileReader();r.onload=ev=>{document.getElementById('cat-emoji-show').style.display='none';const img=document.getElementById('cat-img-show');img.src=ev.target.result;img.style.display='block';document.querySelectorAll('#cat-emoji-grid .emoji-opt').forEach(b=>b.classList.remove('active'));};
-  r.readAsDataURL(file);
-}
-function clearCatPhoto(){catSelFile=null;document.getElementById('cat-img-show').style.display='none';document.getElementById('cat-img-show').src='';document.getElementById('cat-emoji-show').style.display='';document.getElementById('cat-emoji-show').textContent=catEmoji;document.getElementById('cat-file-input').value='';}
-async function saveCategory(){
-  const name=document.getElementById('cat-name-input').value.trim();if(!name){showToast('Введите название!');return;}
-  const btn=document.getElementById('cat-save-btn');btn.disabled=true;btn.textContent='Сохранение...';
-  let imageUrl=null;if(editingCatId&&window._categories[editingCatId])imageUrl=window._categories[editingCatId].imageUrl||null;
-  if(catSelFile){try{imageUrl=await uploadCloudinary(catSelFile);}catch(err){showToast('Ошибка фото: '+err.message);btn.disabled=false;btn.textContent='Сохранить';return;}}
-  if(!catSelFile&&!document.getElementById('cat-img-show').src)imageUrl=null;
-  const data={name,emoji:catEmoji,imageUrl:imageUrl||null};
-  if(window._catModalParentId)data.parentId=window._catModalParentId;
-  if(editingCatId){await window._set(window._ref(window._db,'categories/'+editingCatId),data);showToast('Категория обновлена ✓');}
-  else{const nr=window._push(window._ref(window._db,'categories'));await window._set(nr,data);showToast('Категория добавлена ✓');}
-  btn.disabled=false;document.getElementById('cat-modal').classList.remove('open');
-}
-async function deleteCategory(){
-  if(!editingCatId||!confirm('Удалить категорию?'))return;
-  await window._remove(window._ref(window._db,'categories/'+editingCatId));
-  document.getElementById('cat-modal').classList.remove('open');showToast('Категория удалена');
-}
-function buildCatSelect(){
-  const sel=document.getElementById('f-cat');if(!sel)return;
-  const cats=window._categories;let html='<option value="">— Без категории —</option>';
-  const top=Object.entries(cats).filter(([id,c])=>!c.parentId);
-  top.forEach(([id,c])=>{
-    html+=`<option value="${id}">${c.emoji||''} ${c.name}</option>`;
-    Object.entries(cats).filter(([sid,sc])=>sc.parentId===id).forEach(([sid,sc])=>{html+=`<option value="${sid}">&nbsp;&nbsp;↳ ${sc.emoji||''} ${sc.name}</option>`;});
-  });
-  sel.innerHTML=html;
-}
-
-// ---- PRODUCTS ----
-function renderProducts(){
-  const cur=navStack[navStack.length-1];if(cur.type!=='products')return;
-  const search=(document.getElementById('header-search')?.value||'').toLowerCase();
-  const cats=window._categories;const catId=cur.catId;
-  const subcatIds=Object.entries(cats).filter(([id,c])=>c.parentId===catId).map(([id])=>id);
-  let prods=Object.entries(window._products).map(([id,p])=>({id,...p}));
-  prods=prods.filter(p=>{
-    if(catId==='all')return true;
-    if(currentSubCatId!=='all')return p.catId===currentSubCatId;
-    return p.catId===catId||subcatIds.includes(p.catId);
-  });
-  if(search)prods=prods.filter(p=>p.name?.toLowerCase().includes(search));
-  const total=prods.length;
-  document.getElementById('count-label').textContent=total+' '+(total%10===1&&total!==11?'товар':total%10<5&&(total<11||total>14)?'товара':'товаров');
-  const grid=document.getElementById('product-grid'),empty=document.getElementById('empty-state');
-  if(prods.length===0){grid.style.display='none';empty.style.display='block';document.getElementById('empty-text').textContent=search?'Ничего не найдено':'Нет товаров';return;}
-  empty.style.display='none';grid.style.display='grid';grid.innerHTML='';
-  prods.forEach(p=>{
-    const card=document.createElement('div');card.className='card';
-    let priceHtml=(p.price||0)+' ₸';
-    let variantsHtml='';
-    if(p.variants&&Object.keys(p.variants).length){
-      const vArr=Object.values(p.variants);
-      const prices=vArr.map(v=>Number(v.price)||0);
-      const minP=Math.min(...prices),maxP=Math.max(...prices);
-      priceHtml=minP===maxP?minP+' ₸':'от '+minP+' ₸';
-      variantsHtml=`<div class="card-variants">${vArr.map(v=>`<span class="card-variant-chip">${v.weight||''}</span>`).join('')}</div>`;
-    }
-    card.innerHTML=`<div class="card-img">${p.imageUrl?`<img src="${p.imageUrl}" alt="${p.name}" loading="lazy">`:`<span class="card-emoji">${p.emoji||'📦'}</span>`}</div><div class="card-body"><div class="card-name">${p.name||''}</div><div class="card-weight">${p.weight||'—'}</div>${variantsHtml}<div class="card-price">${priceHtml}</div></div>`;
-    card.onclick=()=>openProductModal(p);grid.appendChild(card);
-  });
-}
-
-// ---- PRODUCT MODAL ----
-function openProductModal(p){
-  editingId=p?p.id:null;selFile=null;curEmoji=p?(p.emoji||"📦"):"📦";pendingLookupImageUrl=null;
-  document.getElementById('prod-modal-title').textContent=p?'Редактировать':'Новый товар';
-  document.getElementById('f-name').value=p?p.name:'';document.getElementById('f-weight').value=p?p.weight:'';document.getElementById('f-price').value=p?p.price:'';
-  document.getElementById('bc-quickfill-btn').style.display=p?'none':'block';
-  buildCatSelect();
-  const cur=navStack[navStack.length-1];const defCat=p?p.catId:(cur.type==='products'&&cur.catId!=='all'?cur.catId:'');
-  if(defCat)setTimeout(()=>{document.getElementById('f-cat').value=defCat;},50);
-  const img=document.getElementById('preview-img'),emo=document.getElementById('preview-emoji'),ov=document.getElementById('preview-overlay-label');
-  if(p&&p.imageUrl){img.src=p.imageUrl;img.style.display='block';emo.style.display='none';ov.textContent='📷 Изменить фото';}
-  else{img.style.display='none';emo.style.display='';emo.textContent=curEmoji;ov.textContent='📷 Добавить фото товара';}
-  document.getElementById('upload-status').style.display='none';document.getElementById('progress-bar').style.display='none';
-  document.getElementById('save-btn').disabled=false;document.getElementById('save-btn').textContent=p?'Сохранить изменения':'Добавить товар';
-  document.getElementById('delete-btn').style.display=p?'block':'none';
-  document.getElementById('file-input').value='';document.getElementById('prod-modal').classList.add('open');
-  // barcodes (multi)
-  let barcodeVals=[];
-  if(p){
-    if(p.barcodes)barcodeVals=Object.values(p.barcodes).filter(Boolean);
-    else if(p.barcode)barcodeVals=[p.barcode];
-  }
-  currentBarcodes=barcodeVals.length?barcodeVals.map(v=>({bid:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),value:v})):[{bid:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),value:''}];
-  renderBarcodeRows();
-  // variants
-  currentVariants=(p&&p.variants)?Object.entries(p.variants).map(([vid,v])=>({vid,weight:v.weight||'',price:v.price!=null?v.price:''})):[];
-  variantsExpanded=currentVariants.length>0;
-  document.getElementById('variants-section').style.display=variantsExpanded?'block':'none';
-  document.getElementById('variants-toggle').textContent=variantsExpanded?'➖ Скрыть варианты':'➕ Добавить несколько вариантов (вес/цена)';
-  renderVariantRows();
-}
-function handleFile(e){
-  const file=e.target.files[0];if(!file)return;selFile=file;pendingLookupImageUrl=null;
-  const r=new FileReader();r.onload=ev=>{document.getElementById('preview-emoji').style.display='none';const img=document.getElementById('preview-img');img.src=ev.target.result;img.style.display='block';document.getElementById('preview-overlay-label').textContent='📷 Изменить фото';};
-  r.readAsDataURL(file);
-}
-function setWeightUnit(unit){
-  const inp=document.getElementById('f-weight');
-  let val=inp.value.trim();
-  val=val.replace(/\s*(мл|л|г|кг)\s*$/i,'').trim(); // заменяем уже стоящую в конце единицу, а не дублируем
-  inp.value=val?(val+' '+unit):unit;
-  inp.focus();
-}
-
-// ---- MULTI BARCODES ----
-function addBarcodeRow(){
-  currentBarcodes.push({bid:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),value:''});
-  renderBarcodeRows();
-}
-function removeBarcodeRow(bid){
-  currentBarcodes=currentBarcodes.filter(b=>b.bid!==bid);
-  if(!currentBarcodes.length)currentBarcodes=[{bid:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),value:''}];
-  renderBarcodeRows();
-}
-function updateBarcodeField(bid,value){
-  const b=currentBarcodes.find(x=>x.bid===bid);if(b)b.value=value;
-}
-function renderBarcodeRows(){
-  const list=document.getElementById('barcodes-list');if(!list)return;
-  list.innerHTML=currentBarcodes.map(b=>`<div class="barcode-row"><input type="text" placeholder="Штрихкод (например, для другого вкуса)" value="${b.value||''}" oninput="updateBarcodeField('${b.bid}',this.value)"><button type="button" class="barcode-row-scan" title="Сканировать" onclick="scanBarcodeIntoForm('${b.bid}')">📷</button><button type="button" class="barcode-row-del" onclick="removeBarcodeRow('${b.bid}')">🗑</button></div>`).join('');
-}
-
-// ---- VARIANTS (несколько весов/цен в одной карточке) ----
-function toggleVariants(){
-  variantsExpanded=!variantsExpanded;
-  document.getElementById('variants-section').style.display=variantsExpanded?'block':'none';
-  document.getElementById('variants-toggle').textContent=variantsExpanded?'➖ Скрыть варианты':'➕ Добавить несколько вариантов (вес/цена)';
-  if(variantsExpanded&&currentVariants.length===0)addVariantRow();
-}
-function addVariantRow(){
-  currentVariants.push({vid:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),weight:'',price:''});
-  renderVariantRows();
-}
-function removeVariantRow(vid){
-  currentVariants=currentVariants.filter(v=>v.vid!==vid);
-  renderVariantRows();
-}
-function updateVariantField(vid,field,value){
-  const v=currentVariants.find(x=>x.vid===vid);if(v)v[field]=value;
-}
-function renderVariantRows(){
-  const list=document.getElementById('variants-list');if(!list)return;
-  list.innerHTML=currentVariants.map(v=>`<div class="variant-row"><input type="text" placeholder="Вес/объём (0.5 л)" value="${v.weight||''}" oninput="updateVariantField('${v.vid}','weight',this.value)"><input type="number" placeholder="Цена ₸" value="${v.price!==''?v.price:''}" oninput="updateVariantField('${v.vid}','price',this.value)"><button type="button" class="variant-del" onclick="removeVariantRow('${v.vid}')">🗑</button></div>`).join('');
-}
-
-async function saveProduct(){
-  const name=document.getElementById('f-name').value.trim();
-  const weight=document.getElementById('f-weight').value.trim();
-  const priceRaw=document.getElementById('f-price').value;
-  const price=parseFloat(priceRaw);
-  const catId=document.getElementById('f-cat').value;
-  const validVariants=currentVariants.filter(v=>v.weight&&v.price!==''&&!isNaN(parseFloat(v.price)));
-  const validBarcodes=currentBarcodes.map(b=>(b.value||'').trim()).filter(Boolean);
-  if(!name){showToast('Введите название!');return;}
-  if(!validVariants.length&&isNaN(price)){showToast('Заполните цену или добавьте варианты!');return;}
-  const btn=document.getElementById('save-btn');btn.disabled=true;btn.textContent='Сохранение...';
-  let imageUrl=editingId&&window._products[editingId]?window._products[editingId].imageUrl||null:null;
-  if(selFile){try{imageUrl=await uploadCloudinary(selFile);}catch(err){showToast('Ошибка фото: '+err.message);btn.disabled=false;btn.textContent='Сохранить';return;}}
-  else if(pendingLookupImageUrl){imageUrl=pendingLookupImageUrl;}
-  const data={name,weight,price:isNaN(price)?0:price,catId:catId||'',emoji:curEmoji,imageUrl:imageUrl||null,updatedAt:Date.now()};
-  if(validBarcodes.length){
-    const barcodesObj={};
-    validBarcodes.forEach((v,i)=>{barcodesObj['b'+i]=v;});
-    data.barcodes=barcodesObj;
-    data.barcode=validBarcodes[0]; // держим для обратной совместимости со старым кодом
-  }else{
-    data.barcodes=null;data.barcode=null;
-  }
-  if(validVariants.length){
-    const variantsObj={};
-    validVariants.forEach(v=>{
-      const vid=v.vid.startsWith('tmp_')?window._push(window._ref(window._db,'products')).key:v.vid;
-      variantsObj[vid]={weight:v.weight,price:parseFloat(v.price)};
-    });
-    const prices=Object.values(variantsObj).map(v=>v.price);
-    data.variants=variantsObj;
-    data.price=Math.min(...prices);
-    if(!weight)data.weight=validVariants.length+' вариант'+(validVariants.length===1?'':'а');
-  }else{
-    data.variants=null;
-  }
-  try{
-    if(editingId){await window._set(window._ref(window._db,'products/'+editingId),data);showToast('Товар обновлён ✓');}
-    else{const nr=window._push(window._ref(window._db,'products'));await window._set(nr,data);showToast('Товар добавлен ✓');}
-    document.getElementById('prod-modal').classList.remove('open');
-  }catch(e){showToast('Ошибка: '+e.message);btn.disabled=false;btn.textContent='Сохранить';}
-}
-async function deleteProduct(){
-  if(!editingId||!confirm('Удалить товар?'))return;
-  await window._remove(window._ref(window._db,'products/'+editingId));
-  document.getElementById('prod-modal').classList.remove('open');showToast('Товар удалён');
-}
-
-// ---- CLOUDINARY ----
-function uploadCloudinary(file){
-  return new Promise((resolve,reject)=>{
-    const r=new FileReader();r.onload=ev=>{
-      const img=new Image();img.onload=()=>{
-        const c=document.createElement('canvas');const MAX=900;let w=img.width,h=img.height;
-        if(w>MAX){h=h*MAX/w;w=MAX;}if(h>MAX){w=w*MAX/h;h=MAX;}
-        c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
-        c.toBlob(blob=>{
-          const fd=new FormData();fd.append('file',blob,'photo.jpg');fd.append('upload_preset',CL_PRESET);fd.append('folder','dastan-shop');
-          const st=document.getElementById('upload-status'),pb=document.getElementById('progress-bar'),pf=document.getElementById('progress-fill');
-          st.style.display='block';st.textContent='⏳ Загрузка фото...';pb.style.display='block';
-          const xhr=new XMLHttpRequest();
-          xhr.upload.onprogress=e=>{if(e.lengthComputable){const p=Math.round(e.loaded/e.total*100);pf.style.width=p+'%';st.textContent='⏳ '+p+'%';}};
-          xhr.onload=()=>{st.style.display='none';pb.style.display='none';if(xhr.status===200){resolve(JSON.parse(xhr.responseText).secure_url);}else{reject(new Error('Ошибка '+xhr.status));}};
-          xhr.onerror=()=>reject(new Error('Нет сети'));
-          xhr.open('POST',`https://api.cloudinary.com/v1_1/${CL_CLOUD}/image/upload`);xhr.send(fd);
-        },'image/jpeg',0.85);
-      };img.src=ev.target.result;
-    };r.readAsDataURL(file);
-  });
-}
-
-// ===================== BARCODE SCANNER =====================
-
-async function loadBarcodeDetector(){
-  if('BarcodeDetector' in window){
-    try{const formats=await window.BarcodeDetector.getSupportedFormats();return new window.BarcodeDetector({formats:formats.filter(f=>['ean_13','ean_8','upc_a','upc_e','code_128','code_39','itf'].includes(f))});}
-    catch(e){try{return new window.BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e','code_128']});}catch(e2){}}
-  }
-  const mod=await import('https://cdn.jsdelivr.net/npm/@zxing/browser@0.1.5/+esm');
-  const reader=new mod.BrowserMultiFormatReader();
-  return {_zx:reader,async detect(v){try{const r=await this._zx.decodeOnceFromVideoElement(v);return r?[{rawValue:r.getText()}]:[];}catch{return [];}}};
-}
-
-function openBarcodeScanner(mode,rowId){
-  barcodeScanMode=mode; // 'lookup' (header, быстрая проверка цены) | 'add' (заполнение формы товара)
-  pendingBarcodeRowId=rowId||null;
-  document.getElementById('barcode-overlay').classList.add('open');
-  document.getElementById('bc-status').textContent='Запуск камеры…';
-  startBarcodeCam();
-}
-async function startBarcodeCam(){
-  try{
-    bcStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}}});
-    const v=document.getElementById('bc-video');v.srcObject=bcStream;await v.play();
-    bcDetector=await loadBarcodeDetector();
-    bcRunning=true;document.getElementById('bc-status').textContent='Наведите камеру на штрихкод…';
-    barcodeScanLoop();
-  }catch(e){
-    document.getElementById('bc-status').textContent='Камера недоступна. Введите штрихкод вручную.';
-  }
-}
-async function barcodeScanLoop(){
-  if(!bcRunning)return;
-  try{
-    const codes=await bcDetector.detect(document.getElementById('bc-video'));
-    if(codes&&codes[0]&&codes[0].rawValue){
-      const code=codes[0].rawValue.trim();
-      if(/^[0-9]{6,14}$/.test(code)){bcRunning=false;onBarcodeDetected(code);return;}
-    }
-  }catch(e){}
-  bcRafId=requestAnimationFrame(barcodeScanLoop);
-}
-function closeBarcodeScanner(){
-  bcRunning=false;if(bcRafId)cancelAnimationFrame(bcRafId);
-  if(bcStream){bcStream.getTracks().forEach(t=>t.stop());bcStream=null;}
-  document.getElementById('barcode-overlay').classList.remove('open');
-}
-function barcodeManualEntry(){
-  const code=prompt('Введите штрихкод вручную:');
-  closeBarcodeScanner();
-  if(code&&/^[0-9]{4,14}$/.test(code.trim()))onBarcodeDetected(code.trim());
-}
-function scanBarcodeIntoForm(rowId){openBarcodeScanner('add',rowId||null);}
-
-function productHasBarcode(p,barcode){
-  if((p.barcode||'')===barcode)return true;
-  if(p.barcodes)return Object.values(p.barcodes).includes(barcode);
-  return false;
-}
-
-async function onBarcodeDetected(barcode){
-  const localHit=Object.entries(window._products).find(([id,p])=>productHasBarcode(p,barcode));
-  const modeAtDetect=barcodeScanMode,rowAtDetect=pendingBarcodeRowId;
-  closeBarcodeScanner();
-  if(localHit){
-    const[id,p]=localHit;
-    if(modeAtDetect==='add'){
-      if(document.getElementById('prod-modal').classList.contains('open')&&rowAtDetect){
-        // сканируем доп. штрихкод прямо в открытую форму товара — не переоткрываем
-        updateBarcodeField(rowAtDetect,barcode);
-        renderBarcodeRows();
-        showToast('Такой штрихкод уже привязан к «'+(p.name||'товару')+'»');
-        return;
-      }
-      showToast('Такой товар уже есть в базе — открываю');
-      openProductModal({id,...p});
-    }else{
-      showToast('Товар найден ✓');
-      document.getElementById('bc-result-title').textContent='Товар найден';
-      document.getElementById('bc-result-body').innerHTML=barcodeFoundCardHtml({id,...p});
-      document.getElementById('bc-result-modal').classList.add('open');
-    }
-    return;
-  }
-  if(modeAtDetect==='add'){
-    if(document.getElementById('prod-modal').classList.contains('open')&&rowAtDetect){
-      updateBarcodeField(rowAtDetect,barcode);
-      renderBarcodeRows();
-      // если это первый штрихкод и название ещё не заполнено — подтягиваем данные через ИИ/интернет
-      const nameField=document.getElementById('f-name');
-      if(!nameField.value.trim())await fillFormFromBarcodeLookup(barcode);
-    }else{
-      await fillFormFromBarcodeLookup(barcode);
-    }
-  }else{
-    await showBarcodeLookupResult(barcode);
-  }
-}
-
-function barcodeFoundCardHtml(p){
-  const img=p.imageUrl?`<img class="bc-big-img" src="${p.imageUrl}">`:`<div class="bc-big-img bc-big-emoji">${p.emoji||'📦'}</div>`;
-  const enc=encodeURIComponent(JSON.stringify(p));
-  return `<div class="bc-card">
-    <div class="bc-card-imgwrap">
-      ${img}
-      <button class="bc-edit-fab" onclick="closeBarcodeResultModal();openProductModal(JSON.parse(decodeURIComponent('${enc}')))" title="Редактировать">✏️</button>
-    </div>
-    <div class="bc-card-body">
-      <div class="bc-card-name">${p.name||''}</div>
-      <div class="bc-card-sub">${p.weight||''}</div>
-      <div class="bc-card-price">${p.price||0} ₸</div>
-    </div>
-  </div>`;
-}
-
-async function lookupBarcodeExternal(barcode){
-  // 1. кэш в своей базе (быстро и бесплатно при повторном сканировании)
-  try{
-    const snap=await window._get(window._ref(window._db,'barcodeCache/'+barcode));
-    if(snap.exists())return {...snap.val(),fromCache:true};
-  }catch(e){}
-  // 2. внешний сервис (Open Food Facts + сторонний lookup)
-  try{
-    const r=await fetch(BARCODE_LOOKUP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({barcode})});
-    const data=await r.json();
-    if(data&&data.name){
-      const cacheData={name:data.name,brand:data.brand||'',weight:data.weight||data.unit||'',imageUrl:data.imageUrl||null,updatedAt:Date.now()};
-      window._set(window._ref(window._db,'barcodeCache/'+barcode),cacheData).catch(()=>{});
-      return cacheData;
-    }
-  }catch(e){}
-  // 3. ИИ (Claude) ищет товар по штрихкоду в интернете — название, вес, фото
-  const aiData=await aiLookupBarcode(barcode);
-  if(aiData){
-    const cacheData={name:aiData.name,brand:aiData.brand||'',weight:aiData.weight||'',imageUrl:aiData.imageUrl||null,updatedAt:Date.now(),source:'ai'};
-    window._set(window._ref(window._db,'barcodeCache/'+barcode),cacheData).catch(()=>{});
-    return cacheData;
-  }
-  return null;
-}
-
-// ИИ-поиск товара по штрихкоду через интернет (название, вес, фото упаковки)
-async function aiLookupBarcode(barcode){
-  try{
-    const resp=await fetch(ANTHROPIC_API,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        tools:[{type:'web_search_20250305',name:'web_search'}],
-        messages:[{
-          role:'user',
-          content:`Найди в интернете товар по штрихкоду (EAN/UPC) ${barcode}. Проверь такие источники как Open Food Facts, upcitemdb, barcode-list, официальные сайты производителей, маркетплейсы (Kaspi.kz, Wildberries, Ozon и т.п.).
-Мне нужны: точное название товара, бренд, вес/объём упаковки и прямая ссылка на изображение упаковки товара (URL картинки jpg/png/webp).
-Ответь ТОЛЬКО JSON без markdown и без пояснений, в таком формате:
-{"name":"...","brand":"...","weight":"...","imageUrl":"прямая ссылка на картинку или null"}
-Если не смог найти товар — верни {"name":null}`
-        }]
-      })
-    });
-    const data=await resp.json();
-    const textBlock=(data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
-    const clean=textBlock.replace(/```json|```/g,'').trim();
-    const jsonMatch=clean.match(/\{[\s\S]*\}/);
-    if(!jsonMatch)return null;
-    const parsed=JSON.parse(jsonMatch[0]);
-    if(!parsed.name)return null;
-    return {name:parsed.name,brand:parsed.brand||'',weight:parsed.weight||'',imageUrl:parsed.imageUrl||null};
-  }catch(e){console.log('aiLookupBarcode error:',e);return null;}
-}
-
-async function showBarcodeLookupResult(barcode){
-  document.getElementById('bc-result-title').textContent='Поиск…';
-  document.getElementById('bc-result-body').innerHTML='<div class="loading"><div class="spinner"></div>Ищем товар (в т.ч. через ИИ и интернет)...</div>';
-  document.getElementById('bc-result-modal').classList.add('open');
-  const data=await lookupBarcodeExternal(barcode);
-  window._pendingBarcodeLookup={barcode,data};
-  const body=document.getElementById('bc-result-body');
-  if(data&&data.name){
-    document.getElementById('bc-result-title').textContent='В каталоге не найден';
-    const img=data.imageUrl?`<img class="bc-big-img" src="${data.imageUrl}">`:`<div class="bc-big-img bc-big-emoji">📦</div>`;
-    body.innerHTML=`<div class="bc-card">
-      <div class="bc-card-imgwrap">${img}</div>
-      <div class="bc-card-body">
-        <div class="bc-card-name">${data.name}</div>
-        <div class="bc-card-sub">${data.brand?data.brand+' · ':''}${data.weight||''}</div>
-        <div class="bc-card-sub">Штрихкод: ${barcode}${data.source==='ai'?' · найдено через ИИ':''}</div>
-        <button class="save-btn" style="margin-top:14px" onclick="applyPendingBarcodeLookup()">➕ Добавить в каталог</button>
-      </div>
-    </div>`;
-  }else{
-    document.getElementById('bc-result-title').textContent='Товар не найден';
-    body.innerHTML=`<div class="bc-res-sub">Штрихкод ${barcode} не найден ни в вашей базе, ни во внешних источниках, ни через ИИ-поиск.</div><button class="save-btn" style="margin-top:12px" onclick="applyPendingBarcodeLookup()">➕ Добавить вручную</button>`;
-  }
-}
-function closeBarcodeResultModal(){document.getElementById('bc-result-modal').classList.remove('open');}
-function applyPendingBarcodeLookup(){
-  const pending=window._pendingBarcodeLookup;closeBarcodeResultModal();
-  openProductModal(null);
-  if(pending&&pending.data)fillFormWithLookup(pending.barcode,pending.data);
-  else if(pending){currentBarcodes=[{bid:'tmp_'+Date.now(),value:pending.barcode}];renderBarcodeRows();}
-}
-
-async function fillFormFromBarcodeLookup(barcode){
-  showToast('🔍 Ищем товар (в т.ч. через ИИ)...');
-  const data=await lookupBarcodeExternal(barcode);
-  if(data&&data.name){
-    fillFormWithLookup(barcode,data);
-    showToast('✅ Заполнено — укажите цену');
-  }else{
-    showToast('Не найден нигде — заполните вручную');
-  }
-}
-function fillFormWithLookup(barcode,data){
-  if(!currentBarcodes.length||currentBarcodes.every(b=>!b.value))currentBarcodes=[{bid:'tmp_'+Date.now(),value:barcode}];
-  else{
-    const empty=currentBarcodes.find(b=>!b.value);
-    if(empty)empty.value=barcode;else currentBarcodes.push({bid:'tmp_'+Date.now(),value:barcode});
-  }
-  renderBarcodeRows();
-  if(data.name)document.getElementById('f-name').value=data.name;
-  if(data.weight)document.getElementById('f-weight').value=data.weight;
-  if(data.imageUrl){
-    selFile=null;pendingLookupImageUrl=data.imageUrl;
-    const img=document.getElementById('preview-img');img.src=data.imageUrl;img.style.display='block';
-    document.getElementById('preview-emoji').style.display='none';
-    document.getElementById('preview-overlay-label').textContent='📷 Изменить фото';
-  }
-  document.getElementById('f-price').focus();
-}
-
-// ===================== AI PHOTO SEARCH (запасной вариант) =====================
-
-function openCamModal(){
-  camPhase='idle';camImageB64=null;
-  document.getElementById('cam-modal').classList.add('open');
-  renderCamBody();
-}
-function closeCamModal(){
-  stopCamLive();
-  document.getElementById('cam-modal').classList.remove('open');
-}
-function camModalOutside(e){if(e.target===document.getElementById('cam-modal'))closeCamModal();}
-
-function renderCamBody(){
-  const body=document.getElementById('cam-body');
-  if(camPhase==='idle'){
-    body.innerHTML=`
-      <div class="cam-idle">
-        <div class="cam-idle-icon">🤖</div>
-        <div class="cam-idle-title">Поиск по фото (ИИ)</div>
-        <div class="cam-idle-sub">Если на упаковке нет штрихкода — сфотографируйте товар, Claude сам его узнает</div>
-        <button class="cam-open-btn" onclick="startCamLive()">📷 Открыть камеру</button>
-        <button class="cam-gallery-open-btn" onclick="document.getElementById('cam-file-input').click()">🖼 Выбрать из галереи</button>
-      </div>`;
-  } else if(camPhase==='preview'){
-    body.innerHTML=`
-      <div class="cam-preview-wrap">
-        <img class="cam-preview-img" src="data:image/jpeg;base64,${camImageB64}">
-        <div id="cam-err" class="cam-err"></div>
-        <div class="cam-preview-actions">
-          <button class="cam-analyze-btn" onclick="runCamAnalysis()">🔍 Найти товар</button>
-          <button class="cam-retake-btn" onclick="camRetake()">📷 Переснять</button>
+    <!-- ВЕРХНИЕ БАННЕРЫ -->
+    <div id="install-banner">
+        <div class="install-inner">
+            <div class="install-text">Установите приложение <span>Dastan Shop</span> на экран телефона</div>
+            <button class="install-yes" id="btn-install-pwa">Скачать</button>
+            <button class="install-no" id="btn-close-install">✕</button>
         </div>
-        <div style="height:16px"></div>
-      </div>`;
-  } else if(camPhase==='analyzing'){
-    body.innerHTML=`
-      <div class="cam-preview-wrap">
-        <img class="cam-preview-img" src="data:image/jpeg;base64,${camImageB64}" style="opacity:.6">
-      </div>
-      <div class="cam-analyzing">
-        <div class="cam-spin"></div>
-        <div class="cam-analyzing-title">Анализирую фото...</div>
-        <div class="cam-analyzing-sub">Claude определяет товар</div>
-      </div>`;
-  }
-}
+    </div>
 
-async function startCamLive(){
-  try{
-    const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}}});
-    camStream=stream;
-    const wrap=document.getElementById('cam-live-wrap');
-    wrap.classList.add('open');
-    document.getElementById('cam-video').srcObject=stream;
-  }catch(e){
-    document.getElementById('cam-file-input').click();
-  }
-}
+    <!-- ШАПКА -->
+    <div class="header">
+        <div class="header-inner">
+            <button class="back-btn" id="header-back-btn">←</button>
+            <div class="header-titles">
+                <div class="header-sub">Магазин</div>
+                <div class="header-main">Dastan Shop</div>
+            </div>
+            <input type="text" class="search-box" id="global-search" placeholder="Поиск товаров...">
+            <div class="header-btns">
+                <button class="cam-search-btn" id="open-cam-btn">📷</button>
+                <button class="add-btn" id="admin-add-btn">+</button>
+                <button class="delivery-btn" id="view-deliv-btn">🚚<div class="delivery-badge" id="deliv-badge">0</div></button>
+            </div>
+        </div>
+    </div>
 
-function stopCamLive(){
-  if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}
-  document.getElementById('cam-live-wrap').classList.remove('open');
-}
+    <!-- КАТЕГОРИИ НА ГЛАВНОЙ -->
+    <div id="categories-home">
+        <div class="cats-home-wrap">
+            <div class="section-title">Категории товаров</div>
+            <div class="cats-home-grid" id="cats-home-grid-container">
+                <!-- Пример одной из увеличенных карточек с поддержкой вывода нового поля вкуса -->
+                <div class="card">
+                    <div class="card-img">
+                        <span class="card-emoji">🍓</span>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="card-name">Демо-товар</div>
+                            <div class="card-flavor-badge">Характеристика / Вкус</div>
+                            <div class="card-weight">1 шт / 500г</div>
+                        </div>
+                        <div class="card-price">1 500 ₸</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-function shootPhoto(){
-  const video=document.getElementById('cam-video');
-  const canvas=document.createElement('canvas');
-  canvas.width=video.videoWidth;canvas.height=video.videoHeight;
-  canvas.getContext('2d').drawImage(video,0,0);
-  camImageB64=canvas.toDataURL('image/jpeg',0.85).split(',')[1];
-  stopCamLive();
-  camPhase='preview';
-  renderCamBody();
-}
+    <!-- ТОВАРЫ ВНУТРИ КАТЕГОРИИ -->
+    <div id="products-view">
+        <div class="subcat-strip">
+            <div class="subcat-strip-inner" id="subcats-strip-container"></div>
+        </div>
+        <div class="grid-wrap">
+            <div class="product-grid" id="products-grid-container"></div>
+        </div>
+    </div>
 
-function camHandleFile(e){
-  const file=e.target.files[0];if(!file)return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    camImageB64=ev.target.result.split(',')[1];
-    camPhase='preview';
-    renderCamBody();
-    document.getElementById('cam-modal').classList.add('open');
-  };
-  r.readAsDataURL(file);
-  e.target.value='';
-}
+    <!-- АДМИН-ПАНЕЛЬ (МОДАЛЬНОЕ ОКНО ДОБАВЛЕНИЯ) -->
+    <div class="modal-overlay" id="add-product-modal">
+        <div class="modal-sheet">
+            <div class="modal-handle"></div>
+            <div class="modal-title">Добавить новый товар</div>
+            
+            <form id="firebase-add-form">
+                <!-- 🔥 КЛЮЧИ ДОСТУПА API (2 ШТ) -->
+                <div class="field">
+                    <label>Firebase API Key (Основной)</label>
+                    <input type="password" id="api-key-main" placeholder="AIzaSy..." required>
+                </div>
+                <div class="field">
+                    <label>Storage API Key (Для картинок)</label>
+                    <input type="password" id="api-key-storage" placeholder="AIzaSy..." required>
+                </div>
 
-function camRetake(){
-  camImageB64=null;camPhase='idle';renderCamBody();
-}
+                <div class="field">
+                    <label>Название товара</label>
+                    <input type="text" id="add-name" placeholder="Например: Гранатовый сок" required>
+                </div>
 
-async function runCamAnalysis(){
-  if(!camImageB64)return;
-  camPhase='analyzing';renderCamBody();
+                <!-- 🔥 НОВАЯ ФУНКЦИЯ: ДОБАВЛЕНИЕ ВКУСА -->
+                <div class="field">
+                    <label>Вкус / Особенность товара</label>
+                    <input type="text" id="add-flavor" placeholder="Например: Сладкий, Кислый, Клубника" required>
+                </div>
 
-  try{
-    const allProds=Object.entries(window._products).map(([id,p])=>({id,...p}));
-    const prodList=allProds.map((p,i)=>`${i+1}. [ID:${p.id}] ${p.name}${p.weight?' ('+p.weight+')':''}`).join('\n');
+                <div class="field">
+                    <label>Объем / Вес</label>
+                    <input type="text" id="add-weight" placeholder="Например: 500 мл или 1 кг" required>
+                </div>
 
-    const resp=await fetch(ANTHROPIC_API,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        messages:[{
-          role:'user',
-          content:[
-            {type:'image',source:{type:'base64',media_type:'image/jpeg',data:camImageB64}},
-            {type:'text',text:`Ты сканер товаров для кассира. Внимательно изучи фото упаковки:
-- Прочитай весь текст на упаковке (название, бренд, состав, вес)
-- Запомни цвет упаковки, логотип, дизайн
-- Определи тип товара
+                <div class="price-label">Цена товара (₸)</div>
+                <div class="price-row">
+                    <input type="number" class="price-input" id="add-price" placeholder="0" required>
+                </div>
 
-Вот список товаров в нашем каталоге:
-${prodList}
+                <div class="img-upload-row-big">
+                    <div class="img-preview-big" id="img-preview-zone">
+                        <span>🖼️</span>
+                        <div class="img-overlay-big">Нажмите, чтобы загрузить фото</div>
+                    </div>
+                    <input type="file" id="file-hidden-input" accept="image/*" style="display:none">
+                </div>
 
-Найди все товары из списка которые могут соответствовать товару на фото. Сопоставляй по: названию, бренду, типу товара, весу/объёму.
+                <button type="submit" class="save-btn" id="btn-save-product">Загрузить в Firebase</button>
+            </form>
+        </div>
+    </div>
 
-Ответь ТОЛЬКО JSON без markdown:
-{"detected":"что ты видишь на фото (бренд, название, вес)","matches":[{"id":"ID товара из списка","score":95,"reason":"почему совпадает"}],"confidence":"high/medium/low"}
+    <!-- ТЕКСТОВЫЕ УВЕДОМЛЕНИЯ -->
+    <div class="toast" id="toast-msg">Товар добавлен!</div>
 
-matches отсортируй по score от высокого к низкому. Если ничего не подходит — matches пустой массив.`}
-          ]
-        }]
-      })
-    });
-    const data=await resp.json();
-    const text=data.content?.[0]?.text||'';
-    const clean=text.replace(/```json|```/g,'').trim();
-    const parsed=JSON.parse(clean);
-    const aiName=parsed.detected||'';
+    <!-- НИЖНЯЯ ПАНЕЛЬ -->
+    <div class="bottom-bar">dastanshop © 2026</div>
 
-    const matchIds=(parsed.matches||[]).map(m=>m.id);
-    const matchMap={};(parsed.matches||[]).forEach(m=>{matchMap[m.id]={score:m.score,reason:m.reason};});
-    const found=allProds
-      .filter(p=>matchIds.includes(p.id))
-      .sort((a,b)=>(matchMap[b.id]?.score||0)-(matchMap[a.id]?.score||0));
+    <script>
+        // Элементы управления модальным окном
+        const addBtn = document.getElementById('admin-add-btn');
+        const modal = document.getElementById('add-product-modal');
+        const previewZone = document.getElementById('img-preview-zone');
+        const hiddenInput = document.getElementById('file-hidden-input');
 
-    const body=document.getElementById('cam-body');
-    if(found.length>0){
-      const cats=window._categories;
-      let itemsHtml=found.map(p=>{
-        const catName=p.catId&&cats[p.catId]?cats[p.catId].name:'';
-        const imgHtml=p.imageUrl?`<img src="${p.imageUrl}">`:`<span>${p.emoji||'📦'}</span>`;
-        const enc=encodeURIComponent(JSON.stringify(p));
-        const score=matchMap[p.id]?.score||0;
-        const reason=matchMap[p.id]?.reason||'';
-        const scoreColor=score>=80?'#1a6e3c':score>=60?'#856404':'#999';
-        return `<div class="cam-result-item" onclick="closeCamModal();openProductModal(JSON.parse(decodeURIComponent('${enc}')))">
-          <div class="cam-result-img">${imgHtml}</div>
-          <div class="cam-result-info">
-            <div class="cam-result-name">${p.name}</div>
-            <div class="cam-result-sub" style="margin-bottom:2px">${p.weight||''}${catName?' · '+catName:''}</div>
-            ${reason?`<div style="font-size:11px;color:#aaa;font-weight:600">${reason}</div>`:''}
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">
-            <div class="cam-result-price">${p.price||0} ₸</div>
-            <div style="font-size:11px;font-weight:900;color:${scoreColor}">${score}%</div>
-          </div>
-        </div>`;
-      }).join('');
-      body.innerHTML=`
-        <div class="cam-results">
-          <img class="cam-results-img" src="data:image/jpeg;base64,${camImageB64}">
-          <div class="cam-ai-tag">
-            <span style="font-size:20px">🤖</span>
-            <div><div class="cam-ai-label">Claude определил</div><div class="cam-ai-name">${aiName}</div></div>
-          </div>
-          <div class="cam-results-title">Найдено в каталоге — ${found.length}</div>
-          ${itemsHtml}
-          <button class="cam-new-search" onclick="camRetake()">📷 Новый поиск</button>
-          <div style="height:16px"></div>
-        </div>`;
-    } else {
-      body.innerHTML=`
-        <div>
-          <img class="cam-preview-img" src="data:image/jpeg;base64,${camImageB64}" style="opacity:.65;width:100%;max-height:200px;object-fit:cover;border-radius:24px 24px 0 0">
-          <div class="cam-notfound">
-            <div class="cam-notfound-icon">🔍</div>
-            <div class="cam-notfound-title">Товар не найден</div>
-            ${aiName?`<div class="cam-notfound-ai">Claude определил: <strong>${aiName}</strong></div>`:''}
-            <div class="cam-notfound-sub">Этого товара нет в базе</div>
-            <button class="cam-open-btn" onclick="camRetake()">📷 Попробовать снова</button>
-          </div>
-        </div>`;
-    }
-  }catch(err){
-    camPhase='preview';renderCamBody();
-    const errEl=document.getElementById('cam-err');
-    if(errEl){errEl.style.display='block';errEl.textContent='⚠️ Ошибка анализа: '+err.message;}
-  }
-}
+        addBtn.addEventListener('click', () => modal.classList.add('open'));
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) modal.classList.remove('open');
+        });
 
-// ---- DELIVERIES ----
-function checkTodayDeliveries(){
-  const today=getTodayStr();const todayOnes=Object.values(window._deliveries).filter(d=>d.date===today);
-  const badge=document.getElementById('delivery-badge');
-  if(todayOnes.length>0){
-    badge.style.display='flex';badge.textContent=todayOnes.length;document.getElementById('delivery-banner').style.display='block';
-    const names=todayOnes.map(d=>d.company).join(', ');const total=todayOnes.reduce((s,d)=>s+(parseFloat(d.amount)||0),0);
-    document.getElementById('banner-title').textContent=`🚚 Сегодня поставка: ${names}`;document.getElementById('banner-sub').textContent=`Сумма: ${fmt(total)} ₸`;
-    sendPush('🚚 Поставка сегодня!',`${names} — ${fmt(total)} ₸`);
-  }else{badge.style.display='none';document.getElementById('delivery-banner').style.display='none';}
-}
-function renderDeliveries(){
-  const today=getTodayStr();const list=document.getElementById('deliveries-list');
-  const all=Object.entries(window._deliveries).map(([id,d])=>({id,...d}));all.sort((a,b)=>a.date>b.date?1:-1);
-  if(all.length===0){list.innerHTML='<div class="empty"><div class="empty-icon">🚚</div><div>Поставок нет</div></div>';return;}
-  const todayL=all.filter(d=>d.date===today),upcoming=all.filter(d=>d.date>today),past=all.filter(d=>d.date<today);
-  let html='';
-  if(todayL.length){html+=`<div class="section-title">📅 Сегодня</div>`;todayL.forEach(d=>{html+=delCard(d,'today');});}
-  if(upcoming.length){html+=`<div class="section-title" style="margin-top:16px">⏰ Предстоящие</div>`;upcoming.forEach(d=>{html+=delCard(d,'upcoming');});}
-  if(past.length){html+=`<div class="section-title" style="margin-top:16px">✅ Прошедшие</div>`;past.forEach(d=>{html+=delCard(d,'past');});}
-  list.innerHTML=html;
-}
-function delCard(d,type){
-  const badge=type==='today'?'🟢 Сегодня':type==='upcoming'?'🟡 Ожидается':'✅ Выполнена';
-  const enc=encodeURIComponent(JSON.stringify(d));
-  return `<div class="delivery-card ${type}" onclick="openDeliveryModal(JSON.parse(decodeURIComponent('${enc}')))"><div style="font-size:28px">🚚</div><div class="del-info"><div class="del-company">${d.company||'—'}</div><div class="del-date">${formatDate(d.date)}${d.note?' · '+d.note:''}</div><span class="del-badge ${type}">${badge}</span></div><div class="del-amount">${fmt(d.amount||0)} ₸</div></div>`;
-}
-function openDeliveryModal(d){
-  editingDeliveryId=d?d.id:null;
-  document.getElementById('del-modal-title').textContent=d?'Редактировать поставку':'Новая поставка';
-  document.getElementById('d-company').value=d?d.company:'';document.getElementById('d-date').value=d?d.date:getTodayStr();
-  document.getElementById('d-amount').value=d?d.amount:'';document.getElementById('d-note').value=d?d.note||'':'';
-  document.getElementById('del-save-btn').textContent=d?'Сохранить':'Добавить поставку';
-  document.getElementById('del-delete-btn').style.display=d?'block':'none';document.getElementById('del-notify-btn').style.display=d?'block':'none';
-  document.getElementById('delivery-modal').classList.add('open');
-}
-async function saveDelivery(){
-  const company=document.getElementById('d-company').value.trim();const date=document.getElementById('d-date').value;const amount=parseFloat(document.getElementById('d-amount').value);const note=document.getElementById('d-note').value.trim();
-  if(!company||!date||isNaN(amount)){showToast('Заполните все поля!');return;}
-  const data={company,date,amount,note,updatedAt:Date.now()};
-  if(editingDeliveryId){await window._set(window._ref(window._db,'deliveries/'+editingDeliveryId),data);showToast('Поставка обновлена ✓');}
-  else{const nr=window._push(window._ref(window._db,'deliveries'));await window._set(nr,data);showToast('Поставка добавлена ✓');if(date===getTodayStr())sendPush('🚚 Новая поставка!',`${company} — ${fmt(amount)} ₸`);}
-  document.getElementById('delivery-modal').classList.remove('open');
-}
-async function deleteDelivery(){
-  if(!editingDeliveryId||!confirm('Удалить?'))return;
-  await window._remove(window._ref(window._db,'deliveries/'+editingDeliveryId));
-  document.getElementById('delivery-modal').classList.remove('open');showToast('Поставка удалена');
-}
-function sendDeliveryNotification(){
-  const company=document.getElementById('d-company').value.trim()||'Компания';const amount=document.getElementById('d-amount').value||'0';const date=document.getElementById('d-date').value;
-  sendPush('🚚 Поставка '+formatDate(date),`${company} — ${fmt(amount)} ₸`);showToast('🔔 Уведомление отправлено!');
-}
-
-// ===================== АППАРАТНАЯ КНОПКА "НАЗАД" =====================
-// Держим один "буферный" history-state поверх реальной загрузки страницы.
-// Внутри товаров/поставок есть ещё один буфер сверху: первое "назад" возвращает
-// на главную, а не закрывает сайт. На главном экране первое "назад" открывает
-// диалог подтверждения выхода вместо мгновенного закрытия сайта.
-function anyOverlayOpen(){
-  return !!document.querySelector('.modal-overlay.open, #cam-modal.open, #cam-live-wrap.open, #barcode-overlay.open');
-}
-function closeTopOverlay(){
-  if(document.getElementById('barcode-overlay').classList.contains('open')){closeBarcodeScanner();return;}
-  if(document.getElementById('cam-live-wrap').classList.contains('open')){stopCamLive();return;}
-  if(document.getElementById('cam-modal').classList.contains('open')){closeCamModal();return;}
-  const openModal=document.querySelector('.modal-overlay.open');
-  if(openModal)openModal.classList.remove('open');
-}
-function confirmExitNo(){
-  document.getElementById('exit-confirm-modal').classList.remove('open');
-}
-function confirmExitYes(){
-  document.getElementById('exit-confirm-modal').classList.remove('open');
-  history.go(-2);
-}
-window.addEventListener('popstate',function(){
-  if(anyOverlayOpen()){
-    closeTopOverlay();
-    history.pushState({dastanShop:true},'');
-    return;
-  }
-  if(navStack.length>1){
-    navStack.pop();
-    currentSubCatId='all';
-    renderView();
-    return;
-  }
-  document.getElementById('exit-confirm-modal').classList.add('open');
-  history.pushState({dastanShop:true},'');
-});
-history.pushState({dastanShop:true},'');
-
-// ---- UTILS ----
-function getTodayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-function fmt(n){return Number(n).toLocaleString('ru-RU');}
-function formatDate(str){if(!str)return'—';const[y,m,d]=str.split('-');const mo=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];return`${parseInt(d)} ${mo[parseInt(m)-1]} ${y}`;}
-function closeIfOutside(e,id){if(e.target===document.getElementById(id))document.getElementById(id).classList.remove('open');}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
-
-window.switchView=switchView;window.goBack=goBack;window.onAddBtn=onAddBtn;
-window.onHomeSearch=onHomeSearch;window.onHeaderSearch=onHeaderSearch;
-window.installApp=installApp;window.allowPush=allowPush;
-window.selectSubcat=selectSubcat;window.openCatModalAsSub=openCatModalAsSub;
-window.openCatModal=openCatModal;window.saveCategory=saveCategory;window.deleteCategory=deleteCategory;
-window.handleCatFile=handleCatFile;window.clearCatPhoto=clearCatPhoto;
-window.openProductModal=openProductModal;window.saveProduct=saveProduct;window.deleteProduct=deleteProduct;
-window.handleFile=handleFile;
-window.openDeliveryModal=openDeliveryModal;window.saveDelivery=saveDelivery;
-window.deleteDelivery=deleteDelivery;window.sendDeliveryNotification=sendDeliveryNotification;
-window.closeIfOutside=closeIfOutside;
-window.openCamModal=openCamModal;window.closeCamModal=closeCamModal;window.camModalOutside=camModalOutside;
-window.startCamLive=startCamLive;window.stopCamLive=stopCamLive;window.shootPhoto=shootPhoto;
-window.camHandleFile=camHandleFile;window.camRetake=camRetake;window.runCamAnalysis=runCamAnalysis;
-window.openBarcodeScanner=openBarcodeScanner;window.closeBarcodeScanner=closeBarcodeScanner;
-window.barcodeManualEntry=barcodeManualEntry;window.scanBarcodeIntoForm=scanBarcodeIntoForm;
-window.applyPendingBarcodeLookup=applyPendingBarcodeLookup;window.closeBarcodeResultModal=closeBarcodeResultModal;
-window.toggleVariants=toggleVariants;window.addVariantRow=addVariantRow;
-window.removeVariantRow=removeVariantRow;window.updateVariantField=updateVariantField;
-window.addBarcodeRow=addBarcodeRow;window.removeBarcodeRow=removeBarcodeRow;window.updateBarcodeField=updateBarcodeField;
-window.setWeightUnit=setWeightUnit;window.confirmExitYes=confirmExitYes;window.confirmExitNo=confirmExitNo;
-</script>
+        previewZone.addEventListener('click', () => hiddenInput.click());
+        hiddenInput.addEventListener('change', function() {
+            if(this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewZone.innerHTML = `<img src="${e.target.result}">`;
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    </script>
 </body>
+</html>
