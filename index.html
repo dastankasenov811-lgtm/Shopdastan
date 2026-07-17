@@ -165,6 +165,10 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .img-preview img{width:100%;height:100%;object-fit:cover}
 .img-overlay{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;font-size:20px}
 .img-preview:hover .img-overlay,.img-preview:active .img-overlay{opacity:1}
+.img-upload-row-big{margin-bottom:16px}
+.img-preview-big{width:100%;height:190px;border-radius:16px;background:#f5f0e8;border:2px dashed #ddd;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;font-size:60px}
+.img-preview-big img{width:100%;height:100%;object-fit:cover}
+.img-overlay-big{position:absolute;left:0;right:0;bottom:0;padding:9px;background:rgba(26,26,46,.72);color:#fff;font-size:13px;font-weight:800;text-align:center}
 .emoji-picker-label{font-size:11px;color:#888;margin-bottom:5px;font-weight:700}
 .emoji-grid{display:flex;flex-wrap:wrap;gap:5px}
 .emoji-opt{width:32px;height:32px;border-radius:8px;border:2px solid #eee;background:#fff;font-size:16px;cursor:pointer;transition:border .15s;display:flex;align-items:center;justify-content:center}
@@ -173,13 +177,12 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .field label{font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:4px}
 .field input,.field select{width:100%;padding:10px 12px;border-radius:11px;border:2px solid #f0f0f0;font-size:14px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;transition:border .15s;background:#fff}
 .field input:focus,.field select:focus{border-color:#e8c547}
+.unit-chip-row{display:flex;gap:6px;margin-top:6px}
+.unit-chip{flex:1;padding:7px 0;border-radius:9px;border:2px solid #f0f0f0;background:#fff;color:#888;font-size:12px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;text-align:center}
+.unit-chip:active{background:#fff9e6;border-color:#e8c547;color:#1a1a2e}
 .price-label{font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:5px}
 .price-row{display:flex;align-items:center;gap:7px;margin-bottom:18px}
-.price-adj{width:40px;height:40px;border-radius:10px;border:2px solid #f0f0f0;background:#fff;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Nunito',sans-serif}
-.price-adj.minus{color:#e8544a}
-.price-adj.plus{color:#2d9e6e}
-.price-adj:active{background:#f5f5f5}
-.price-input{flex:1;padding:10px 8px;border-radius:11px;border:2px solid #f0f0f0;font-size:19px;font-family:'Nunito',sans-serif;font-weight:900;text-align:center;outline:none;transition:border .15s}
+.price-input{flex:1;padding:12px 8px;border-radius:11px;border:2px solid #f0f0f0;font-size:22px;font-family:'Nunito',sans-serif;font-weight:900;text-align:center;outline:none;transition:border .15s}
 .price-input:focus{border-color:#e8c547}
 .upload-status{text-align:center;color:#888;font-size:13px;font-weight:700;margin-bottom:12px;display:none}
 .progress-bar{height:4px;background:#f0f0f0;border-radius:2px;margin-bottom:14px;overflow:hidden;display:none}
@@ -272,10 +275,26 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .bc-res-name{font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:2px}
 .bc-res-sub{font-size:13px;color:#999;font-weight:700;margin-bottom:6px}
 
+/* BARCODE FOUND CARD (big photo style) */
+.bc-card{margin:-18px -18px 0}
+.bc-card-imgwrap{position:relative}
+.bc-big-img{width:100%;height:230px;object-fit:cover;display:block;background:#f5f0e8}
+.bc-big-emoji{display:flex;align-items:center;justify-content:center;font-size:80px}
+.bc-edit-fab{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:12px;border:none;background:#e8c547;color:#1a1a2e;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.bc-card-body{padding:18px}
+.bc-card-name{font-size:21px;font-weight:900;color:#1a1a2e;line-height:1.25}
+.bc-card-sub{font-size:13px;color:#999;font-weight:700;margin-top:3px}
+.bc-card-price{font-size:32px;font-weight:900;color:#1a1a2e;margin-top:10px}
+
 /* BARCODE FIELD IN PRODUCT MODAL */
 .barcode-field-row{display:flex;gap:8px}
 .barcode-field-row input{flex:1}
 .barcode-scan-mini{width:44px;height:44px;border-radius:11px;border:2px solid #e8c547;background:#fff9e6;color:#1a1a2e;font-size:18px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.barcode-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;background:#f9f7f2;border-radius:12px;padding:8px 10px}
+.barcode-row input{flex:1;padding:8px 10px;border-radius:9px;border:2px solid #eee;font-size:13px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;background:#fff}
+.barcode-row input:focus{border-color:#e8c547}
+.barcode-row-del{width:32px;height:32px;border-radius:8px;border:none;background:#fee;color:#e8544a;font-size:14px;cursor:pointer;flex-shrink:0}
+.barcode-row-scan{width:32px;height:32px;border-radius:8px;border:none;background:#fff9e6;color:#1a1a2e;font-size:14px;cursor:pointer;flex-shrink:0}
 
 /* VARIANTS */
 .variants-toggle{font-size:12px;font-weight:800;color:#1a6e3c;background:#f0fff7;border:2px solid #d4f5e6;border-radius:10px;padding:9px 12px;text-align:center;cursor:pointer;margin-bottom:12px}
@@ -433,35 +452,32 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <div class="modal-handle"></div>
     <div class="modal-title" id="prod-modal-title">Новый товар</div>
     <button type="button" class="cam-gallery-open-btn" id="bc-quickfill-btn" style="display:none;margin-bottom:14px;border-color:#e8c547;background:#fff9e6;color:#1a1a2e" onclick="scanBarcodeIntoForm()">📷 Заполнить по штрихкоду</button>
-    <div class="img-upload-row">
-      <div class="img-preview" id="img-preview" onclick="document.getElementById('file-input').click()">
+    <div class="img-upload-row-big">
+      <div class="img-preview-big" id="img-preview" onclick="document.getElementById('file-input').click()">
         <span id="preview-emoji">📦</span>
         <img id="preview-img" style="display:none">
-        <div class="img-overlay">📷</div>
+        <div class="img-overlay-big" id="preview-overlay-label">📷 Добавить фото товара</div>
       </div>
       <input type="file" id="file-input" accept="image/*" style="display:none" onchange="handleFile(event)">
-      <div style="flex:1">
-        <div class="emoji-picker-label">Или выберите иконку</div>
-        <div class="emoji-grid" id="emoji-grid"></div>
-      </div>
     </div>
     <div class="field"><label>Название товара</label><input type="text" id="f-name" placeholder="Например: Пломбир"></div>
-    <div class="field"><label>Вес / объём</label><input type="text" id="f-weight" placeholder="Например: 100 г"></div>
+    <div class="field"><label>Вес / объём</label><input type="text" id="f-weight" placeholder="Например: 100 г">
+      <div class="unit-chip-row">
+        <button type="button" class="unit-chip" onclick="setWeightUnit('мл')">мл</button>
+        <button type="button" class="unit-chip" onclick="setWeightUnit('л')">л</button>
+        <button type="button" class="unit-chip" onclick="setWeightUnit('г')">г</button>
+        <button type="button" class="unit-chip" onclick="setWeightUnit('кг')">кг</button>
+      </div>
+    </div>
     <div class="field"><label>Категория</label><select id="f-cat"></select></div>
     <div class="field">
-      <label>Штрихкод</label>
-      <div class="barcode-field-row">
-        <input type="text" id="f-barcode" placeholder="Необязательно">
-        <button type="button" class="barcode-scan-mini" onclick="scanBarcodeIntoForm()" title="Сканировать">📷</button>
-      </div>
+      <label>Штрихкоды (можно несколько — для разных вкусов с одной ценой)</label>
+      <div id="barcodes-list"></div>
+      <button type="button" class="variant-add-btn" onclick="addBarcodeRow()">＋ Добавить штрихкод</button>
     </div>
     <label class="price-label">Цена (₸)</label>
     <div class="price-row">
-      <button class="price-adj minus" onclick="adjPrice(-10)">−10</button>
-      <button class="price-adj minus" onclick="adjPrice(-1)">−1</button>
       <input type="number" class="price-input" id="f-price" placeholder="0">
-      <button class="price-adj plus" onclick="adjPrice(1)">+1</button>
-      <button class="price-adj plus" onclick="adjPrice(10)">+10</button>
     </div>
     <div class="variants-toggle" id="variants-toggle" onclick="toggleVariants()">➕ Добавить несколько вариантов (вес/цена)</div>
     <div id="variants-section" style="display:none">
@@ -513,6 +529,18 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <button class="save-btn" id="del-save-btn" onclick="saveDelivery()">Добавить поставку</button>
     <button class="notify-btn" id="del-notify-btn" style="display:none" onclick="sendDeliveryNotification()">🔔 Уведомить всех кассиров</button>
     <button class="delete-btn" id="del-delete-btn" style="display:none" onclick="deleteDelivery()">🗑 Удалить поставку</button>
+  </div>
+</div>
+
+<!-- EXIT CONFIRM MODAL -->
+<div class="modal-overlay" id="exit-confirm-modal">
+  <div class="modal-sheet" style="text-align:center">
+    <div class="modal-handle"></div>
+    <div style="font-size:44px;margin-bottom:8px">🚪</div>
+    <div class="modal-title" style="text-align:center">Покинуть Dastan Shop?</div>
+    <div style="font-size:14px;color:#999;font-weight:600;margin-bottom:20px;line-height:1.4">Несохранённые изменения могут быть потеряны</div>
+    <button class="save-btn" onclick="confirmExitYes()">Да, выйти</button>
+    <button class="delete-btn" style="border-color:#eee;color:#666;margin-top:10px" onclick="confirmExitNo()">Остаться</button>
   </div>
 </div>
 
@@ -568,11 +596,15 @@ let camStream=null;
 // ---- BARCODE STATE ----
 let bcStream=null,bcDetector=null,bcRunning=false,bcRafId=null,barcodeScanMode=null;
 let pendingLookupImageUrl=null;
+let pendingBarcodeRowId=null; // which barcode row in the product form is currently being scanned into
 window._pendingBarcodeLookup=null;
 
 // ---- VARIANTS STATE ----
 let currentVariants=[];
 let variantsExpanded=false;
+
+// ---- BARCODES (multi) STATE ----
+let currentBarcodes=[];
 
 // ---- PWA ----
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;document.getElementById('install-banner').style.display='block';});
@@ -596,12 +628,24 @@ function onDataUpdate(){
 // ---- NAV ----
 function currentView(){return navStack[navStack.length-1].type;}
 function switchView(type,catId,catName){
+  if(type==='categories'&&navStack.length>1){
+    // уходим на главную с глубины — через реальный "назад" в истории браузера,
+    // чтобы аппаратная кнопка "назад" на телефоне осталась синхронизирована
+    history.back();
+    return;
+  }
+  const prevLen=navStack.length;
   if(type==='deliveries'){navStack=[{type:'categories'},{type:'deliveries'}];}
   else if(type==='categories'){navStack=[{type:'categories'}];}
   else if(type==='products'){navStack.push({type:'products',catId,catName});currentSubCatId='all';}
   renderView();
+  if(navStack.length>prevLen){for(let i=prevLen;i<navStack.length;i++)history.pushState({dastanShop:true},'');}
 }
-function goBack(){if(navStack.length>1){navStack.pop();renderView();}}
+function goBack(){
+  // сам переход делает popstate-обработчик — так экранная "←" и аппаратная
+  // кнопка "назад" на телефоне всегда работают одинаково
+  if(navStack.length>1)history.back();
+}
 function renderView(){
   const cur=navStack[navStack.length-1];
   const isHome=cur.type==='categories';
@@ -633,7 +677,7 @@ function renderBreadcrumb(){
     const el=document.createElement('span');const isLast=i===navStack.length-1;
     el.className=isLast?'bc-item bc-current':'bc-item';
     el.textContent=item.type==='categories'?'Главная':item.type==='deliveries'?'Поставки':item.catName;
-    if(!isLast){const idx=i;el.onclick=()=>{navStack=navStack.slice(0,idx+1);currentSubCatId='all';renderView();};}
+    if(!isLast){const idx=i;el.onclick=()=>{const delta=navStack.length-1-idx;if(delta>0)history.go(-delta);};}
     inner.appendChild(el);
   });
 }
@@ -809,24 +853,25 @@ function openProductModal(p){
   editingId=p?p.id:null;selFile=null;curEmoji=p?(p.emoji||"📦"):"📦";pendingLookupImageUrl=null;
   document.getElementById('prod-modal-title').textContent=p?'Редактировать':'Новый товар';
   document.getElementById('f-name').value=p?p.name:'';document.getElementById('f-weight').value=p?p.weight:'';document.getElementById('f-price').value=p?p.price:'';
-  document.getElementById('f-barcode').value=p?(p.barcode||''):'';
   document.getElementById('bc-quickfill-btn').style.display=p?'none':'block';
   buildCatSelect();
   const cur=navStack[navStack.length-1];const defCat=p?p.catId:(cur.type==='products'&&cur.catId!=='all'?cur.catId:'');
   if(defCat)setTimeout(()=>{document.getElementById('f-cat').value=defCat;},50);
-  const img=document.getElementById('preview-img'),emo=document.getElementById('preview-emoji');
-  if(p&&p.imageUrl){img.src=p.imageUrl;img.style.display='block';emo.style.display='none';}
-  else{img.style.display='none';emo.style.display='';emo.textContent=curEmoji;}
+  const img=document.getElementById('preview-img'),emo=document.getElementById('preview-emoji'),ov=document.getElementById('preview-overlay-label');
+  if(p&&p.imageUrl){img.src=p.imageUrl;img.style.display='block';emo.style.display='none';ov.textContent='📷 Изменить фото';}
+  else{img.style.display='none';emo.style.display='';emo.textContent=curEmoji;ov.textContent='📷 Добавить фото товара';}
   document.getElementById('upload-status').style.display='none';document.getElementById('progress-bar').style.display='none';
   document.getElementById('save-btn').disabled=false;document.getElementById('save-btn').textContent=p?'Сохранить изменения':'Добавить товар';
   document.getElementById('delete-btn').style.display=p?'block':'none';
-  const grid=document.getElementById('emoji-grid');grid.innerHTML='';
-  P_EMOJIS.forEach(e=>{
-    const b=document.createElement('button');b.className='emoji-opt'+(e===curEmoji?' active':'');b.textContent=e;
-    b.onclick=()=>{curEmoji=e;selFile=null;pendingLookupImageUrl=null;document.getElementById('preview-img').style.display='none';document.getElementById('preview-emoji').style.display='';document.getElementById('preview-emoji').textContent=e;document.querySelectorAll('#emoji-grid .emoji-opt').forEach(x=>x.classList.toggle('active',x.textContent===e));};
-    grid.appendChild(b);
-  });
   document.getElementById('file-input').value='';document.getElementById('prod-modal').classList.add('open');
+  // barcodes (multi)
+  let barcodeVals=[];
+  if(p){
+    if(p.barcodes)barcodeVals=Object.values(p.barcodes).filter(Boolean);
+    else if(p.barcode)barcodeVals=[p.barcode];
+  }
+  currentBarcodes=barcodeVals.length?barcodeVals.map(v=>({bid:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),value:v})):[{bid:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),value:''}];
+  renderBarcodeRows();
   // variants
   currentVariants=(p&&p.variants)?Object.entries(p.variants).map(([vid,v])=>({vid,weight:v.weight||'',price:v.price!=null?v.price:''})):[];
   variantsExpanded=currentVariants.length>0;
@@ -836,10 +881,34 @@ function openProductModal(p){
 }
 function handleFile(e){
   const file=e.target.files[0];if(!file)return;selFile=file;pendingLookupImageUrl=null;
-  const r=new FileReader();r.onload=ev=>{document.getElementById('preview-emoji').style.display='none';const img=document.getElementById('preview-img');img.src=ev.target.result;img.style.display='block';document.querySelectorAll('#emoji-grid .emoji-opt').forEach(b=>b.classList.remove('active'));};
+  const r=new FileReader();r.onload=ev=>{document.getElementById('preview-emoji').style.display='none';const img=document.getElementById('preview-img');img.src=ev.target.result;img.style.display='block';document.getElementById('preview-overlay-label').textContent='📷 Изменить фото';};
   r.readAsDataURL(file);
 }
-function adjPrice(d){const i=document.getElementById('f-price');i.value=Math.max(0,(parseFloat(i.value)||0)+d);}
+function setWeightUnit(unit){
+  const inp=document.getElementById('f-weight');
+  let val=inp.value.trim();
+  val=val.replace(/\s*(мл|л|г|кг)\s*$/i,'').trim(); // заменяем уже стоящую в конце единицу, а не дублируем
+  inp.value=val?(val+' '+unit):unit;
+  inp.focus();
+}
+
+// ---- MULTI BARCODES ----
+function addBarcodeRow(){
+  currentBarcodes.push({bid:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),value:''});
+  renderBarcodeRows();
+}
+function removeBarcodeRow(bid){
+  currentBarcodes=currentBarcodes.filter(b=>b.bid!==bid);
+  if(!currentBarcodes.length)currentBarcodes=[{bid:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),value:''}];
+  renderBarcodeRows();
+}
+function updateBarcodeField(bid,value){
+  const b=currentBarcodes.find(x=>x.bid===bid);if(b)b.value=value;
+}
+function renderBarcodeRows(){
+  const list=document.getElementById('barcodes-list');if(!list)return;
+  list.innerHTML=currentBarcodes.map(b=>`<div class="barcode-row"><input type="text" placeholder="Штрихкод (например, для другого вкуса)" value="${b.value||''}" oninput="updateBarcodeField('${b.bid}',this.value)"><button type="button" class="barcode-row-scan" title="Сканировать" onclick="scanBarcodeIntoForm('${b.bid}')">📷</button><button type="button" class="barcode-row-del" onclick="removeBarcodeRow('${b.bid}')">🗑</button></div>`).join('');
+}
 
 // ---- VARIANTS (несколько весов/цен в одной карточке) ----
 function toggleVariants(){
@@ -870,15 +939,23 @@ async function saveProduct(){
   const priceRaw=document.getElementById('f-price').value;
   const price=parseFloat(priceRaw);
   const catId=document.getElementById('f-cat').value;
-  const barcode=document.getElementById('f-barcode').value.trim();
   const validVariants=currentVariants.filter(v=>v.weight&&v.price!==''&&!isNaN(parseFloat(v.price)));
+  const validBarcodes=currentBarcodes.map(b=>(b.value||'').trim()).filter(Boolean);
   if(!name){showToast('Введите название!');return;}
   if(!validVariants.length&&isNaN(price)){showToast('Заполните цену или добавьте варианты!');return;}
   const btn=document.getElementById('save-btn');btn.disabled=true;btn.textContent='Сохранение...';
   let imageUrl=editingId&&window._products[editingId]?window._products[editingId].imageUrl||null:null;
   if(selFile){try{imageUrl=await uploadCloudinary(selFile);}catch(err){showToast('Ошибка фото: '+err.message);btn.disabled=false;btn.textContent='Сохранить';return;}}
   else if(pendingLookupImageUrl){imageUrl=pendingLookupImageUrl;}
-  const data={name,weight,price:isNaN(price)?0:price,catId:catId||'',emoji:curEmoji,imageUrl:imageUrl||null,barcode:barcode||null,updatedAt:Date.now()};
+  const data={name,weight,price:isNaN(price)?0:price,catId:catId||'',emoji:curEmoji,imageUrl:imageUrl||null,updatedAt:Date.now()};
+  if(validBarcodes.length){
+    const barcodesObj={};
+    validBarcodes.forEach((v,i)=>{barcodesObj['b'+i]=v;});
+    data.barcodes=barcodesObj;
+    data.barcode=validBarcodes[0]; // держим для обратной совместимости со старым кодом
+  }else{
+    data.barcodes=null;data.barcode=null;
+  }
   if(validVariants.length){
     const variantsObj={};
     validVariants.forEach(v=>{
@@ -939,8 +1016,9 @@ async function loadBarcodeDetector(){
   return {_zx:reader,async detect(v){try{const r=await this._zx.decodeOnceFromVideoElement(v);return r?[{rawValue:r.getText()}]:[];}catch{return [];}}};
 }
 
-function openBarcodeScanner(mode){
+function openBarcodeScanner(mode,rowId){
   barcodeScanMode=mode; // 'lookup' (header, быстрая проверка цены) | 'add' (заполнение формы товара)
+  pendingBarcodeRowId=rowId||null;
   document.getElementById('barcode-overlay').classList.add('open');
   document.getElementById('bc-status').textContent='Запуск камеры…';
   startBarcodeCam();
@@ -977,26 +1055,67 @@ function barcodeManualEntry(){
   closeBarcodeScanner();
   if(code&&/^[0-9]{4,14}$/.test(code.trim()))onBarcodeDetected(code.trim());
 }
-function scanBarcodeIntoForm(){openBarcodeScanner('add');}
+function scanBarcodeIntoForm(rowId){openBarcodeScanner('add',rowId||null);}
+
+function productHasBarcode(p,barcode){
+  if((p.barcode||'')===barcode)return true;
+  if(p.barcodes)return Object.values(p.barcodes).includes(barcode);
+  return false;
+}
 
 async function onBarcodeDetected(barcode){
-  const localHit=Object.entries(window._products).find(([id,p])=>(p.barcode||'')===barcode);
+  const localHit=Object.entries(window._products).find(([id,p])=>productHasBarcode(p,barcode));
+  const modeAtDetect=barcodeScanMode,rowAtDetect=pendingBarcodeRowId;
   closeBarcodeScanner();
   if(localHit){
     const[id,p]=localHit;
-    if(barcodeScanMode==='add'){
+    if(modeAtDetect==='add'){
+      if(document.getElementById('prod-modal').classList.contains('open')&&rowAtDetect){
+        // сканируем доп. штрихкод прямо в открытую форму товара — не переоткрываем
+        updateBarcodeField(rowAtDetect,barcode);
+        renderBarcodeRows();
+        showToast('Такой штрихкод уже привязан к «'+(p.name||'товару')+'»');
+        return;
+      }
       showToast('Такой товар уже есть в базе — открываю');
+      openProductModal({id,...p});
     }else{
       showToast('Товар найден ✓');
+      document.getElementById('bc-result-title').textContent='Товар найден';
+      document.getElementById('bc-result-body').innerHTML=barcodeFoundCardHtml({id,...p});
+      document.getElementById('bc-result-modal').classList.add('open');
     }
-    openProductModal({id,...p});
     return;
   }
-  if(barcodeScanMode==='add'){
-    await fillFormFromBarcodeLookup(barcode);
+  if(modeAtDetect==='add'){
+    if(document.getElementById('prod-modal').classList.contains('open')&&rowAtDetect){
+      updateBarcodeField(rowAtDetect,barcode);
+      renderBarcodeRows();
+      // если это первый штрихкод и название ещё не заполнено — подтягиваем данные через ИИ/интернет
+      const nameField=document.getElementById('f-name');
+      if(!nameField.value.trim())await fillFormFromBarcodeLookup(barcode);
+    }else{
+      await fillFormFromBarcodeLookup(barcode);
+    }
   }else{
     await showBarcodeLookupResult(barcode);
   }
+}
+
+function barcodeFoundCardHtml(p){
+  const img=p.imageUrl?`<img class="bc-big-img" src="${p.imageUrl}">`:`<div class="bc-big-img bc-big-emoji">${p.emoji||'📦'}</div>`;
+  const enc=encodeURIComponent(JSON.stringify(p));
+  return `<div class="bc-card">
+    <div class="bc-card-imgwrap">
+      ${img}
+      <button class="bc-edit-fab" onclick="closeBarcodeResultModal();openProductModal(JSON.parse(decodeURIComponent('${enc}')))" title="Редактировать">✏️</button>
+    </div>
+    <div class="bc-card-body">
+      <div class="bc-card-name">${p.name||''}</div>
+      <div class="bc-card-sub">${p.weight||''}</div>
+      <div class="bc-card-price">${p.price||0} ₸</div>
+    </div>
+  </div>`;
 }
 
 async function lookupBarcodeExternal(barcode){
@@ -1005,7 +1124,7 @@ async function lookupBarcodeExternal(barcode){
     const snap=await window._get(window._ref(window._db,'barcodeCache/'+barcode));
     if(snap.exists())return {...snap.val(),fromCache:true};
   }catch(e){}
-  // 2. внешний сервис (Open Food Facts + ИИ)
+  // 2. внешний сервис (Open Food Facts + сторонний lookup)
   try{
     const r=await fetch(BARCODE_LOOKUP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({barcode})});
     const data=await r.json();
@@ -1015,22 +1134,69 @@ async function lookupBarcodeExternal(barcode){
       return cacheData;
     }
   }catch(e){}
+  // 3. ИИ (Claude) ищет товар по штрихкоду в интернете — название, вес, фото
+  const aiData=await aiLookupBarcode(barcode);
+  if(aiData){
+    const cacheData={name:aiData.name,brand:aiData.brand||'',weight:aiData.weight||'',imageUrl:aiData.imageUrl||null,updatedAt:Date.now(),source:'ai'};
+    window._set(window._ref(window._db,'barcodeCache/'+barcode),cacheData).catch(()=>{});
+    return cacheData;
+  }
   return null;
+}
+
+// ИИ-поиск товара по штрихкоду через интернет (название, вес, фото упаковки)
+async function aiLookupBarcode(barcode){
+  try{
+    const resp=await fetch(ANTHROPIC_API,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        tools:[{type:'web_search_20250305',name:'web_search'}],
+        messages:[{
+          role:'user',
+          content:`Найди в интернете товар по штрихкоду (EAN/UPC) ${barcode}. Проверь такие источники как Open Food Facts, upcitemdb, barcode-list, официальные сайты производителей, маркетплейсы (Kaspi.kz, Wildberries, Ozon и т.п.).
+Мне нужны: точное название товара, бренд, вес/объём упаковки и прямая ссылка на изображение упаковки товара (URL картинки jpg/png/webp).
+Ответь ТОЛЬКО JSON без markdown и без пояснений, в таком формате:
+{"name":"...","brand":"...","weight":"...","imageUrl":"прямая ссылка на картинку или null"}
+Если не смог найти товар — верни {"name":null}`
+        }]
+      })
+    });
+    const data=await resp.json();
+    const textBlock=(data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
+    const clean=textBlock.replace(/```json|```/g,'').trim();
+    const jsonMatch=clean.match(/\{[\s\S]*\}/);
+    if(!jsonMatch)return null;
+    const parsed=JSON.parse(jsonMatch[0]);
+    if(!parsed.name)return null;
+    return {name:parsed.name,brand:parsed.brand||'',weight:parsed.weight||'',imageUrl:parsed.imageUrl||null};
+  }catch(e){console.log('aiLookupBarcode error:',e);return null;}
 }
 
 async function showBarcodeLookupResult(barcode){
   document.getElementById('bc-result-title').textContent='Поиск…';
-  document.getElementById('bc-result-body').innerHTML='<div class="loading"><div class="spinner"></div>Ищем товар...</div>';
+  document.getElementById('bc-result-body').innerHTML='<div class="loading"><div class="spinner"></div>Ищем товар (в т.ч. через ИИ и интернет)...</div>';
   document.getElementById('bc-result-modal').classList.add('open');
   const data=await lookupBarcodeExternal(barcode);
   window._pendingBarcodeLookup={barcode,data};
   const body=document.getElementById('bc-result-body');
   if(data&&data.name){
     document.getElementById('bc-result-title').textContent='В каталоге не найден';
-    body.innerHTML=`${data.imageUrl?`<img class="bc-res-img" src="${data.imageUrl}">`:''}<div class="bc-res-name">${data.name}</div><div class="bc-res-sub">${data.brand?data.brand+' · ':''}${data.weight||''}</div><div class="bc-res-sub">Штрихкод: ${barcode}</div><button class="save-btn" onclick="applyPendingBarcodeLookup()">➕ Добавить в каталог</button>`;
+    const img=data.imageUrl?`<img class="bc-big-img" src="${data.imageUrl}">`:`<div class="bc-big-img bc-big-emoji">📦</div>`;
+    body.innerHTML=`<div class="bc-card">
+      <div class="bc-card-imgwrap">${img}</div>
+      <div class="bc-card-body">
+        <div class="bc-card-name">${data.name}</div>
+        <div class="bc-card-sub">${data.brand?data.brand+' · ':''}${data.weight||''}</div>
+        <div class="bc-card-sub">Штрихкод: ${barcode}${data.source==='ai'?' · найдено через ИИ':''}</div>
+        <button class="save-btn" style="margin-top:14px" onclick="applyPendingBarcodeLookup()">➕ Добавить в каталог</button>
+      </div>
+    </div>`;
   }else{
     document.getElementById('bc-result-title').textContent='Товар не найден';
-    body.innerHTML=`<div class="bc-res-sub">Штрихкод ${barcode} не найден ни в вашей базе, ни во внешних источниках.</div><button class="save-btn" style="margin-top:12px" onclick="applyPendingBarcodeLookup()">➕ Добавить вручную</button>`;
+    body.innerHTML=`<div class="bc-res-sub">Штрихкод ${barcode} не найден ни в вашей базе, ни во внешних источниках, ни через ИИ-поиск.</div><button class="save-btn" style="margin-top:12px" onclick="applyPendingBarcodeLookup()">➕ Добавить вручную</button>`;
   }
 }
 function closeBarcodeResultModal(){document.getElementById('bc-result-modal').classList.remove('open');}
@@ -1038,28 +1204,33 @@ function applyPendingBarcodeLookup(){
   const pending=window._pendingBarcodeLookup;closeBarcodeResultModal();
   openProductModal(null);
   if(pending&&pending.data)fillFormWithLookup(pending.barcode,pending.data);
-  else if(pending)document.getElementById('f-barcode').value=pending.barcode;
+  else if(pending){currentBarcodes=[{bid:'tmp_'+Date.now(),value:pending.barcode}];renderBarcodeRows();}
 }
 
 async function fillFormFromBarcodeLookup(barcode){
-  showToast('🔍 Ищем товар...');
+  showToast('🔍 Ищем товар (в т.ч. через ИИ)...');
   const data=await lookupBarcodeExternal(barcode);
   if(data&&data.name){
     fillFormWithLookup(barcode,data);
     showToast('✅ Заполнено — укажите цену');
   }else{
-    document.getElementById('f-barcode').value=barcode;
-    showToast('Не найден во внешних базах — заполните вручную');
+    showToast('Не найден нигде — заполните вручную');
   }
 }
 function fillFormWithLookup(barcode,data){
-  document.getElementById('f-barcode').value=barcode;
+  if(!currentBarcodes.length||currentBarcodes.every(b=>!b.value))currentBarcodes=[{bid:'tmp_'+Date.now(),value:barcode}];
+  else{
+    const empty=currentBarcodes.find(b=>!b.value);
+    if(empty)empty.value=barcode;else currentBarcodes.push({bid:'tmp_'+Date.now(),value:barcode});
+  }
+  renderBarcodeRows();
   if(data.name)document.getElementById('f-name').value=data.name;
   if(data.weight)document.getElementById('f-weight').value=data.weight;
   if(data.imageUrl){
     selFile=null;pendingLookupImageUrl=data.imageUrl;
     const img=document.getElementById('preview-img');img.src=data.imageUrl;img.style.display='block';
     document.getElementById('preview-emoji').style.display='none';
+    document.getElementById('preview-overlay-label').textContent='📷 Изменить фото';
   }
   document.getElementById('f-price').focus();
 }
@@ -1314,6 +1485,45 @@ function sendDeliveryNotification(){
   sendPush('🚚 Поставка '+formatDate(date),`${company} — ${fmt(amount)} ₸`);showToast('🔔 Уведомление отправлено!');
 }
 
+// ===================== АППАРАТНАЯ КНОПКА "НАЗАД" =====================
+// Держим один "буферный" history-state поверх реальной загрузки страницы.
+// Внутри товаров/поставок есть ещё один буфер сверху: первое "назад" возвращает
+// на главную, а не закрывает сайт. На главном экране первое "назад" открывает
+// диалог подтверждения выхода вместо мгновенного закрытия сайта.
+function anyOverlayOpen(){
+  return !!document.querySelector('.modal-overlay.open, #cam-modal.open, #cam-live-wrap.open, #barcode-overlay.open');
+}
+function closeTopOverlay(){
+  if(document.getElementById('barcode-overlay').classList.contains('open')){closeBarcodeScanner();return;}
+  if(document.getElementById('cam-live-wrap').classList.contains('open')){stopCamLive();return;}
+  if(document.getElementById('cam-modal').classList.contains('open')){closeCamModal();return;}
+  const openModal=document.querySelector('.modal-overlay.open');
+  if(openModal)openModal.classList.remove('open');
+}
+function confirmExitNo(){
+  document.getElementById('exit-confirm-modal').classList.remove('open');
+}
+function confirmExitYes(){
+  document.getElementById('exit-confirm-modal').classList.remove('open');
+  history.go(-2);
+}
+window.addEventListener('popstate',function(){
+  if(anyOverlayOpen()){
+    closeTopOverlay();
+    history.pushState({dastanShop:true},'');
+    return;
+  }
+  if(navStack.length>1){
+    navStack.pop();
+    currentSubCatId='all';
+    renderView();
+    return;
+  }
+  document.getElementById('exit-confirm-modal').classList.add('open');
+  history.pushState({dastanShop:true},'');
+});
+history.pushState({dastanShop:true},'');
+
 // ---- UTILS ----
 function getTodayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function fmt(n){return Number(n).toLocaleString('ru-RU');}
@@ -1328,7 +1538,7 @@ window.selectSubcat=selectSubcat;window.openCatModalAsSub=openCatModalAsSub;
 window.openCatModal=openCatModal;window.saveCategory=saveCategory;window.deleteCategory=deleteCategory;
 window.handleCatFile=handleCatFile;window.clearCatPhoto=clearCatPhoto;
 window.openProductModal=openProductModal;window.saveProduct=saveProduct;window.deleteProduct=deleteProduct;
-window.adjPrice=adjPrice;window.handleFile=handleFile;
+window.handleFile=handleFile;
 window.openDeliveryModal=openDeliveryModal;window.saveDelivery=saveDelivery;
 window.deleteDelivery=deleteDelivery;window.sendDeliveryNotification=sendDeliveryNotification;
 window.closeIfOutside=closeIfOutside;
@@ -1340,6 +1550,7 @@ window.barcodeManualEntry=barcodeManualEntry;window.scanBarcodeIntoForm=scanBarc
 window.applyPendingBarcodeLookup=applyPendingBarcodeLookup;window.closeBarcodeResultModal=closeBarcodeResultModal;
 window.toggleVariants=toggleVariants;window.addVariantRow=addVariantRow;
 window.removeVariantRow=removeVariantRow;window.updateVariantField=updateVariantField;
+window.addBarcodeRow=addBarcodeRow;window.removeBarcodeRow=removeBarcodeRow;window.updateBarcodeField=updateBarcodeField;
+window.setWeightUnit=setWeightUnit;window.confirmExitYes=confirmExitYes;window.confirmExitNo=confirmExitNo;
 </script>
 </body>
-</html>
