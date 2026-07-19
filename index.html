@@ -14,30 +14,24 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscroll-behavior:none}
-
-/* BANNERS */
 #install-banner{display:none;background:linear-gradient(135deg,#1a1a2e,#16213e);padding:11px 16px;border-bottom:1px solid rgba(232,197,71,.2)}
 .install-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:10px}
 .install-text{flex:1;color:#fff;font-size:13px;font-weight:700}
 .install-text span{color:#e8c547}
 .install-yes{padding:7px 14px;border-radius:10px;border:none;background:#e8c547;color:#1a1a2e;font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
 .install-no{padding:7px 8px;border-radius:10px;border:none;background:transparent;color:#666;font-size:18px;cursor:pointer}
-
 #push-ask{display:none;background:#16213e;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
 .push-ask-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:10px}
 .push-text{flex:1;color:#fff;font-size:13px;font-weight:700}
 .push-text span{color:#e8c547}
 .push-yes{padding:7px 14px;border-radius:10px;border:none;background:#e8c547;color:#1a1a2e;font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
 .push-no{padding:7px 10px;border-radius:10px;border:none;background:transparent;color:#888;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif}
-
 #delivery-banner{display:none;background:linear-gradient(135deg,#1a6e3c,#2d9e6e);padding:12px 16px;cursor:pointer}
 .banner-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:10px}
 .banner-text{flex:1}
 .banner-title{color:#fff;font-size:14px;font-weight:900}
 .banner-sub{color:rgba(255,255,255,.8);font-size:12px;font-weight:600}
 .banner-close{color:rgba(255,255,255,.6);font-size:18px;padding:4px;cursor:pointer;flex-shrink:0}
-
-/* HEADER */
 .header{background:#1a1a2e;padding:12px 14px;position:sticky;top:0;z-index:50;box-shadow:0 2px 16px rgba(0,0,0,.2)}
 .header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:10px}
 .back-btn{width:38px;height:38px;border-radius:10px;border:none;background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer;display:none;align-items:center;justify-content:center;flex-shrink:0}
@@ -52,11 +46,8 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .add-btn:active{transform:scale(.9)}
 .delivery-btn{width:42px;height:42px;border-radius:12px;border:none;background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
 .delivery-badge{position:absolute;top:-4px;right:-4px;background:#e8544a;color:#fff;font-size:10px;font-weight:900;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center}
-/* CAMERA SEARCH BUTTON (now barcode) */
 .cam-search-btn{width:42px;height:42px;border-radius:12px;border:none;background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
 .cam-search-btn:active{background:rgba(255,255,255,.2)}
-
-/* BREADCRUMB */
 #breadcrumb{display:none;background:#fff;border-bottom:1px solid #ece8de;padding:8px 16px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
 #breadcrumb::-webkit-scrollbar{display:none}
 .breadcrumb-inner{max-width:960px;margin:0 auto;display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700}
@@ -64,13 +55,9 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .bc-item:hover{color:#1a1a2e}
 .bc-sep{color:#ddd}
 .bc-current{color:#1a1a2e}
-
-/* HOME SEARCH */
 .home-search-wrap{padding:14px 12px 0;max-width:960px;margin:0 auto}
 .home-search{width:100%;padding:11px 16px;border-radius:14px;border:2px solid #e8e4da;background:#fff;font-size:15px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;transition:border .15s}
 .home-search:focus{border-color:#e8c547}
-
-/* SEARCH RESULTS */
 #search-results{display:none;max-width:960px;margin:0 auto;padding:10px 12px 90px}
 .search-section-title{font-size:11px;font-weight:900;color:#999;text-transform:uppercase;letter-spacing:2px;margin:12px 0 8px}
 .search-cat-item{background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.06)}
@@ -85,51 +72,44 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .search-prod-name{font-size:14px;font-weight:800;color:#1a1a2e}
 .search-prod-info{font-size:12px;color:#999;font-weight:600}
 .search-prod-price{font-size:16px;font-weight:900;color:#1a1a2e;margin-left:auto;flex-shrink:0}
-
-/* CATEGORIES HOME */
 #categories-home{display:block}
 .cats-home-wrap{max-width:960px;margin:0 auto;padding:12px 12px 90px}
 .cats-home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-.cat-home-card{background:#fff;border-radius:18px;overflow:hidden;cursor:pointer;box-shadow:0 3px 14px rgba(0,0,0,.07);transition:transform .18s;position:relative;display:flex;flex-direction:column}
+.cat-home-card{background:linear-gradient(135deg,#f6c528,#eeae00);border-radius:18px;overflow:hidden;cursor:pointer;box-shadow:0 3px 14px rgba(0,0,0,.15);transition:transform .18s;position:relative;display:flex;flex-direction:column}
 .cat-home-card:active{transform:scale(.96)}
-.cat-card-img{height:110px;background:linear-gradient(135deg,#f5f0e8,#ede8d8);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.cat-card-img{height:110px;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
 .cat-card-img img{width:100%;height:100%;object-fit:cover}
 .cat-card-emoji{font-size:48px}
 .cat-card-body{padding:10px 12px 12px;flex:1}
 .cat-card-name{font-size:14px;font-weight:900;color:#1a1a2e;line-height:1.2;margin-bottom:2px}
-.cat-card-count{font-size:11px;color:#999;font-weight:600}
+.cat-card-count{font-size:11px;color:#5c4a00;font-weight:700}
 .cat-card-edit{position:absolute;top:7px;right:7px;width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.9);border:none;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.15)}
-.cat-home-card.all-card .cat-card-img{background:linear-gradient(135deg,#1a1a2e,#2d2d4a)}
+.cat-home-card.all-card{background:linear-gradient(135deg,#1a1a2e,#2d2d4a)}
+.cat-home-card.all-card .cat-card-img{background:rgba(255,255,255,.08)}
+.cat-home-card.all-card .cat-card-name{color:#fff}
+.cat-home-card.all-card .cat-card-count{color:#e8c547}
 .cat-home-card.add-cat-card{border:2px dashed #ddd;box-shadow:none;background:#fff}
 .cat-home-card.add-cat-card .cat-card-img{background:transparent}
-
-/* PRODUCTS VIEW */
 #products-view{display:none}
 .grid-wrap{max-width:960px;margin:0 auto;padding:14px 12px 90px}
 .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:11px}
-
-/* SUBCATEGORY STRIP inside products view */
 .subcat-strip{background:#fff;border-bottom:1px solid #ece8de;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .subcat-strip::-webkit-scrollbar{display:none}
 .subcat-strip-inner{display:flex;padding:8px 12px;gap:8px;max-width:960px;margin:0 auto}
 .subcat-chip{padding:7px 14px;border-radius:20px;border:2px solid #eee;background:#fff;font-size:13px;font-weight:800;color:#999;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
 .subcat-chip.active{background:#1a1a2e;border-color:#1a1a2e;color:#e8c547}
 .subcat-chip.add-subcat{border-style:dashed;color:#ccc}
-
-/* CARD */
-.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.07);cursor:pointer;transition:transform .18s;display:flex;flex-direction:column}
+.card{background:linear-gradient(135deg,#f6c528,#eeae00);border-radius:16px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.13);cursor:pointer;transition:transform .18s;display:flex;flex-direction:column}
 .card:active{transform:scale(.97)}
-.card-img{height:125px;background:linear-gradient(135deg,#f5f0e8,#ede8d8);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.card-img{height:125px;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
 .card-img img{width:100%;height:100%;object-fit:cover}
 .card-emoji{font-size:50px}
 .card-body{padding:9px 11px 11px;flex:1;display:flex;flex-direction:column}
 .card-name{font-weight:800;font-size:13px;color:#1a1a2e;margin-bottom:2px;line-height:1.3}
-.card-weight{color:#999;font-size:11px;margin-bottom:7px}
+.card-weight{color:#5c4a00;font-size:11px;margin-bottom:7px;font-weight:700}
 .card-price{font-size:18px;font-weight:900;color:#1a1a2e;margin-top:auto}
 .card-variants{display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap}
-.card-variant-chip{font-size:9px;font-weight:800;color:#8a8a8a;background:#f5f0e8;border-radius:6px;padding:2px 6px}
-
-/* DELIVERIES */
+.card-variant-chip{font-size:9px;font-weight:800;color:#5c4a00;background:rgba(255,255,255,.5);border-radius:6px;padding:2px 6px}
 #deliveries-view{display:none;max-width:960px;margin:0 auto;padding:14px 12px 90px}
 .section-title{font-size:12px;font-weight:900;color:#999;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;margin-top:4px}
 .delivery-card{background:#fff;border-radius:16px;padding:14px 16px;margin-bottom:10px;box-shadow:0 3px 14px rgba(0,0,0,.06);display:flex;align-items:center;gap:12px;cursor:pointer}
@@ -145,31 +125,19 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .del-badge.upcoming{background:#fff3cd;color:#856404}
 .del-badge.past{background:#f0f0f0;color:#999}
 .add-delivery-btn{width:100%;padding:14px;border-radius:14px;border:2px dashed #ddd;background:#fff;color:#999;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px}
-
-/* EMPTY */
 .empty{text-align:center;color:#bbb;font-size:15px;padding-top:50px}
 .empty-icon{font-size:48px;margin-bottom:10px}
-
-/* BOTTOM BAR */
 .bottom-bar{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#888;font-size:12px;font-weight:600;padding:7px 18px;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.2);white-space:nowrap;z-index:40}
-
-/* MODALS */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:100;align-items:flex-end;justify-content:center}
 .modal-overlay.open{display:flex}
 .modal-sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:18px 18px 30px;max-height:92vh;overflow-y:auto;animation:slideUp .25s ease}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .modal-handle{width:40px;height:4px;background:#e0e0e0;border-radius:2px;margin:0 auto 16px}
 .modal-title{font-size:19px;font-weight:900;color:#1a1a2e;margin-bottom:16px}
-.img-upload-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px}
-.img-preview{width:84px;height:84px;border-radius:14px;background:#f5f0e8;border:2px dashed #ddd;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0;position:relative;font-size:38px}
-.img-preview img{width:100%;height:100%;object-fit:cover}
-.img-overlay{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;font-size:20px}
-.img-preview:hover .img-overlay,.img-preview:active .img-overlay{opacity:1}
 .img-upload-row-big{margin-bottom:16px}
 .img-preview-big{width:100%;height:190px;border-radius:16px;background:#f5f0e8;border:2px dashed #ddd;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;font-size:60px}
 .img-preview-big img{width:100%;height:100%;object-fit:cover}
 .img-overlay-big{position:absolute;left:0;right:0;bottom:0;padding:9px;background:rgba(26,26,46,.72);color:#fff;font-size:13px;font-weight:800;text-align:center}
-.emoji-picker-label{font-size:11px;color:#888;margin-bottom:5px;font-weight:700}
 .emoji-grid{display:flex;flex-wrap:wrap;gap:5px}
 .emoji-opt{width:32px;height:32px;border-radius:8px;border:2px solid #eee;background:#fff;font-size:16px;cursor:pointer;transition:border .15s;display:flex;align-items:center;justify-content:center}
 .emoji-opt.active{border-color:#e8c547;background:#fff9e6}
@@ -192,20 +160,15 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .delete-btn{width:100%;padding:11px;border-radius:13px;border:2px solid #fee;background:#fff;color:#e8544a;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:10px}
 .notify-btn{width:100%;padding:11px;border-radius:13px;border:2px solid #d4f5e6;background:#f0fff7;color:#1a6e3c;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:10px}
 .photo-upload-label{display:block;width:100%;padding:11px;border-radius:13px;border:2px solid #e8c547;background:#fff9e6;color:#1a1a2e;font-size:14px;font-weight:800;cursor:pointer;text-align:center;font-family:'Nunito',sans-serif;margin-bottom:10px}
-
-/* TOAST */
 .toast{display:none;position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#e8c547;padding:9px 20px;border-radius:12px;font-size:13px;font-weight:800;box-shadow:0 4px 20px rgba(0,0,0,.2);z-index:200;white-space:nowrap}
 .toast.show{display:block;animation:fadeT .2s}
 @keyframes fadeT{from{opacity:0;transform:translate(-50%,-8px)}to{opacity:1;transform:translate(-50%,0)}}
 .loading{text-align:center;color:#bbb;padding:50px 20px;font-size:14px}
 .spinner{width:30px;height:30px;border:3px solid #e8c547;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 10px}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* ===================== CAMERA SEARCH MODAL (AI photo, secondary) ===================== */
 #cam-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:150;align-items:flex-end;justify-content:center}
 #cam-modal.open{display:flex}
 .cam-sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:0 0 30px;max-height:95vh;overflow-y:auto;animation:slideUp .25s ease;display:flex;flex-direction:column}
-
 #cam-live-wrap{display:none;position:fixed;inset:0;background:#000;z-index:200;flex-direction:column}
 #cam-live-wrap.open{display:flex}
 #cam-video{width:100%;flex:1;object-fit:cover}
@@ -216,26 +179,21 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .cam-shoot-btn{width:72px;height:72px;border-radius:50%;border:4px solid rgba(255,255,255,.5);background:#e8c547;color:#1a1a2e;font-size:26px;cursor:pointer;font-weight:900;display:flex;align-items:center;justify-content:center}
 .cam-shoot-btn:active{transform:scale(.92)}
 .cam-gallery-btn{width:52px;height:52px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:22px;cursor:pointer}
-
 .cam-idle{padding:28px 20px 10px;text-align:center}
 .cam-idle-icon{font-size:64px;margin-bottom:12px}
 .cam-idle-title{font-size:20px;font-weight:900;color:#1a1a2e;margin-bottom:6px}
 .cam-idle-sub{font-size:14px;color:#999;font-weight:600;margin-bottom:28px;line-height:1.5}
 .cam-open-btn{width:100%;padding:15px;border-radius:16px;border:none;background:linear-gradient(135deg,#e8c547,#f0a500);color:#1a1a2e;font-size:16px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;margin-bottom:10px;box-shadow:0 5px 18px rgba(232,197,71,.4)}
 .cam-gallery-open-btn{width:100%;padding:13px;border-radius:16px;border:2px solid #e0dbd0;background:#fff;color:#666;font-size:15px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
-
 .cam-preview-wrap{padding:0}
 .cam-preview-img{width:100%;max-height:300px;object-fit:cover;border-radius:24px 24px 0 0}
 .cam-preview-actions{padding:16px 18px 0;display:flex;gap:10px}
 .cam-analyze-btn{flex:1;padding:14px;border-radius:14px;border:none;background:linear-gradient(135deg,#e8c547,#f0a500);color:#1a1a2e;font-size:15px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 14px rgba(232,197,71,.35)}
 .cam-retake-btn{padding:14px 16px;border-radius:14px;border:2px solid #e0dbd0;background:#fff;color:#666;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
-
 .cam-analyzing{padding:40px 20px;text-align:center}
-.cam-analyzing-img{width:100%;max-height:200px;object-fit:cover;border-radius:24px 24px 0 0;opacity:.65}
 .cam-spin{width:52px;height:52px;border:4px solid #e8c547;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;margin:20px auto 14px}
 .cam-analyzing-title{font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:4px}
 .cam-analyzing-sub{font-size:13px;color:#999;font-weight:600}
-
 .cam-results{padding:0}
 .cam-results-img{width:100%;max-height:180px;object-fit:cover;border-radius:24px 24px 0 0}
 .cam-ai-tag{margin:14px 16px 0;background:#f0fff7;border:2px solid #d4f5e6;border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px}
@@ -252,17 +210,13 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .cam-result-sub{font-size:12px;color:#999;font-weight:600}
 .cam-result-price{font-size:17px;font-weight:900;color:#1a1a2e;flex-shrink:0}
 .cam-new-search{margin:14px 16px 0;width:calc(100% - 32px);padding:13px;border-radius:14px;border:none;background:#1a1a2e;color:#e8c547;font-size:14px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif}
-
 .cam-notfound{padding:28px 20px;text-align:center}
-.cam-notfound-img{width:100%;max-height:180px;object-fit:cover;border-radius:24px 24px 0 0;opacity:.65}
 .cam-notfound-icon{font-size:52px;margin:20px 0 10px}
 .cam-notfound-title{font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:6px}
 .cam-notfound-ai{font-size:14px;color:#999;font-weight:600;margin-bottom:4px}
 .cam-notfound-ai strong{color:#1a1a2e}
 .cam-notfound-sub{font-size:13px;color:#bbb;font-weight:600;margin-bottom:20px}
 .cam-err{padding:16px;background:#fff0f0;border:2px solid #fdd;border-radius:12px;color:#e8544a;font-size:13px;font-weight:800;margin:10px 16px 0;display:none}
-
-/* ===================== BARCODE SCANNER ===================== */
 #barcode-overlay{display:none;position:fixed;inset:0;background:#000;z-index:250;flex-direction:column}
 #barcode-overlay.open{display:flex}
 #bc-video{width:100%;flex:1;object-fit:cover;background:#000}
@@ -271,32 +225,23 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 .bc-topbar{position:absolute;top:0;left:0;right:0;padding:16px;display:flex;justify-content:space-between;align-items:center;z-index:2;gap:10px}
 .bc-close-btn{width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:20px;cursor:pointer;flex-shrink:0}
 .bc-manual-btn{padding:9px 12px;border-radius:20px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap}
-.bc-res-img{width:100%;height:150px;border-radius:16px;object-fit:cover;background:#f5f0e8;margin-bottom:12px}
-.bc-res-name{font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:2px}
-.bc-res-sub{font-size:13px;color:#999;font-weight:700;margin-bottom:6px}
-
-/* BARCODE FOUND CARD (big photo style) */
 .bc-card{margin:-18px -18px 0}
 .bc-card-imgwrap{position:relative}
-.bc-big-img{width:100%;height:230px;object-fit:cover;display:block;background:#f5f0e8}
-.bc-big-emoji{display:flex;align-items:center;justify-content:center;font-size:80px}
-.bc-edit-fab{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:12px;border:none;background:#e8c547;color:#1a1a2e;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.25)}
-.bc-card-body{padding:18px}
-.bc-card-name{font-size:21px;font-weight:900;color:#1a1a2e;line-height:1.25}
-.bc-card-sub{font-size:13px;color:#999;font-weight:700;margin-top:3px}
-.bc-card-price{font-size:32px;font-weight:900;color:#1a1a2e;margin-top:10px}
-
-/* BARCODE FIELD IN PRODUCT MODAL */
-.barcode-field-row{display:flex;gap:8px}
-.barcode-field-row input{flex:1}
-.barcode-scan-mini{width:44px;height:44px;border-radius:11px;border:2px solid #e8c547;background:#fff9e6;color:#1a1a2e;font-size:18px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.bc-big-img{width:100%;height:62vh;max-height:520px;object-fit:cover;display:block;background:#f5f0e8;border-radius:28px 28px 0 0}
+.bc-big-emoji{display:flex;align-items:center;justify-content:center;font-size:100px}
+.bc-card-body{padding:18px;border-radius:0 0 28px 28px}
+.bc-card-name{font-size:22px;font-weight:900;color:#1a1a2e;line-height:1.25}
+.bc-card-sub{font-size:14px;color:#888;font-weight:700;margin-top:4px}
+.bc-card-sub b{color:#1a1a2e}
+.bc-card-price{font-size:30px;font-weight:900;color:#1a1a2e;margin-top:10px}
+.bc-confirm-row{display:flex;gap:10px;margin-top:16px}
+.bc-confirm-yes{flex:1;padding:14px;border-radius:14px;border:none;background:linear-gradient(135deg,#e8c547,#f0a500);color:#1a1a2e;font-size:15px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif}
+.bc-confirm-no{padding:14px 18px;border-radius:14px;border:2px solid #eee;background:#fff;color:#888;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
 .barcode-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;background:#f9f7f2;border-radius:12px;padding:8px 10px}
 .barcode-row input{flex:1;padding:8px 10px;border-radius:9px;border:2px solid #eee;font-size:13px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;background:#fff}
 .barcode-row input:focus{border-color:#e8c547}
 .barcode-row-del{width:32px;height:32px;border-radius:8px;border:none;background:#fee;color:#e8544a;font-size:14px;cursor:pointer;flex-shrink:0}
 .barcode-row-scan{width:32px;height:32px;border-radius:8px;border:none;background:#fff9e6;color:#1a1a2e;font-size:14px;cursor:pointer;flex-shrink:0}
-
-/* VARIANTS */
 .variants-toggle{font-size:12px;font-weight:800;color:#1a6e3c;background:#f0fff7;border:2px solid #d4f5e6;border-radius:10px;padding:9px 12px;text-align:center;cursor:pointer;margin-bottom:12px}
 .variant-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;background:#f9f7f2;border-radius:12px;padding:8px 10px}
 .variant-row input{flex:1;padding:8px 10px;border-radius:9px;border:2px solid #eee;font-size:13px;font-family:'Nunito',sans-serif;font-weight:700;outline:none;background:#fff}
@@ -306,7 +251,6 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
 </style>
 </head>
 <body>
-
 <div id="install-banner">
   <div class="install-inner">
     <div class="install-text">📲 Установить <span>Dastan Shop</span> на рабочий стол</div>
@@ -314,7 +258,6 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <button class="install-no" onclick="document.getElementById('install-banner').style.display='none'">✕</button>
   </div>
 </div>
-
 <div id="push-ask">
   <div class="push-ask-inner">
     <div class="push-text">🔔 Уведомления о <span>поставках</span>?</div>
@@ -322,7 +265,6 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <button class="push-no" onclick="document.getElementById('push-ask').style.display='none'">Нет</button>
   </div>
 </div>
-
 <div id="delivery-banner" onclick="switchView('deliveries')">
   <div class="banner-inner">
     <div style="font-size:24px;flex-shrink:0">🚚</div>
@@ -333,8 +275,6 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <div class="banner-close" onclick="event.stopPropagation();document.getElementById('delivery-banner').style.display='none'">✕</div>
   </div>
 </div>
-
-<!-- HEADER -->
 <div class="header">
   <div class="header-inner">
     <button class="back-btn" id="back-btn" onclick="goBack()">←</button>
@@ -352,34 +292,22 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     </div>
   </div>
 </div>
-
-<!-- BREADCRUMB -->
 <div id="breadcrumb">
   <div class="breadcrumb-inner" id="breadcrumb-inner"></div>
 </div>
-
-<!-- SUBCATEGORY STRIP -->
 <div class="subcat-strip" id="subcat-strip" style="display:none">
   <div class="subcat-strip-inner" id="subcat-strip-inner"></div>
 </div>
-
-<!-- HOME SEARCH -->
 <div class="home-search-wrap" id="home-search-wrap">
   <input class="home-search" id="home-search-input" placeholder="🔍 Поиск по товарам и категориям..." oninput="onHomeSearch()">
 </div>
-
-<!-- SEARCH RESULTS -->
 <div id="search-results"></div>
-
-<!-- CATEGORIES HOME -->
 <div id="categories-home">
   <div class="cats-home-wrap">
     <div id="loading-cats" class="loading"><div class="spinner"></div>Загрузка...</div>
     <div class="cats-home-grid" id="cats-home-grid" style="display:none"></div>
   </div>
 </div>
-
-<!-- PRODUCTS VIEW -->
 <div id="products-view">
   <div class="grid-wrap">
     <div class="product-grid" id="product-grid"></div>
@@ -389,18 +317,13 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     </div>
   </div>
 </div>
-
-<!-- DELIVERIES -->
 <div id="deliveries-view">
   <div style="padding:14px 12px 4px;max-width:960px;margin:0 auto">
     <button class="add-delivery-btn" onclick="openDeliveryModal(null)">➕ Добавить поставку</button>
   </div>
   <div id="deliveries-list" style="max-width:960px;margin:0 auto;padding:0 12px 90px"></div>
 </div>
-
 <div class="bottom-bar"><span id="count-label">Выберите категорию</span></div>
-
-<!-- ===================== BARCODE SCANNER OVERLAY ===================== -->
 <div id="barcode-overlay">
   <div class="bc-topbar">
     <button class="bc-close-btn" onclick="closeBarcodeScanner()">✕</button>
@@ -411,8 +334,6 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
   <div class="bc-frame"></div>
   <div class="bc-status" id="bc-status">Наведите камеру на штрихкод…</div>
 </div>
-
-<!-- BARCODE RESULT MODAL -->
 <div class="modal-overlay" id="bc-result-modal" onclick="closeIfOutside(event,'bc-result-modal')">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -420,8 +341,6 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <div id="bc-result-body"></div>
   </div>
 </div>
-
-<!-- ===================== CAMERA LIVE VIEW (AI photo search) ===================== -->
 <div id="cam-live-wrap" onclick="">
   <video id="cam-video" autoplay playsinline></video>
   <div class="cam-viewfinder"></div>
@@ -432,8 +351,6 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <button class="cam-gallery-btn" onclick="document.getElementById('cam-file-input').click()">🖼</button>
   </div>
 </div>
-
-<!-- ===================== CAMERA SEARCH MODAL (AI photo search) ===================== -->
 <div id="cam-modal" onclick="camModalOutside(event)">
   <div class="cam-sheet" id="cam-sheet">
     <div style="padding:10px 18px 0;display:flex;align-items:center;justify-content:space-between">
@@ -443,10 +360,7 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <div id="cam-body"></div>
   </div>
 </div>
-
 <input type="file" id="cam-file-input" accept="image/*" style="display:none" onchange="camHandleFile(event)">
-
-<!-- PRODUCT MODAL -->
 <div class="modal-overlay" id="prod-modal" onclick="closeIfOutside(event,'prod-modal')">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -490,8 +404,6 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <button class="delete-btn" id="delete-btn" style="display:none" onclick="deleteProduct()">🗑 Удалить товар</button>
   </div>
 </div>
-
-<!-- CATEGORY MODAL -->
 <div class="modal-overlay" id="cat-modal" onclick="closeIfOutside(event,'cat-modal')">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -516,8 +428,6 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <button class="delete-btn" id="cat-delete-btn" style="display:none" onclick="deleteCategory()">🗑 Удалить категорию</button>
   </div>
 </div>
-
-<!-- DELIVERY MODAL -->
 <div class="modal-overlay" id="delivery-modal" onclick="closeIfOutside(event,'delivery-modal')">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -531,8 +441,6 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <button class="delete-btn" id="del-delete-btn" style="display:none" onclick="deleteDelivery()">🗑 Удалить поставку</button>
   </div>
 </div>
-
-<!-- EXIT CONFIRM MODAL -->
 <div class="modal-overlay" id="exit-confirm-modal">
   <div class="modal-sheet" style="text-align:center">
     <div class="modal-handle"></div>
@@ -543,9 +451,7 @@ body{font-family:'Nunito',sans-serif;background:#f4f1eb;min-height:100vh;overscr
     <button class="delete-btn" style="border-color:#eee;color:#666;margin-top:10px" onclick="confirmExitNo()">Остаться</button>
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
-
 <script>
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
@@ -553,7 +459,6 @@ if('serviceWorker' in navigator){
   });
 }
 </script>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, onValue, set, remove, push, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
@@ -572,14 +477,12 @@ onValue(ref(db,'products'),snap=>{window._products=snap.val()||{};onDataUpdate()
 onValue(ref(db,'categories'),snap=>{window._categories=snap.val()||{};onDataUpdate();});
 onValue(ref(db,'deliveries'),snap=>{window._deliveries=snap.val()||{};renderDeliveries();checkTodayDeliveries();});
 </script>
-
 <script>
 const CL_CLOUD="dv9zm4x4o",CL_PRESET="dastan_shop";
 const ANTHROPIC_API="https://api.anthropic.com/v1/messages";
 const BARCODE_LOOKUP_URL="https://id-preview--86a93b32-22ec-4ee4-8b42-a47783797301.lovable.app/api/public/product-lookup";
 const P_EMOJIS=["📦","🍦","🧃","🍞","🥛","🧈","🥩","🍎","🥦","🧀","🍗","🥚","🍫","🥤","🫙","🧂","🍬","🍪","🥜","🍋","🧁","🎂","🍕","🥗","🫐"];
 const C_EMOJIS=["🗂️","🍦","🧃","🍞","🥛","🥩","🍎","🥦","🍫","🥤","🍬","🍪","🧁","🎂","🍕","🛒","⭐","🔥","🆕","🧂","🥜","🍋","🥗","🫙","🧀"];
-
 let navStack=[{type:'categories'}];
 let currentSubCatId='all';
 let editingId=null,selFile=null,curEmoji="📦";
@@ -587,36 +490,22 @@ let catSelFile=null,editingCatId=null,catEmoji="🗂️";
 let editingDeliveryId=null;
 let deferredInstallPrompt=null;
 window._products={};window._categories={};window._deliveries={};
-
-// ---- CAMERA (AI photo) SEARCH STATE ----
-let camPhase='idle'; // idle | preview | analyzing | results | notfound
+let camPhase='idle';
 let camImageB64=null;
 let camStream=null;
-
-// ---- BARCODE STATE ----
 let bcStream=null,bcDetector=null,bcRunning=false,bcRafId=null,barcodeScanMode=null;
 let pendingLookupImageUrl=null;
-let pendingBarcodeRowId=null; // which barcode row in the product form is currently being scanned into
+let pendingBarcodeRowId=null;
 window._pendingBarcodeLookup=null;
-
-// ---- VARIANTS STATE ----
 let currentVariants=[];
 let variantsExpanded=false;
-
-// ---- BARCODES (multi) STATE ----
 let currentBarcodes=[];
-
-// ---- PWA ----
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;document.getElementById('install-banner').style.display='block';});
 window.addEventListener('appinstalled',()=>{document.getElementById('install-banner').style.display='none';showToast('✅ Приложение установлено!');});
 function installApp(){if(!deferredInstallPrompt)return;deferredInstallPrompt.prompt();deferredInstallPrompt.userChoice.then(()=>{deferredInstallPrompt=null;document.getElementById('install-banner').style.display='none';});}
-
-// ---- PUSH ----
 window.addEventListener('load',()=>{if('Notification'in window&&Notification.permission==='default'){setTimeout(()=>{document.getElementById('push-ask').style.display='block';},3000);}});
 function allowPush(){Notification.requestPermission().then(p=>{document.getElementById('push-ask').style.display='none';if(p==='granted')showToast('🔔 Уведомления включены!');});}
 function sendPush(title,body){if(Notification.permission==='granted'){new Notification(title,{body,icon:'icon-192.png'});}}
-
-// ---- DATA UPDATE ----
 function onDataUpdate(){
   const cur=navStack[navStack.length-1];
   if(cur.type==='categories') renderCatsHome();
@@ -624,16 +513,9 @@ function onDataUpdate(){
   const q=document.getElementById('home-search-input').value;
   if(q) onHomeSearch();
 }
-
-// ---- NAV ----
 function currentView(){return navStack[navStack.length-1].type;}
 function switchView(type,catId,catName){
-  if(type==='categories'&&navStack.length>1){
-    // уходим на главную с глубины — через реальный "назад" в истории браузера,
-    // чтобы аппаратная кнопка "назад" на телефоне осталась синхронизирована
-    history.back();
-    return;
-  }
+  if(type==='categories'&&navStack.length>1){history.back();return;}
   const prevLen=navStack.length;
   if(type==='deliveries'){navStack=[{type:'categories'},{type:'deliveries'}];}
   else if(type==='categories'){navStack=[{type:'categories'}];}
@@ -641,11 +523,7 @@ function switchView(type,catId,catName){
   renderView();
   if(navStack.length>prevLen){for(let i=prevLen;i<navStack.length;i++)history.pushState({dastanShop:true},'');}
 }
-function goBack(){
-  // сам переход делает popstate-обработчик — так экранная "←" и аппаратная
-  // кнопка "назад" на телефоне всегда работают одинаково
-  if(navStack.length>1)history.back();
-}
+function goBack(){if(navStack.length>1)history.back();}
 function renderView(){
   const cur=navStack[navStack.length-1];
   const isHome=cur.type==='categories';
@@ -686,8 +564,6 @@ function onAddBtn(){
   if(cur.type==='deliveries') openDeliveryModal(null);
   else openProductModal(null);
 }
-
-// ---- HOME SEARCH ----
 function onHomeSearch(){
   const q=document.getElementById('home-search-input').value.trim().toLowerCase();
   const results=document.getElementById('search-results');
@@ -718,8 +594,6 @@ function onHomeSearch(){
   results.innerHTML=html;
 }
 function onHeaderSearch(){renderProducts();}
-
-// ---- SUBCATEGORIES STRIP ----
 function getSubcatsOf(parentCatId){return Object.entries(window._categories).filter(([id,c])=>c.parentId===parentCatId);}
 function renderSubcatStrip(){
   const cur=navStack[navStack.length-1];
@@ -739,8 +613,6 @@ function renderSubcatStrip(){
 }
 function selectSubcat(id){currentSubCatId=id;renderSubcatStrip();renderProducts();}
 function openCatModalAsSub(){const cur=navStack[navStack.length-1];openCatModal(null,cur.catId);}
-
-// ---- CATEGORIES HOME (топ-категории, "Все товары" — в самом конце) ----
 function renderCatsHome(){
   const grid=document.getElementById('cats-home-grid');
   document.getElementById('loading-cats').style.display='none';grid.style.display='grid';
@@ -757,8 +629,6 @@ function renderCatsHome(){
   html+=`<div class="cat-home-card add-cat-card" onclick="openCatModal(null,null)"><div class="cat-card-img"><span style="font-size:36px;color:#ccc">＋</span></div><div class="cat-card-body"><div class="cat-card-name" style="color:#bbb">Добавить</div><div class="cat-card-count">категорию</div></div></div>`;
   grid.innerHTML=html;buildCatSelect();
 }
-
-// ---- CATEGORY MODAL ----
 function openCatModal(catId,parentId){
   editingCatId=catId||null;catSelFile=null;catEmoji="🗂️";
   const existing=catId&&window._categories[catId]?window._categories[catId]:null;
@@ -813,8 +683,6 @@ function buildCatSelect(){
   });
   sel.innerHTML=html;
 }
-
-// ---- PRODUCTS ----
 function renderProducts(){
   const cur=navStack[navStack.length-1];if(cur.type!=='products')return;
   const search=(document.getElementById('header-search')?.value||'').toLowerCase();
@@ -847,8 +715,6 @@ function renderProducts(){
     card.onclick=()=>openProductModal(p);grid.appendChild(card);
   });
 }
-
-// ---- PRODUCT MODAL ----
 function openProductModal(p){
   editingId=p?p.id:null;selFile=null;curEmoji=p?(p.emoji||"📦"):"📦";pendingLookupImageUrl=null;
   document.getElementById('prod-modal-title').textContent=p?'Редактировать':'Новый товар';
@@ -864,15 +730,13 @@ function openProductModal(p){
   document.getElementById('save-btn').disabled=false;document.getElementById('save-btn').textContent=p?'Сохранить изменения':'Добавить товар';
   document.getElementById('delete-btn').style.display=p?'block':'none';
   document.getElementById('file-input').value='';document.getElementById('prod-modal').classList.add('open');
-  // barcodes (multi)
   let barcodeVals=[];
   if(p){
-    if(p.barcodes)barcodeVals=Object.values(p.barcodes).filter(Boolean);
+    if(p.barcodes)barcodeVals=Object.values(p.barcodes).map(b=>typeof b==='string'?b:(b&&b.code)||'').filter(Boolean);
     else if(p.barcode)barcodeVals=[p.barcode];
   }
   currentBarcodes=barcodeVals.length?barcodeVals.map(v=>({bid:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),value:v})):[{bid:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),value:''}];
   renderBarcodeRows();
-  // variants
   currentVariants=(p&&p.variants)?Object.entries(p.variants).map(([vid,v])=>({vid,weight:v.weight||'',price:v.price!=null?v.price:''})):[];
   variantsExpanded=currentVariants.length>0;
   document.getElementById('variants-section').style.display=variantsExpanded?'block':'none';
@@ -887,12 +751,10 @@ function handleFile(e){
 function setWeightUnit(unit){
   const inp=document.getElementById('f-weight');
   let val=inp.value.trim();
-  val=val.replace(/\s*(мл|л|г|кг)\s*$/i,'').trim(); // заменяем уже стоящую в конце единицу, а не дублируем
+  val=val.replace(/\s*(мл|л|г|кг)\s*$/i,'').trim();
   inp.value=val?(val+' '+unit):unit;
   inp.focus();
 }
-
-// ---- MULTI BARCODES ----
 function addBarcodeRow(){
   currentBarcodes.push({bid:'tmp_'+Date.now()+'_'+Math.random().toString(36).slice(2),value:''});
   renderBarcodeRows();
@@ -909,8 +771,6 @@ function renderBarcodeRows(){
   const list=document.getElementById('barcodes-list');if(!list)return;
   list.innerHTML=currentBarcodes.map(b=>`<div class="barcode-row"><input type="text" placeholder="Штрихкод (например, для другого вкуса)" value="${b.value||''}" oninput="updateBarcodeField('${b.bid}',this.value)"><button type="button" class="barcode-row-scan" title="Сканировать" onclick="scanBarcodeIntoForm('${b.bid}')">📷</button><button type="button" class="barcode-row-del" onclick="removeBarcodeRow('${b.bid}')">🗑</button></div>`).join('');
 }
-
-// ---- VARIANTS (несколько весов/цен в одной карточке) ----
 function toggleVariants(){
   variantsExpanded=!variantsExpanded;
   document.getElementById('variants-section').style.display=variantsExpanded?'block':'none';
@@ -932,7 +792,6 @@ function renderVariantRows(){
   const list=document.getElementById('variants-list');if(!list)return;
   list.innerHTML=currentVariants.map(v=>`<div class="variant-row"><input type="text" placeholder="Вес/объём (0.5 л)" value="${v.weight||''}" oninput="updateVariantField('${v.vid}','weight',this.value)"><input type="number" placeholder="Цена ₸" value="${v.price!==''?v.price:''}" oninput="updateVariantField('${v.vid}','price',this.value)"><button type="button" class="variant-del" onclick="removeVariantRow('${v.vid}')">🗑</button></div>`).join('');
 }
-
 async function saveProduct(){
   const name=document.getElementById('f-name').value.trim();
   const weight=document.getElementById('f-weight').value.trim();
@@ -952,7 +811,7 @@ async function saveProduct(){
     const barcodesObj={};
     validBarcodes.forEach((v,i)=>{barcodesObj['b'+i]=v;});
     data.barcodes=barcodesObj;
-    data.barcode=validBarcodes[0]; // держим для обратной совместимости со старым кодом
+    data.barcode=validBarcodes[0];
   }else{
     data.barcodes=null;data.barcode=null;
   }
@@ -980,8 +839,6 @@ async function deleteProduct(){
   await window._remove(window._ref(window._db,'products/'+editingId));
   document.getElementById('prod-modal').classList.remove('open');showToast('Товар удалён');
 }
-
-// ---- CLOUDINARY ----
 function uploadCloudinary(file){
   return new Promise((resolve,reject)=>{
     const r=new FileReader();r.onload=ev=>{
@@ -1004,8 +861,12 @@ function uploadCloudinary(file){
   });
 }
 
-// ===================== BARCODE SCANNER =====================
-
+/* ===================== BARCODE SCANNER — confirmation-first flow =====================
+   Правило: после распознавания штрихкод НИКОГДА не применяется молча.
+   Всегда сначала показываем карточку с найденной информацией (название, бренд,
+   вес/объём, доп.инфо — цвет/вкус, цена если найдена), и ждём подтверждения
+   "Да, верно" от пользователя. Это касается и быстрой проверки (кнопка в шапке),
+   и заполнения формы при добавлении товара. */
 async function loadBarcodeDetector(){
   if('BarcodeDetector' in window){
     try{const formats=await window.BarcodeDetector.getSupportedFormats();return new window.BarcodeDetector({formats:formats.filter(f=>['ean_13','ean_8','upc_a','upc_e','code_128','code_39','itf'].includes(f))});}
@@ -1015,9 +876,8 @@ async function loadBarcodeDetector(){
   const reader=new mod.BrowserMultiFormatReader();
   return {_zx:reader,async detect(v){try{const r=await this._zx.decodeOnceFromVideoElement(v);return r?[{rawValue:r.getText()}]:[];}catch{return [];}}};
 }
-
 function openBarcodeScanner(mode,rowId){
-  barcodeScanMode=mode; // 'lookup' (header, быстрая проверка цены) | 'add' (заполнение формы товара)
+  barcodeScanMode=mode; // 'lookup' (кнопка в шапке) | 'add' (кнопка в форме товара)
   pendingBarcodeRowId=rowId||null;
   document.getElementById('barcode-overlay').classList.add('open');
   document.getElementById('bc-status').textContent='Запуск камеры…';
@@ -1056,95 +916,135 @@ function barcodeManualEntry(){
   if(code&&/^[0-9]{4,14}$/.test(code.trim()))onBarcodeDetected(code.trim());
 }
 function scanBarcodeIntoForm(rowId){openBarcodeScanner('add',rowId||null);}
-
 function productHasBarcode(p,barcode){
   if((p.barcode||'')===barcode)return true;
-  if(p.barcodes)return Object.values(p.barcodes).includes(barcode);
+  if(p.barcodes)return Object.values(p.barcodes).some(b=>(typeof b==='string'?b:(b&&b.code))===barcode);
   return false;
 }
-
 async function onBarcodeDetected(barcode){
   const localHit=Object.entries(window._products).find(([id,p])=>productHasBarcode(p,barcode));
   const modeAtDetect=barcodeScanMode,rowAtDetect=pendingBarcodeRowId;
   closeBarcodeScanner();
   if(localHit){
+    // товар уже есть в базе — тут распознавание однозначно, подтверждение не нужно
     const[id,p]=localHit;
-    if(modeAtDetect==='add'){
-      if(document.getElementById('prod-modal').classList.contains('open')&&rowAtDetect){
-        // сканируем доп. штрихкод прямо в открытую форму товара — не переоткрываем
-        updateBarcodeField(rowAtDetect,barcode);
-        renderBarcodeRows();
-        showToast('Такой штрихкод уже привязан к «'+(p.name||'товару')+'»');
-        return;
-      }
-      showToast('Такой товар уже есть в базе — открываю');
-      openProductModal({id,...p});
-    }else{
-      showToast('Товар найден ✓');
-      document.getElementById('bc-result-title').textContent='Товар найден';
-      document.getElementById('bc-result-body').innerHTML=barcodeFoundCardHtml({id,...p});
-      document.getElementById('bc-result-modal').classList.add('open');
-    }
-    return;
-  }
-  if(modeAtDetect==='add'){
-    if(document.getElementById('prod-modal').classList.contains('open')&&rowAtDetect){
+    if(modeAtDetect==='add'&&document.getElementById('prod-modal').classList.contains('open')&&rowAtDetect){
       updateBarcodeField(rowAtDetect,barcode);
       renderBarcodeRows();
-      // если это первый штрихкод и название ещё не заполнено — подтягиваем данные через ИИ/интернет
-      const nameField=document.getElementById('f-name');
-      if(!nameField.value.trim())await fillFormFromBarcodeLookup(barcode);
-    }else{
-      await fillFormFromBarcodeLookup(barcode);
+      showToast('Такой штрихкод уже привязан к «'+(p.name||'товару')+'»');
+      return;
     }
+    showToast('Товар найден в базе ✓');
+    openProductModal({id,...p});
+    return;
+  }
+  // неизвестный штрихкод — всегда показываем карточку с данными и просим подтвердить
+  await showBarcodeConfirmation(barcode,modeAtDetect,rowAtDetect);
+}
+async function showBarcodeConfirmation(barcode,mode,rowId){
+  document.getElementById('bc-result-title').textContent='Ищу товар…';
+  document.getElementById('bc-result-body').innerHTML='<div class="loading"><div class="spinner"></div>Проверяю Open Food Facts и интернет...</div>';
+  document.getElementById('bc-result-modal').classList.add('open');
+  const data=await lookupBarcodeExternal(barcode);
+  window._pendingBarcodeLookup={barcode,data,mode,rowId};
+  const body=document.getElementById('bc-result-body');
+  if(data&&data.name){
+    document.getElementById('bc-result-title').textContent='Проверьте товар';
+    const img=data.imageUrl?`<img class="bc-big-img" src="${data.imageUrl}">`:`<div class="bc-big-img bc-big-emoji">📦</div>`;
+    body.innerHTML=`<div class="bc-card">
+      <div class="bc-card-imgwrap">${img}</div>
+      <div class="bc-card-body">
+        <div class="bc-card-name">${data.name}</div>
+        <div class="bc-card-sub">${data.brand?'<b>Бренд:</b> '+data.brand+'<br>':''}${data.weight?'<b>Вес/объём:</b> '+data.weight+'<br>':''}${data.extra?'<b>Доп. инфо:</b> '+data.extra+'<br>':''}<b>Штрихкод:</b> ${barcode}</div>
+        ${data.price?`<div class="bc-card-price">${data.price} ₸</div>`:''}
+        <div class="bc-confirm-row">
+          <button class="bc-confirm-yes" onclick="applyPendingBarcodeLookup()">✅ Верно, добавить</button>
+          <button class="bc-confirm-no" onclick="rejectPendingBarcodeLookup()">🔄 Заново</button>
+        </div>
+      </div>
+    </div>`;
   }else{
-    await showBarcodeLookupResult(barcode);
+    document.getElementById('bc-result-title').textContent='Не удалось распознать';
+    body.innerHTML=`<div class="bc-res-sub">Штрихкод ${barcode} не найден ни в вашей базе, ни во внешних источниках (Open Food Facts, интернет-поиск).</div>
+      <div class="bc-confirm-row">
+        <button class="bc-confirm-yes" onclick="applyPendingBarcodeLookup()">➕ Добавить вручную</button>
+        <button class="bc-confirm-no" onclick="rejectPendingBarcodeLookup()">🔄 Заново</button>
+      </div>`;
   }
 }
-
-function barcodeFoundCardHtml(p){
-  const img=p.imageUrl?`<img class="bc-big-img" src="${p.imageUrl}">`:`<div class="bc-big-img bc-big-emoji">${p.emoji||'📦'}</div>`;
-  const enc=encodeURIComponent(JSON.stringify(p));
-  return `<div class="bc-card">
-    <div class="bc-card-imgwrap">
-      ${img}
-      <button class="bc-edit-fab" onclick="closeBarcodeResultModal();openProductModal(JSON.parse(decodeURIComponent('${enc}')))" title="Редактировать">✏️</button>
-    </div>
-    <div class="bc-card-body">
-      <div class="bc-card-name">${p.name||''}</div>
-      <div class="bc-card-sub">${p.weight||''}</div>
-      <div class="bc-card-price">${p.price||0} ₸</div>
-    </div>
-  </div>`;
+function closeBarcodeResultModal(){document.getElementById('bc-result-modal').classList.remove('open');}
+function rejectPendingBarcodeLookup(){
+  const pending=window._pendingBarcodeLookup;
+  closeBarcodeResultModal();
+  if(pending)openBarcodeScanner(pending.mode,pending.rowId);
 }
-
+function applyPendingBarcodeLookup(){
+  const pending=window._pendingBarcodeLookup;closeBarcodeResultModal();
+  if(!pending)return;
+  const {barcode,data,mode,rowId}=pending;
+  if(mode==='add'&&document.getElementById('prod-modal').classList.contains('open')){
+    // форма товара уже открыта — просто дозаполняем нужные поля, ничего не теряя
+    if(rowId){updateBarcodeField(rowId,barcode);renderBarcodeRows();}
+    else{
+      const empty=currentBarcodes.find(b=>!b.value);
+      if(empty){empty.value=barcode;}else{currentBarcodes.push({bid:'tmp_'+Date.now(),value:barcode});}
+      renderBarcodeRows();
+    }
+    if(data){
+      if(data.name&&!document.getElementById('f-name').value.trim())document.getElementById('f-name').value=data.name;
+      if(data.weight&&!document.getElementById('f-weight').value.trim())document.getElementById('f-weight').value=data.weight;
+      if(data.imageUrl){
+        selFile=null;pendingLookupImageUrl=data.imageUrl;
+        const img=document.getElementById('preview-img');img.src=data.imageUrl;img.style.display='block';
+        document.getElementById('preview-emoji').style.display='none';
+        document.getElementById('preview-overlay-label').textContent='📷 Изменить фото';
+      }
+    }
+    showToast(data?'✅ Заполнено — укажите цену':'Штрихкод добавлен, заполните вручную');
+    document.getElementById('f-price').focus();
+  }else{
+    // новый товар с нуля (кнопка "штрихкод" в шапке или форма ещё не открыта)
+    openProductModal(null);
+    if(data){
+      currentBarcodes=[{bid:'tmp_'+Date.now(),value:barcode}];renderBarcodeRows();
+      if(data.name)document.getElementById('f-name').value=data.name;
+      if(data.weight)document.getElementById('f-weight').value=data.weight;
+      if(data.imageUrl){
+        selFile=null;pendingLookupImageUrl=data.imageUrl;
+        const img=document.getElementById('preview-img');img.src=data.imageUrl;img.style.display='block';
+        document.getElementById('preview-emoji').style.display='none';
+        document.getElementById('preview-overlay-label').textContent='📷 Изменить фото';
+      }
+      showToast('✅ Заполнено — укажите цену');
+    }else{
+      currentBarcodes=[{bid:'tmp_'+Date.now(),value:barcode}];renderBarcodeRows();
+      showToast('Штрихкод добавлен, заполните вручную');
+    }
+    document.getElementById('f-price').focus();
+  }
+}
 async function lookupBarcodeExternal(barcode){
-  // 1. кэш в своей базе (быстро и бесплатно при повторном сканировании)
   try{
     const snap=await window._get(window._ref(window._db,'barcodeCache/'+barcode));
     if(snap.exists())return {...snap.val(),fromCache:true};
   }catch(e){}
-  // 2. внешний сервис (Open Food Facts + сторонний lookup)
   try{
     const r=await fetch(BARCODE_LOOKUP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({barcode})});
     const data=await r.json();
     if(data&&data.name){
-      const cacheData={name:data.name,brand:data.brand||'',weight:data.weight||data.unit||'',imageUrl:data.imageUrl||null,updatedAt:Date.now()};
+      const cacheData={name:data.name,brand:data.brand||'',weight:data.weight||data.unit||'',imageUrl:data.imageUrl||null,extra:data.extra||'',price:data.price||null,updatedAt:Date.now()};
       window._set(window._ref(window._db,'barcodeCache/'+barcode),cacheData).catch(()=>{});
       return cacheData;
     }
   }catch(e){}
-  // 3. ИИ (Claude) ищет товар по штрихкоду в интернете — название, вес, фото
   const aiData=await aiLookupBarcode(barcode);
   if(aiData){
-    const cacheData={name:aiData.name,brand:aiData.brand||'',weight:aiData.weight||'',imageUrl:aiData.imageUrl||null,updatedAt:Date.now(),source:'ai'};
+    const cacheData={name:aiData.name,brand:aiData.brand||'',weight:aiData.weight||'',imageUrl:aiData.imageUrl||null,extra:aiData.extra||'',price:aiData.price||null,updatedAt:Date.now(),source:'ai'};
     window._set(window._ref(window._db,'barcodeCache/'+barcode),cacheData).catch(()=>{});
     return cacheData;
   }
   return null;
 }
-
-// ИИ-поиск товара по штрихкоду через интернет (название, вес, фото упаковки)
 async function aiLookupBarcode(barcode){
   try{
     const resp=await fetch(ANTHROPIC_API,{
@@ -1156,11 +1056,11 @@ async function aiLookupBarcode(barcode){
         tools:[{type:'web_search_20250305',name:'web_search'}],
         messages:[{
           role:'user',
-          content:`Найди в интернете товар по штрихкоду (EAN/UPC) ${barcode}. Проверь такие источники как Open Food Facts, upcitemdb, barcode-list, официальные сайты производителей, маркетплейсы (Kaspi.kz, Wildberries, Ozon и т.п.).
-Мне нужны: точное название товара, бренд, вес/объём упаковки и прямая ссылка на изображение упаковки товара (URL картинки jpg/png/webp).
-Ответь ТОЛЬКО JSON без markdown и без пояснений, в таком формате:
-{"name":"...","brand":"...","weight":"...","imageUrl":"прямая ссылка на картинку или null"}
-Если не смог найти товар — верни {"name":null}`
+          content:`Найди в интернете товар по штрихкоду (EAN/UPC) ${barcode}. Проверь Open Food Facts, upcitemdb, barcode-list, официальные сайты производителей, маркетплейсы (Kaspi.kz, Wildberries, Ozon).
+Нужны: точное название, бренд, вес/объём, доп. информация (цвет упаковки, вкус, количество штук в упаковке — если применимо), прямая ссылка на фото упаковки, и цена если она где-то указана.
+Ответь ТОЛЬКО JSON без markdown:
+{"name":"...","brand":"...","weight":"...","extra":"цвет/вкус/кол-во если есть, иначе пусто","imageUrl":"ссылка на картинку или null","price":число или null}
+Если не нашёл товар — верни {"name":null}`
         }]
       })
     });
@@ -1171,72 +1071,10 @@ async function aiLookupBarcode(barcode){
     if(!jsonMatch)return null;
     const parsed=JSON.parse(jsonMatch[0]);
     if(!parsed.name)return null;
-    return {name:parsed.name,brand:parsed.brand||'',weight:parsed.weight||'',imageUrl:parsed.imageUrl||null};
+    return {name:parsed.name,brand:parsed.brand||'',weight:parsed.weight||'',extra:parsed.extra||'',imageUrl:parsed.imageUrl||null,price:parsed.price||null};
   }catch(e){console.log('aiLookupBarcode error:',e);return null;}
 }
-
-async function showBarcodeLookupResult(barcode){
-  document.getElementById('bc-result-title').textContent='Поиск…';
-  document.getElementById('bc-result-body').innerHTML='<div class="loading"><div class="spinner"></div>Ищем товар (в т.ч. через ИИ и интернет)...</div>';
-  document.getElementById('bc-result-modal').classList.add('open');
-  const data=await lookupBarcodeExternal(barcode);
-  window._pendingBarcodeLookup={barcode,data};
-  const body=document.getElementById('bc-result-body');
-  if(data&&data.name){
-    document.getElementById('bc-result-title').textContent='В каталоге не найден';
-    const img=data.imageUrl?`<img class="bc-big-img" src="${data.imageUrl}">`:`<div class="bc-big-img bc-big-emoji">📦</div>`;
-    body.innerHTML=`<div class="bc-card">
-      <div class="bc-card-imgwrap">${img}</div>
-      <div class="bc-card-body">
-        <div class="bc-card-name">${data.name}</div>
-        <div class="bc-card-sub">${data.brand?data.brand+' · ':''}${data.weight||''}</div>
-        <div class="bc-card-sub">Штрихкод: ${barcode}${data.source==='ai'?' · найдено через ИИ':''}</div>
-        <button class="save-btn" style="margin-top:14px" onclick="applyPendingBarcodeLookup()">➕ Добавить в каталог</button>
-      </div>
-    </div>`;
-  }else{
-    document.getElementById('bc-result-title').textContent='Товар не найден';
-    body.innerHTML=`<div class="bc-res-sub">Штрихкод ${barcode} не найден ни в вашей базе, ни во внешних источниках, ни через ИИ-поиск.</div><button class="save-btn" style="margin-top:12px" onclick="applyPendingBarcodeLookup()">➕ Добавить вручную</button>`;
-  }
-}
-function closeBarcodeResultModal(){document.getElementById('bc-result-modal').classList.remove('open');}
-function applyPendingBarcodeLookup(){
-  const pending=window._pendingBarcodeLookup;closeBarcodeResultModal();
-  openProductModal(null);
-  if(pending&&pending.data)fillFormWithLookup(pending.barcode,pending.data);
-  else if(pending){currentBarcodes=[{bid:'tmp_'+Date.now(),value:pending.barcode}];renderBarcodeRows();}
-}
-
-async function fillFormFromBarcodeLookup(barcode){
-  showToast('🔍 Ищем товар (в т.ч. через ИИ)...');
-  const data=await lookupBarcodeExternal(barcode);
-  if(data&&data.name){
-    fillFormWithLookup(barcode,data);
-    showToast('✅ Заполнено — укажите цену');
-  }else{
-    showToast('Не найден нигде — заполните вручную');
-  }
-}
-function fillFormWithLookup(barcode,data){
-  if(!currentBarcodes.length||currentBarcodes.every(b=>!b.value))currentBarcodes=[{bid:'tmp_'+Date.now(),value:barcode}];
-  else{
-    const empty=currentBarcodes.find(b=>!b.value);
-    if(empty)empty.value=barcode;else currentBarcodes.push({bid:'tmp_'+Date.now(),value:barcode});
-  }
-  renderBarcodeRows();
-  if(data.name)document.getElementById('f-name').value=data.name;
-  if(data.weight)document.getElementById('f-weight').value=data.weight;
-  if(data.imageUrl){
-    selFile=null;pendingLookupImageUrl=data.imageUrl;
-    const img=document.getElementById('preview-img');img.src=data.imageUrl;img.style.display='block';
-    document.getElementById('preview-emoji').style.display='none';
-    document.getElementById('preview-overlay-label').textContent='📷 Изменить фото';
-  }
-  document.getElementById('f-price').focus();
-}
-
-// ===================== AI PHOTO SEARCH (запасной вариант) =====================
-
+/* ===================== AI PHOTO SEARCH (запасной вариант) ===================== */
 function openCamModal(){
   camPhase='idle';camImageB64=null;
   document.getElementById('cam-modal').classList.add('open');
@@ -1247,7 +1085,6 @@ function closeCamModal(){
   document.getElementById('cam-modal').classList.remove('open');
 }
 function camModalOutside(e){if(e.target===document.getElementById('cam-modal'))closeCamModal();}
-
 function renderCamBody(){
   const body=document.getElementById('cam-body');
   if(camPhase==='idle'){
@@ -1282,7 +1119,6 @@ function renderCamBody(){
       </div>`;
   }
 }
-
 async function startCamLive(){
   try{
     const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}}});
@@ -1294,12 +1130,10 @@ async function startCamLive(){
     document.getElementById('cam-file-input').click();
   }
 }
-
 function stopCamLive(){
   if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}
   document.getElementById('cam-live-wrap').classList.remove('open');
 }
-
 function shootPhoto(){
   const video=document.getElementById('cam-video');
   const canvas=document.createElement('canvas');
@@ -1310,7 +1144,6 @@ function shootPhoto(){
   camPhase='preview';
   renderCamBody();
 }
-
 function camHandleFile(e){
   const file=e.target.files[0];if(!file)return;
   const r=new FileReader();
@@ -1323,19 +1156,15 @@ function camHandleFile(e){
   r.readAsDataURL(file);
   e.target.value='';
 }
-
 function camRetake(){
   camImageB64=null;camPhase='idle';renderCamBody();
 }
-
 async function runCamAnalysis(){
   if(!camImageB64)return;
   camPhase='analyzing';renderCamBody();
-
   try{
     const allProds=Object.entries(window._products).map(([id,p])=>({id,...p}));
     const prodList=allProds.map((p,i)=>`${i+1}. [ID:${p.id}] ${p.name}${p.weight?' ('+p.weight+')':''}`).join('\n');
-
     const resp=await fetch(ANTHROPIC_API,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
@@ -1350,15 +1179,11 @@ async function runCamAnalysis(){
 - Прочитай весь текст на упаковке (название, бренд, состав, вес)
 - Запомни цвет упаковки, логотип, дизайн
 - Определи тип товара
-
 Вот список товаров в нашем каталоге:
 ${prodList}
-
 Найди все товары из списка которые могут соответствовать товару на фото. Сопоставляй по: названию, бренду, типу товара, весу/объёму.
-
 Ответь ТОЛЬКО JSON без markdown:
 {"detected":"что ты видишь на фото (бренд, название, вес)","matches":[{"id":"ID товара из списка","score":95,"reason":"почему совпадает"}],"confidence":"high/medium/low"}
-
 matches отсортируй по score от высокого к низкому. Если ничего не подходит — matches пустой массив.`}
           ]
         }]
@@ -1369,13 +1194,11 @@ matches отсортируй по score от высокого к низкому.
     const clean=text.replace(/```json|```/g,'').trim();
     const parsed=JSON.parse(clean);
     const aiName=parsed.detected||'';
-
     const matchIds=(parsed.matches||[]).map(m=>m.id);
     const matchMap={};(parsed.matches||[]).forEach(m=>{matchMap[m.id]={score:m.score,reason:m.reason};});
     const found=allProds
       .filter(p=>matchIds.includes(p.id))
       .sort((a,b)=>(matchMap[b.id]?.score||0)-(matchMap[a.id]?.score||0));
-
     const body=document.getElementById('cam-body');
     if(found.length>0){
       const cats=window._categories;
@@ -1430,8 +1253,6 @@ matches отсортируй по score от высокого к низкому.
     if(errEl){errEl.style.display='block';errEl.textContent='⚠️ Ошибка анализа: '+err.message;}
   }
 }
-
-// ---- DELIVERIES ----
 function checkTodayDeliveries(){
   const today=getTodayStr();const todayOnes=Object.values(window._deliveries).filter(d=>d.date===today);
   const badge=document.getElementById('delivery-badge');
@@ -1484,12 +1305,6 @@ function sendDeliveryNotification(){
   const company=document.getElementById('d-company').value.trim()||'Компания';const amount=document.getElementById('d-amount').value||'0';const date=document.getElementById('d-date').value;
   sendPush('🚚 Поставка '+formatDate(date),`${company} — ${fmt(amount)} ₸`);showToast('🔔 Уведомление отправлено!');
 }
-
-// ===================== АППАРАТНАЯ КНОПКА "НАЗАД" =====================
-// Держим один "буферный" history-state поверх реальной загрузки страницы.
-// Внутри товаров/поставок есть ещё один буфер сверху: первое "назад" возвращает
-// на главную, а не закрывает сайт. На главном экране первое "назад" открывает
-// диалог подтверждения выхода вместо мгновенного закрытия сайта.
 function anyOverlayOpen(){
   return !!document.querySelector('.modal-overlay.open, #cam-modal.open, #cam-live-wrap.open, #barcode-overlay.open');
 }
@@ -1500,37 +1315,20 @@ function closeTopOverlay(){
   const openModal=document.querySelector('.modal-overlay.open');
   if(openModal)openModal.classList.remove('open');
 }
-function confirmExitNo(){
-  document.getElementById('exit-confirm-modal').classList.remove('open');
-}
-function confirmExitYes(){
-  document.getElementById('exit-confirm-modal').classList.remove('open');
-  history.go(-2);
-}
+function confirmExitNo(){document.getElementById('exit-confirm-modal').classList.remove('open');}
+function confirmExitYes(){document.getElementById('exit-confirm-modal').classList.remove('open');history.go(-2);}
 window.addEventListener('popstate',function(){
-  if(anyOverlayOpen()){
-    closeTopOverlay();
-    history.pushState({dastanShop:true},'');
-    return;
-  }
-  if(navStack.length>1){
-    navStack.pop();
-    currentSubCatId='all';
-    renderView();
-    return;
-  }
+  if(anyOverlayOpen()){closeTopOverlay();history.pushState({dastanShop:true},'');return;}
+  if(navStack.length>1){navStack.pop();currentSubCatId='all';renderView();return;}
   document.getElementById('exit-confirm-modal').classList.add('open');
   history.pushState({dastanShop:true},'');
 });
 history.pushState({dastanShop:true},'');
-
-// ---- UTILS ----
 function getTodayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function fmt(n){return Number(n).toLocaleString('ru-RU');}
 function formatDate(str){if(!str)return'—';const[y,m,d]=str.split('-');const mo=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];return`${parseInt(d)} ${mo[parseInt(m)-1]} ${y}`;}
 function closeIfOutside(e,id){if(e.target===document.getElementById(id))document.getElementById(id).classList.remove('open');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
-
 window.switchView=switchView;window.goBack=goBack;window.onAddBtn=onAddBtn;
 window.onHomeSearch=onHomeSearch;window.onHeaderSearch=onHeaderSearch;
 window.installApp=installApp;window.allowPush=allowPush;
@@ -1548,6 +1346,7 @@ window.camHandleFile=camHandleFile;window.camRetake=camRetake;window.runCamAnaly
 window.openBarcodeScanner=openBarcodeScanner;window.closeBarcodeScanner=closeBarcodeScanner;
 window.barcodeManualEntry=barcodeManualEntry;window.scanBarcodeIntoForm=scanBarcodeIntoForm;
 window.applyPendingBarcodeLookup=applyPendingBarcodeLookup;window.closeBarcodeResultModal=closeBarcodeResultModal;
+window.rejectPendingBarcodeLookup=rejectPendingBarcodeLookup;
 window.toggleVariants=toggleVariants;window.addVariantRow=addVariantRow;
 window.removeVariantRow=removeVariantRow;window.updateVariantField=updateVariantField;
 window.addBarcodeRow=addBarcodeRow;window.removeBarcodeRow=removeBarcodeRow;window.updateBarcodeField=updateBarcodeField;
