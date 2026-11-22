@@ -303,6 +303,35 @@ body{font-family:'Nunito',sans-serif;background:#1a1a2e;min-height:100vh;overscr
 .variant-row input:focus{border-color:#e8c547}
 .variant-del{width:32px;height:32px;border-radius:8px;border:none;background:#fee;color:#e8544a;font-size:14px;cursor:pointer;flex-shrink:0}
 .variant-add-btn{width:100%;padding:11px;border-radius:11px;border:2px dashed #ddd;background:#fff;color:#999;font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-bottom:16px}
+
+/* ===== ИИ-ПОМОЩНИК (чат) и раздел ФИНАНСЫ ===== */
+#ai-chat{display:none;position:fixed;inset:0;z-index:180;background:#f5f0e8;flex-direction:column}
+#ai-chat.open{display:flex}
+.aic-head{background:#1a1a2e;padding:calc(10px + env(safe-area-inset-top,0px)) 12px 10px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 16px rgba(0,0,0,.25);flex-shrink:0}
+.aic-x{width:40px;height:40px;border-radius:12px;border:none;background:rgba(255,255,255,.1);color:#fff;font-size:18px;cursor:pointer;flex-shrink:0}
+.aic-title{flex:1;color:#fff;font-size:17px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aic-title span{color:#e8c547}
+.aic-fin{padding:10px 14px;border-radius:12px;border:none;background:linear-gradient(135deg,#e8c547,#f0a500);color:#1a1a2e;font-size:14px;font-weight:900;font-family:'Nunito',sans-serif;cursor:pointer;flex-shrink:0}
+.aic-fin:active{transform:scale(.95)}
+#ai-msgs{flex:1;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:10px;-webkit-overflow-scrolling:touch}
+.aim{max-width:88%;padding:10px 13px;border-radius:16px;font-size:14px;font-weight:600;line-height:1.5;color:#1a1a2e;word-wrap:break-word}
+.aim.u{align-self:flex-end;background:linear-gradient(135deg,#e8c547,#f0a500);border-bottom-right-radius:4px}
+.aim.a{align-self:flex-start;background:#fff;border-bottom-left-radius:4px;box-shadow:0 1px 6px rgba(0,0,0,.08)}
+.aim.w{color:#999}
+.aic-chips{display:flex;gap:8px;overflow-x:auto;padding:0 12px 8px;flex-shrink:0}
+.aic-chip{flex:0 0 auto;padding:8px 13px;border-radius:20px;border:2px solid #e0dbd0;background:#fff;color:#1a1a2e;font-size:13px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;white-space:nowrap}
+.aic-chip:active{background:#fdf6dc}
+.aic-bar{display:flex;gap:8px;padding:8px 12px calc(12px + env(safe-area-inset-bottom,0px));background:#f5f0e8;align-items:flex-end;flex-shrink:0}
+.aic-bar textarea{flex:1;border:2px solid #e0dbd0;border-radius:16px;padding:11px 14px;font-size:15px;font-family:'Nunito',sans-serif;font-weight:600;resize:none;max-height:110px;background:#fff;color:#1a1a2e;outline:none}
+.aic-bar textarea:focus{border-color:#e8c547}
+.aic-send{width:48px;height:48px;border-radius:50%;border:none;background:linear-gradient(135deg,#e8c547,#f0a500);color:#1a1a2e;font-size:20px;font-weight:900;cursor:pointer;flex-shrink:0}
+.aic-send:disabled{opacity:.5}
+#fin-panel{display:none;position:fixed;inset:0;z-index:190;background:#14110b;flex-direction:column}
+#fin-panel.open{display:flex}
+.fin-head{background:#1a1a2e;padding:calc(8px + env(safe-area-inset-top,0px)) 12px 8px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.fin-head button{padding:9px 14px;border-radius:12px;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:14px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer}
+.fin-head span{color:#e8c547;font-size:16px;font-weight:900}
+#fin-frame{flex:1;border:0;width:100%;background:#14110b}
 </style>
 </head>
 <body>
@@ -400,6 +429,25 @@ body{font-family:'Nunito',sans-serif;background:#1a1a2e;min-height:100vh;overscr
   <button class="bn-btn" id="bn-add-btn" onclick="onAddBtn()" title="Добавить товар">+</button>
   <button class="bn-btn" id="bn-cam-btn" onclick="openBarcodeScanner('lookup')" title="Штрихкод">📷</button>
   <button class="bn-btn" id="bn-chat-btn" onclick="onChatBtn()" title="Чат">💬</button>
+</div>
+
+<!-- ===================== ИИ-ПОМОЩНИК + ФИНАНСЫ ===================== -->
+<div id="ai-chat">
+  <div class="aic-head">
+    <button class="aic-x" onclick="closeChat()" title="Закрыть">✕</button>
+    <div class="aic-title">🤖 <span>ИИ-помощник</span></div>
+    <button class="aic-fin" onclick="openFin()">💰 Финансы</button>
+  </div>
+  <div id="ai-msgs"></div>
+  <div class="aic-chips" id="ai-chips"></div>
+  <div class="aic-bar">
+    <textarea id="ai-input" rows="1" placeholder="Спросите про товары…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();aiSend();}"></textarea>
+    <button class="aic-send" id="ai-send-btn" onclick="aiSend()">➤</button>
+  </div>
+</div>
+<div id="fin-panel">
+  <div class="fin-head"><button onclick="closeFin()">← Чат</button><span>💰 Финансы</span></div>
+  <iframe id="fin-frame" title="Финансы"></iframe>
 </div>
 
 <!-- ===================== BARCODE SCANNER OVERLAY ===================== -->
@@ -548,6 +596,730 @@ body{font-family:'Nunito',sans-serif;background:#1a1a2e;min-height:100vh;overscr
 
 <div class="toast" id="toast"></div>
 
+<script type="text/plain" id="fin-src"><!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#14110b">
+<title>Dastan Финансы</title>
+<style>
+:root{--on:#201700;--bg:#14110b;--card:#201a0f;--card2:#2a2215;--gold:#f5b301;--gold2:#ffd35c;--txt:#f4ecd8;--mut:#a89c80;--ok:#4cc38a;--bad:#ff6b6b;--line:#3a3020}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:84px}
+#app{max-width:640px;margin:0 auto;padding:14px 14px 20px}
+h2{margin:6px 0 12px;font-size:20px}h3{margin:0 0 10px}
+.muted{color:var(--mut);font-size:13px}.c{text-align:center;padding:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:0 0 12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+.kpi small{color:var(--mut);display:block;font-size:12px}.kpi b{font-size:18px}
+.big{font-size:26px;font-weight:700;color:var(--gold2)}
+.ok{color:var(--ok)}.bad{color:var(--bad)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px}
+.chip{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:20px;padding:7px 13px;white-space:nowrap;font-size:14px}
+.chip.on{background:var(--gold);color:var(--on);border-color:var(--gold);font-weight:600}
+select,input,textarea{width:100%;background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:12px;padding:11px;font:inherit;margin:4px 0 8px}
+textarea{resize:vertical;min-height:70px}
+label{font-size:12px;color:var(--mut)}
+.btn{background:var(--gold);color:var(--on);border:0;border-radius:12px;padding:12px 16px;font-weight:700;font-size:15px}
+.btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.btn.red{background:transparent;color:var(--bad);border:1px solid var(--bad)}
+.btn.full{width:100%}.btn.sm{padding:7px 12px;font-size:13px}
+.row{display:flex;gap:8px}.row>*{flex:1}
+.item{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border:0}.item .ic{font-size:22px;width:34px;text-align:center}.item .m{flex:1;min-width:0}
+.item .m div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar{height:8px;background:var(--card2);border-radius:5px;overflow:hidden;margin-top:5px}.bar i{display:block;height:100%;background:var(--gold)}
+#nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:5}
+#nav button{flex:1;background:none;border:0;color:var(--mut);font-size:10.5px;padding:4px 0}
+#nav button span{display:block;font-size:20px}#nav button.on{color:var(--gold)}
+.fab{position:fixed;right:16px;bottom:84px;width:56px;height:56px;border-radius:28px;background:var(--gold);color:var(--on);border:0;font-size:30px;font-weight:700;box-shadow:0 4px 14px #000a;z-index:6}
+.ov{position:fixed;inset:0;background:#000b;z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--card);width:100%;max-width:640px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:16px 16px 26px}
+.seg{display:flex;gap:6px;margin-bottom:8px}.seg button{flex:1;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:var(--txt);font-weight:600}
+.seg button.on.inc{background:var(--ok);color:#06210f;border-color:var(--ok)}.seg button.on.exp{background:var(--bad);color:#2a0606;border-color:var(--bad)}
+#login{position:fixed;inset:0;background:var(--bg);z-index:50;display:flex;align-items:center;justify-content:center;padding:24px}
+#login div{width:100%;max-width:340px;text-align:center}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:96px;background:#000d;color:#fff;padding:10px 16px;border-radius:20px;z-index:60;font-size:14px;display:none}
+.msg{padding:10px 12px;border-radius:14px;margin:6px 0;white-space:pre-wrap}.msg.u{background:var(--card2);margin-left:36px}.msg.a{background:var(--card2);border:1px solid var(--line);margin-right:20px}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:7px 4px;border-bottom:1px solid var(--line);text-align:right}td:first-child,th:first-child{text-align:left}th{color:var(--mut);font-weight:500}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div id="login" hidden>
+  <div>
+    <div style="font-size:44px">💰</div>
+    <h2 id="ltitle">Dastan Финансы</h2>
+    <input id="pw" type="password" inputmode="numeric" placeholder="Пароль" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn full" onclick="doLogin()">Войти</button>
+    <p id="lerr" class="bad"></p>
+  </div>
+</div>
+<div id="app"></div>
+<nav id="nav"></nav>
+<div id="modal"></div>
+<div id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"><\/script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"><\/script>
+<script>
+/* ============ НАСТРОЙКИ (заполните) ============ */
+// 1) Вставьте конфиг вашего Firebase (те же значения, что в Dastan Shop). Данные пишутся в узел /fin
+const FIREBASE_CONFIG = {apiKey:"AIzaSyCLvX7Rx83A2Z0P2Jjs4XaCV1wFEEyvFuM", authDomain:"dastan-shop-catalogue.firebaseapp.com", databaseURL:"https://dastan-shop-catalogue-default-rtdb.firebaseio.com", projectId:"dastan-shop-catalogue", storageBucket:"dastan-shop-catalogue.firebasestorage.app", messagingSenderId:"435593086596", appId:"1:435593086596:web:1cb0c60fcda8a70d5924d1"};
+// 2) Адрес вашего Cloudflare Worker (см. finance-worker.js) и токен. Пусто = ИИ работает в упрощённом режиме
+const AI_PROXY_URL = (window.parent&&window.parent.AI_URL)||"";
+const AI_TOKEN = (window.parent&&window.parent.AI_TOKEN)||"";
+const AI_MODEL = "claude-sonnet-5-5";
+// 3) Пароль по умолчанию (можно сменить в «Ещё»)
+const DEFAULT_PASSWORD = "501309";
+/* ================================================ */
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const money=n=>(n<0?'−':'')+Math.round(Math.abs(n)).toLocaleString('ru-RU')+' ₸';
+const emptyState=()=>({branches:{},tx:{},products:{},debts:{},settings:{},auth:{}});
+const SYM={KZT:'₸',USD:'$',EUR:'€',RUB:'₽'};
+const INC=['Продажа','Услуга','Аренда (доход)','Прочий доход'];
+const EXP=['Закупка товара','Зарплата','Аренда','Налоги','Коммунальные','Реклама','Транспорт','Прочее'];
+const ICONS=['🏪','🌿','🏠','🚕','🛠️','🍽️','📦','💼','🐄','🌾','🧵','📱'];
+const PER={today:'Сегодня',week:'Неделя',month:'Месяц',quarter:'Квартал',year:'Год',all:'Всё'};
+let S=emptyState(),db=null,local=true,tab='home',period='month',branchF='all',authed=false,ready=false,chat=[],aiText='',booted=false;
+
+const cfg=()=>{const s=S.settings||{};return{cur:s.cur||'KZT',taxRate:s.taxRate!=null?s.taxRate:4,taxOn:!!s.taxOn,rates:Object.assign({KZT:1,USD:500,EUR:540,RUB:5.5},s.rates||{})}};
+const ent=o=>Object.entries(o||{});
+
+/* ---------- конфиг вида сайта (его правит ИИ) ---------- */
+const TAB_DEF=[['home','🏠','Главная'],['ops','🧾','Операции'],['stock','📦','Склад'],['rep','📊','Отчёты'],['ai','✨','ИИ'],['more','⚙️','Ещё']];
+const TAB_ALIAS={'главная':'home','операции':'ops','склад':'stock','отчеты':'rep','отчёты':'rep','ии':'ai','еще':'more','ещё':'more'};
+const LOCKED=['ai','more'];
+const SINGLE=['kpi','chart','tax','branches','debts','lowstock'];
+const BLOCK_TYPES={kpi:'Показатели',chart:'График',tax:'Налог',branches:'По отраслям',debts:'Долги',lowstock:'Мало на складе',metric:'Одна цифра',weekday:'Прибыль по дням недели',topcats:'Топ расходов',share:'Доли отраслей',recent:'Последние операции',note:'Заметка'};
+const METRICS={income:'Доход',expense:'Расход',profit:'Прибыль',cash:'Деньги'};
+const HEX=/^#[0-9a-fA-F]{6}$/;
+const hx=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+const mix=(a,b,t)=>{const A=hx(a),B=hx(b);return'#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('')};
+const lum=h=>{const[r,g,b]=hx(h);return(0.299*r+0.587*g+0.114*b)/255};
+const DEF_UI=()=>({title:'Dastan Финансы',theme:{accent:'#f5b301',bg:'#14110b',card:'#201a0f',txt:'#f4ecd8'},order:TAB_DEF.map(t=>t[0]),hidden:{},labels:{},icons:{},blocks:SINGLE.map(t=>({id:'d_'+t,t})),catsInc:[],catsExp:[]});
+function cleanBlock(b){
+  const o={id:String(b.id||uid()).replace(/[^\w-]/g,'').slice(0,16)||uid(),t:b.t};
+  if(typeof b.title==='string'&&b.title.trim())o.title=b.title.trim().slice(0,40);
+  if(METRICS[b.metric])o.metric=b.metric;
+  if(PER[b.period])o.period=b.period;
+  if(typeof b.branch==='string'&&b.branch)o.branch=b.branch.slice(0,40);
+  const n=parseInt(b.limit);if(n>0)o.limit=Math.min(n,15);
+  if(typeof b.text==='string'&&b.text.trim())o.text=b.text.trim().slice(0,300);
+  return o;
+}
+function sanitizeUI(j){
+  const u=DEF_UI();
+  if(typeof j.title==='string'&&j.title.trim())u.title=j.title.trim().slice(0,30);
+  if(j.theme&&typeof j.theme==='object')for(const k of['accent','bg','card','txt'])if(HEX.test(j.theme[k]||''))u.theme[k]=j.theme[k].toLowerCase();
+  if(Array.isArray(j.order)){const o=j.order.filter(x=>TAB_DEF.some(t=>t[0]===x));for(const t of TAB_DEF)if(!o.includes(t[0]))o.push(t[0]);u.order=[...new Set(o)]}
+  if(j.hidden&&typeof j.hidden==='object')for(const t of TAB_DEF)if(j.hidden[t[0]]&&!LOCKED.includes(t[0]))u.hidden[t[0]]=true;
+  if(j.labels&&typeof j.labels==='object')for(const t of TAB_DEF)if(typeof j.labels[t[0]]==='string'&&j.labels[t[0]].trim())u.labels[t[0]]=j.labels[t[0]].trim().slice(0,12);
+  if(j.icons&&typeof j.icons==='object')for(const t of TAB_DEF)if(typeof j.icons[t[0]]==='string'&&j.icons[t[0]].trim())u.icons[t[0]]=[...j.icons[t[0]].trim()].slice(0,2).join('');
+  if(Array.isArray(j.blocks))u.blocks=j.blocks.filter(b=>b&&BLOCK_TYPES[b.t]).slice(0,24).map(cleanBlock);
+  const cl=a=>(Array.isArray(a)?a:[]).filter(x=>typeof x==='string'&&x.trim()).map(x=>x.trim().slice(0,30)).slice(0,20);
+  u.catsInc=cl(j.catsInc);u.catsExp=cl(j.catsExp);
+  return u;
+}
+function getUI(){try{const j=JSON.parse((S.settings||{}).uiJson||'null');if(j&&typeof j==='object')return sanitizeUI(j)}catch(e){}return DEF_UI()}
+const incCats=()=>INC.concat(getUI().catsInc);
+const expCats=()=>EXP.concat(getUI().catsExp);
+function applyTheme(){
+  const U=getUI(),t=U.theme;
+  document.title=U.title;
+  const lt=$('#ltitle');if(lt)lt.textContent=U.title;
+  const r=document.documentElement&&document.documentElement.style;if(!r)return;
+  const dark=lum(t.bg)<.5,set=(k,v)=>r.setProperty(k,v);
+  set('--bg',t.bg);set('--card',t.card);set('--txt',t.txt);
+  set('--card2',mix(t.card,t.txt,.07));set('--line',mix(t.card,t.txt,.16));set('--mut',mix(t.txt,t.bg,.4));
+  set('--gold',t.accent);set('--gold2',dark?mix(t.accent,'#ffffff',.3):mix(t.accent,'#000000',.15));
+  set('--on',lum(t.accent)>.55?'#201700':'#ffffff');
+  const m=document.querySelector('meta[name=theme-color]');if(m&&m.setAttribute)m.setAttribute('content',t.bg);
+}
+const bname=id=>S.branches[id]?S.branches[id].name:'—';
+const bicon=id=>S.branches[id]?(S.branches[id].icon||'🏪'):'❔';
+
+function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',2600)}
+async function sha(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return'f'+h}}
+const curHash=async()=>S.auth&&S.auth.hash?S.auth.hash:await sha(DEFAULT_PASSWORD);
+
+/* ---------- данные ---------- */
+function initDB(){
+  if(FIREBASE_CONFIG.databaseURL&&window.firebase){
+    try{
+      firebase.initializeApp(FIREBASE_CONFIG);db=firebase.database().ref('fin');local=false;
+      db.on('value',snap=>{S=Object.assign(emptyState(),snap.val()||{});ready=true;boot()},err=>toast('Нет доступа к базе: '+err.message));
+      return;
+    }catch(e){console.error(e)}
+  }
+  try{S=Object.assign(emptyState(),JSON.parse(localStorage.getItem('fin')||'{}'))}catch(e){}
+  ready=true;boot();
+}
+async function boot(){
+  applyTheme();
+  if(!authed){const h=await curHash();if(localStorage.getItem('finOk')===h)authed=true}
+  if(!authed){$('#login').hidden=false;return}
+  $('#login').hidden=true;render();
+}
+async function doLogin(){
+  const h=await sha($('#pw').value);
+  if(h===await curHash()){localStorage.setItem('finOk',h);authed=true;$('#pw').value='';boot()}
+  else $('#lerr').textContent='Неверный пароль';
+}
+function logout(){localStorage.removeItem('finOk');authed=false;$('#login').hidden=false}
+function put(path,val){
+  if(val!==null&&typeof val==='object')val=JSON.parse(JSON.stringify(val));
+  if(local){
+    const p=path.split('/');let o=S;
+    for(let i=0;i<p.length-1;i++){o=o[p[i]]=o[p[i]]||{}}
+    const k=p[p.length-1];if(val===null)delete o[k];else o[k]=val;
+    localStorage.setItem('fin',JSON.stringify(S));render();
+  }else db.child(path).set(val).catch(e=>toast('Ошибка записи: '+e.message));
+}
+
+/* ---------- периоды и расчёты ---------- */
+function range(p){
+  const n=new Date();let a=new Date(n.getFullYear(),n.getMonth(),n.getDate()),b=new Date(a);b.setDate(b.getDate()+1);
+  if(p==='week')a.setDate(a.getDate()-((a.getDay()+6)%7));
+  else if(p==='month'){a=new Date(n.getFullYear(),n.getMonth(),1);b=new Date(n.getFullYear(),n.getMonth()+1,1)}
+  else if(p==='quarter'){const q=Math.floor(n.getMonth()/3)*3;a=new Date(n.getFullYear(),q,1);b=new Date(n.getFullYear(),q+3,1)}
+  else if(p==='year'){a=new Date(n.getFullYear(),0,1);b=new Date(n.getFullYear()+1,0,1)}
+  else if(p==='all'){a=new Date(2000,0,1);b=new Date(2100,0,1)}
+  return[iso(a),iso(b)];
+}
+const allTx=()=>ent(S.tx).map(([id,t])=>Object.assign({},t,{id}));
+function listFor(a,b,br){br=br||branchF;return allTx().filter(t=>t.date>=a&&t.date<b&&(br==='all'||t.branch===br)).sort((x,y)=>y.date.localeCompare(x.date)||(y.ts||0)-(x.ts||0))}
+const inPeriod=()=>{const[a,b]=range(period);return listFor(a,b)};
+function prevList(){
+  if(period==='all')return null;const[a,b]=range(period);
+  const A=new Date(a),B=new Date(b),len=B-A;return listFor(iso(new Date(A-len)),a);
+}
+function stats(list){
+  let inc=0,exp=0,cogs=0,stockBuy=0;
+  for(const t of list){if(t.type==='income'){inc+=t.base;cogs+=t.cogs||0}else{exp+=t.base;if(t.productId)stockBuy+=t.base}}
+  return{inc,exp,cogs,stockBuy,cash:inc-exp,profit:inc-cogs-(exp-stockBuy)};
+}
+const delta=(c,p)=>p?`<small class="${c>=p?'ok':'bad'}">${p?((c-p)/Math.abs(p)*100>=0?'▲ ':'▼ ')+Math.abs(Math.round((c-p)/Math.abs(p)*100))+'% к прошлому':''}</small>`:'';
+
+/* ---------- общие элементы ---------- */
+function filterBar(){
+  return`<div class="chips">${ent(PER).map(([k,v])=>`<button class="chip ${period===k?'on':''}" onclick="setP('${k}')">${v}</button>`).join('')}</div>
+  <select onchange="setB(this.value)"><option value="all">Все отрасли</option>${ent(S.branches).map(([id,b])=>`<option value="${id}" ${branchF===id?'selected':''}>${esc(b.icon||'')} ${esc(b.name)}</option>`).join('')}</select>`;
+}
+function setP(p){period=p;render()}function setB(b){branchF=b;render()}
+function modal(h){$('#modal').innerHTML=`<div class="ov" onclick="if(event.target===this)closeM()"><div class="sheet">${h}</div></div>`}
+function closeM(){$('#modal').innerHTML=''}
+const opt=(arr,sel)=>arr.map(x=>`<option ${x===sel?'selected':''}>${esc(x)}</option>`).join('');
+
+function chart(list){
+  const[a,b]=range(period);const days=(new Date(b)-new Date(a))/864e5,byM=days>62,m={};
+  for(const t of list){const k=byM?t.date.slice(0,7):t.date;m[k]=m[k]||{i:0,e:0};m[k][t.type==='income'?'i':'e']+=t.base}
+  const keys=Object.keys(m).sort();if(!keys.length)return'<div class="muted c">Нет данных за период</div>';
+  const W=340,H=140,max=Math.max(1,...keys.map(k=>Math.max(m[k].i,m[k].e))),step=W/keys.length,bw=Math.max(2,Math.min(16,step/2.4));
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%">`;
+  keys.forEach((k,i)=>{const x=(i+.5)*step,ih=m[k].i/max*(H-26),eh=m[k].e/max*(H-26);
+    s+=`<rect x="${x-bw-1}" y="${H-16-ih}" width="${bw}" height="${ih}" rx="2" fill="#4cc38a"/><rect x="${x+1}" y="${H-16-eh}" width="${bw}" height="${eh}" rx="2" fill="#ff6b6b"/>`});
+  s+=`<text x="2" y="${H-3}" style="fill:var(--mut)" font-size="10">${keys[0].slice(byM?0:5)}</text><text x="${W-2}" y="${H-3}" text-anchor="end" style="fill:var(--mut)" font-size="10">${keys[keys.length-1].slice(byM?0:5)}</text></svg>`;
+  return s+`<div class="muted c" style="padding:0">🟩 доход &nbsp; 🟥 расход</div>`;
+}
+
+/* ---------- главная ---------- */
+function blockList(b){
+  const p=b.period||period,br=b.branch&&(b.branch==='all'||S.branches[b.branch])?b.branch:branchF,[a,z]=range(p);
+  return listFor(a,z,br);
+}
+const blockScope=b=>PER[b.period||period]+(b.branch&&S.branches[b.branch]?' · '+S.branches[b.branch].name:'');
+function renderBlock(b){
+  const ttl=b.title?`<b>${esc(b.title)}</b>`:'';
+  switch(b.t){
+  case'kpi':{
+    const list=inPeriod(),st=stats(list),pl=prevList(),ps=pl?stats(pl):null;
+    return`<div class="grid">
+     <div class="kpi"><small>Доход</small><b class="ok">${money(st.inc)}</b><br>${delta(st.inc,ps&&ps.inc)}</div>
+     <div class="kpi"><small>Расход</small><b class="bad">${money(st.exp)}</b><br>${delta(st.exp,ps&&ps.exp)}</div>
+     <div class="kpi"><small>Прибыль</small><b>${money(st.profit)}</b><br>${delta(st.profit,ps&&ps.profit)}</div>
+     <div class="kpi"><small>Деньги (приход − расход)</small><b>${money(st.cash)}</b></div></div>`}
+  case'chart':return`<div class="card">${ttl}${chart(inPeriod())}</div>`;
+  case'tax':return taxCard(stats(inPeriod()));
+  case'branches':return`<div class="card"><b>${esc(b.title||'По отраслям')}</b>${branchRows(inPeriod())}</div>`;
+  case'debts':{
+    const dIn=ent(S.debts).filter(([,d])=>d.dir==='in').reduce((s,[,d])=>s+(d.amount-(d.paid||0)),0);
+    const dOut=ent(S.debts).filter(([,d])=>d.dir==='out').reduce((s,[,d])=>s+(d.amount-(d.paid||0)),0);
+    return(dIn||dOut)?`<div class="card"><b>${esc(b.title||'Долги')}</b><div class="row" style="margin-top:6px"><div class="muted">Мне должны<br><b class="ok">${money(dIn)}</b></div><div class="muted">Я должен<br><b class="bad">${money(dOut)}</b></div></div></div>`:''}
+  case'lowstock':{
+    const low=ent(S.products).filter(([,p])=>p.min>0&&p.qty<=p.min);
+    return low.length?`<div class="card"><b>⚠️ ${esc(b.title||'Заканчивается на складе')}</b>${low.map(([,p])=>`<div class="item"><div class="m">${esc(p.name)}</div><b class="bad">${p.qty} ${esc(p.unit||'шт')}</b></div>`).join('')}</div>`:''}
+  case'metric':{
+    const st=stats(blockList(b)),m=b.metric||'profit',v=m==='income'?st.inc:m==='expense'?st.exp:m==='cash'?st.cash:st.profit;
+    return`<div class="kpi" style="margin-bottom:12px"><small>${esc(b.title||METRICS[m])} · ${esc(blockScope(b))}</small><b class="${m==='income'?'ok':m==='expense'?'bad':''}" style="font-size:24px">${money(v)}</b></div>`}
+  case'weekday':{
+    const days=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],g=days.map(()=>[]);
+    for(const t of blockList(b))g[(new Date(t.date+'T00:00:00').getDay()+6)%7].push(t);
+    const v=g.map(l=>stats(l).profit),mx=Math.max(1,...v.map(Math.abs));
+    return`<div class="card"><b>${esc(b.title||'Прибыль по дням недели')}</b> <span class="muted">${esc(blockScope(b))}</span>${days.map((d,i)=>`<div class="item"><div class="m" style="flex:0 0 28px">${d}</div><div class="m"><div class="bar"><i style="width:${Math.abs(v[i])/mx*100}%;background:${v[i]<0?'var(--bad)':'var(--gold)'}"></i></div></div><b style="flex:0 0 96px;text-align:right">${money(v[i])}</b></div>`).join('')}</div>`}
+  case'topcats':{
+    const cats={};for(const t of blockList(b))if(t.type==='expense'&&!t.productId)cats[t.cat]=(cats[t.cat]||0)+t.base;
+    const cl=Object.entries(cats).sort((x,y)=>y[1]-x[1]).slice(0,b.limit||5),mx=Math.max(1,...cl.map(x=>x[1]));
+    return`<div class="card"><b>${esc(b.title||'Топ расходов')}</b> <span class="muted">${esc(blockScope(b))}</span>${cl.length?cl.map(([k,v])=>`<div style="margin-top:8px"><div class="row"><span>${esc(k)}</span><span style="text-align:right">${money(v)}</span></div><div class="bar"><i style="width:${v/mx*100}%;background:var(--bad)"></i></div></div>`).join(''):'<div class="muted">Нет расходов</div>'}</div>`}
+  case'share':{
+    const m={};let tot=0;for(const t of blockList(b))if(t.type==='income'){m[t.branch]=(m[t.branch]||0)+t.base;tot+=t.base}
+    const rows=Object.entries(m).sort((x,y)=>y[1]-x[1]);
+    return`<div class="card"><b>${esc(b.title||'Доли отраслей в доходе')}</b> <span class="muted">${esc(blockScope(b))}</span>${rows.length?rows.map(([id,v])=>`<div class="item"><div class="ic">${bicon(id)}</div><div class="m"><div>${esc(bname(id))}</div><div class="bar"><i style="width:${v/tot*100}%"></i></div></div><b>${Math.round(v/tot*100)}%</b></div>`).join(''):'<div class="muted">Нет доходов</div>'}</div>`}
+  case'recent':{
+    const l=blockList(b).slice(0,b.limit||5);
+    return`<div class="card"><b>${esc(b.title||'Последние операции')}</b>${l.length?l.map(t=>`<div class="item"><div class="ic">${bicon(t.branch)}</div><div class="m"><div>${esc(t.cat)}</div><div class="muted">${t.date} · ${esc(bname(t.branch))}</div></div><b class="${t.type==='income'?'ok':'bad'}">${t.type==='income'?'+':'−'}${Math.round(t.amount).toLocaleString('ru-RU')} ${SYM[t.cur]||t.cur}</b></div>`).join(''):'<div class="muted">Нет операций</div>'}</div>`}
+  case'note':return`<div class="card">${ttl}<div style="white-space:pre-wrap;margin-top:6px">${esc(b.text||'')}</div></div>`;
+  }
+  return'';
+}
+function viewHome(){
+  if(!ent(S.branches).length)return`<h2>Добро пожаловать 👋</h2><div class="card"><p>Начните с добавления отрасли — направления, по которому считаем деньги (магазин, дача, аренда, услуги и т.д.). Отраслей может быть сколько угодно.</p>
+  <div class="chips">${['Магазин','Дача','Аренда','Услуги'].map(n=>`<button class="chip" onclick="quickBranch('${n}')">+ ${n}</button>`).join('')}</div>
+  <button class="btn full" onclick="branchForm()">Добавить свою отрасль</button></div>`;
+  const U=getUI();
+  return`<h2>${esc(U.title)}</h2>${filterBar()}${U.blocks.map(renderBlock).join('')}${U.blocks.length?'':'<div class="card muted c">На главной нет блоков. Попросите ИИ на вкладке ✨, например: «добавь график».</div>'}<button class="fab" onclick="txForm()">+</button>`;
+}
+function branchRows(list){
+  const m={};for(const t of list){const b=m[t.branch]=m[t.branch]||[];b.push(t)}
+  const rows=ent(S.branches).map(([id,b])=>({id,b,s:stats(m[id]||[])}));
+  const max=Math.max(1,...rows.map(r=>r.s.inc));
+  return rows.map(r=>`<div class="item"><div class="ic">${esc(r.b.icon||'🏪')}</div><div class="m"><div>${esc(r.b.name)}</div><div class="bar"><i style="width:${r.s.inc/max*100}%"></i></div></div><div style="text-align:right"><b>${money(r.s.profit)}</b><br><small class="muted">доход ${money(r.s.inc)}</small></div></div>`).join('')||'<div class="muted">Нет отраслей</div>';
+}
+function quickBranch(n){const ic={Магазин:'🏪',Дача:'🌿',Аренда:'🏠',Услуги:'🛠️'}[n];put('branches/'+uid(),{name:n,icon:ic})}
+function taxCard(st){
+  const c=cfg();
+  if(!c.taxOn)return`<div class="card"><b>🧾 Налог по упрощёнке</b><p class="muted">Сейчас не считается. Посчитать оценку за выбранный период?</p><button class="btn ghost sm" onclick="taxModal()">Посчитать</button></div>`;
+  return`<div class="card"><b>🧾 Налог по упрощёнке (оценка)</b><div class="big">${money(st.inc*c.taxRate/100)}</div><p class="muted">${c.taxRate}% от дохода ${money(st.inc)}</p></div>`;
+}
+function taxModal(){
+  const c=cfg(),st=stats(inPeriod());
+  modal(`<h3>Налог по упрощёнке</h3><p>Доход за период: <b>${money(st.inc)}</b></p><label>Ставка, %</label><input id="f_tax" type="number" step="any" value="${c.taxRate}" oninput="$('#taxres').textContent=money(${st.inc}*(parseFloat(this.value)||0)/100)">
+  <p>Оценка налога: <b id="taxres" class="big">${money(st.inc*c.taxRate/100)}</b></p>
+  <p class="muted">Это приблизительная оценка (доход × ставка). Проверьте актуальную ставку и лимиты в налоговом кодексе РК; соцплатежи и ИПН работников сюда не входят.</p>
+  <button class="btn full" onclick="put('settings/taxRate',parseFloat($('#f_tax').value)||0);put('settings/taxOn',true);closeM()">Считать всегда</button>
+  <button class="btn ghost full" style="margin-top:8px" onclick="closeM()">Закрыть</button>`);
+}
+
+/* ---------- операции ---------- */
+function viewOps(){
+  const list=inPeriod();
+  return`<h2>Операции</h2>${filterBar()}
+  ${list.length?`<div class="card">${list.map(t=>`<div class="item" onclick="txForm('${t.id}')"><div class="ic">${bicon(t.branch)}</div><div class="m"><div>${esc(t.cat)}${t.productId&&S.products[t.productId]?' · '+esc(S.products[t.productId].name)+' ×'+t.qty:''}</div><div class="muted">${t.date} · ${esc(bname(t.branch))}${t.note?' · '+esc(t.note):''}</div></div><b class="${t.type==='income'?'ok':'bad'}">${t.type==='income'?'+':'−'}${Math.round(t.amount).toLocaleString('ru-RU')} ${SYM[t.cur]||t.cur}</b></div>`).join('')}</div>`:'<div class="card muted c">Пока нет операций за период</div>'}
+  <button class="fab" onclick="txForm()">+</button>`;
+}
+function txForm(id,pre){
+  if(!ent(S.branches).length){toast('Сначала добавьте отрасль');tab='more';render();return}
+  const t=id?S.tx[id]:Object.assign({type:'expense',date:iso(new Date()),cur:cfg().cur},pre||{});
+  const bs=ent(S.branches);
+  modal(`<h3>${id?'Изменить операцию':'Новая операция'}</h3>
+  <div class="seg"><button id="f_ti" class="${t.type==='income'?'on inc':''}" onclick="setType('income')">Доход</button><button id="f_te" class="${t.type==='expense'?'on exp':''}" onclick="setType('expense')">Расход</button></div>
+  <input type="hidden" id="f_type" value="${t.type}">
+  <label>Отрасль</label><select id="f_branch">${bs.map(([i,b])=>`<option value="${i}" ${t.branch===i||(!t.branch&&branchF===i)?'selected':''}>${esc(b.icon||'')} ${esc(b.name)}</option>`).join('')}</select>
+  <label>Категория</label><select id="f_cat"></select>
+  <div class="row"><div><label>Сумма</label><input id="f_amount" type="number" inputmode="decimal" step="any" value="${t.amount||''}"></div><div><label>Валюта</label><select id="f_cur">${opt(Object.keys(SYM),t.cur)}</select></div></div>
+  <label>Товар со склада (необязательно)</label><select id="f_prod" onchange="prodPick()"><option value="">— без товара —</option>${ent(S.products).map(([i,p])=>`<option value="${i}" ${t.productId===i?'selected':''}>${esc(p.name)} (${p.qty} ${esc(p.unit||'шт')})</option>`).join('')}</select>
+  <label>Количество</label><input id="f_qty" type="number" inputmode="decimal" step="any" value="${t.qty||''}" oninput="prodPick(1)">
+  <label>Дата</label><input id="f_date" type="date" value="${t.date}">
+  <label>Заметка</label><input id="f_note" value="${esc(t.note||'')}">
+  <button class="btn full" onclick="saveTx(${id?`'${id}'`:'null'})">Сохранить</button>
+  ${id?`<button class="btn red full" style="margin-top:8px" onclick="delTx('${id}')">Удалить</button>`:''}`);
+  fillCats(t.cat);
+}
+function fillCats(sel){const ty=$('#f_type').value,arr=(ty==='income'?incCats():expCats()).slice();if(sel&&!arr.includes(sel))arr.push(sel);$('#f_cat').innerHTML=opt(arr,sel)}
+function setType(ty){$('#f_type').value=ty;$('#f_ti').className=ty==='income'?'on inc':'';$('#f_te').className=ty==='expense'?'on exp':'';fillCats()}
+function prodPick(fromQty){
+  const p=S.products[$('#f_prod').value];if(!p)return;
+  const q=parseFloat($('#f_qty').value)||(fromQty?0:1);if(!fromQty)$('#f_qty').value=q;
+  const unit=$('#f_type').value==='income'?p.price:p.cost;
+  if(unit){$('#f_amount').value=Math.round(q*unit*100)/100;$('#f_cur').value='KZT'}
+  if($('#f_type').value==='income')$('#f_cat').value='Продажа';else $('#f_cat').value='Закупка товара';
+}
+function adjStock(oldT,newT){
+  const P={};
+  const add=(t,s)=>{if(!t||!t.productId)return;const p=P[t.productId]=P[t.productId]||{dq:0,bq:0,bb:0};
+    if(t.type==='income')p.dq-=s*t.qty;else{p.dq+=s*t.qty;p.bq+=s*t.qty;p.bb+=s*t.base}};
+  add(oldT,-1);add(newT,1);
+  for(const[pid,d]of Object.entries(P)){
+    const p=S.products[pid];if(!p)continue;const np=Object.assign({},p),oq=p.qty||0;np.qty=Math.round((oq+d.dq)*1000)/1000;
+    if(d.bq>0){const pq=Math.max(oq,0);np.cost=(pq*(p.cost||0)+d.bb)/(pq+d.bq)}
+    put('products/'+pid,np);
+  }
+}
+function saveTx(id){
+  const amount=parseFloat($('#f_amount').value);if(!(amount>0)){toast('Введите сумму');return}
+  const cur=$('#f_cur').value,type=$('#f_type').value,pid=$('#f_prod').value,qty=parseFloat($('#f_qty').value)||0,old=id?S.tx[id]:null;
+  const t={type,branch:$('#f_branch').value,cat:$('#f_cat').value,date:$('#f_date').value||iso(new Date()),amount,cur,base:amount*(cfg().rates[cur]||1),note:$('#f_note').value.trim(),ts:old&&old.ts?old.ts:Date.now()};
+  if(pid&&qty>0&&S.products[pid]){t.productId=pid;t.qty=qty;if(type==='income')t.cogs=qty*(S.products[pid].cost||0)}
+  adjStock(old,t);put('tx/'+(id||uid()),t);closeM();
+}
+function delTx(id){if(!confirm('Удалить операцию?'))return;adjStock(S.tx[id],null);put('tx/'+id,null);closeM()}
+
+/* ---------- склад ---------- */
+function viewStock(){
+  const ps=ent(S.products).filter(([,p])=>branchF==='all'||p.branch===branchF);
+  const val=ps.reduce((s,[,p])=>s+Math.max(p.qty,0)*(p.cost||0),0),pot=ps.reduce((s,[,p])=>s+Math.max(p.qty,0)*(p.price||0),0);
+  return`<h2>Склад</h2>
+  <select onchange="setB(this.value)"><option value="all">Все отрасли</option>${ent(S.branches).map(([id,b])=>`<option value="${id}" ${branchF===id?'selected':''}>${esc(b.icon||'')} ${esc(b.name)}</option>`).join('')}</select>
+  <div class="grid"><div class="kpi"><small>Стоимость остатков</small><b>${money(val)}</b></div><div class="kpi"><small>Если продать всё</small><b>${money(pot)}</b></div></div>
+  <div class="card">${ps.length?ps.map(([id,p])=>`<div class="item" onclick="prodForm('${id}')"><div class="ic">${bicon(p.branch)}</div><div class="m"><div>${esc(p.name)}</div><div class="muted">себест. ${money(p.cost||0)} · цена ${money(p.price||0)}</div></div><b class="${p.min>0&&p.qty<=p.min?'bad':''}">${p.qty} ${esc(p.unit||'шт')}</b></div>`).join(''):'<div class="muted c">Товаров пока нет</div>'}</div>
+  <button class="btn full" onclick="prodForm()">+ Добавить товар</button>`;
+}
+function prodForm(id){
+  if(!ent(S.branches).length){toast('Сначала добавьте отрасль');tab='more';render();return}
+  const p=id?S.products[id]:{unit:'шт'};
+  modal(`<h3>${id?'Товар':'Новый товар'}</h3>
+  <label>Название</label><input id="p_name" value="${esc(p.name||'')}">
+  <label>Отрасль</label><select id="p_branch">${ent(S.branches).map(([i,b])=>`<option value="${i}" ${p.branch===i?'selected':''}>${esc(b.icon||'')} ${esc(b.name)}</option>`).join('')}</select>
+  <div class="row"><div><label>Остаток</label><input id="p_qty" type="number" step="any" value="${p.qty!=null?p.qty:''}"></div><div><label>Ед. изм.</label><input id="p_unit" value="${esc(p.unit||'шт')}"></div></div>
+  <div class="row"><div><label>Себестоимость, ₸</label><input id="p_cost" type="number" step="any" value="${p.cost||''}"></div><div><label>Цена продажи, ₸</label><input id="p_price" type="number" step="any" value="${p.price||''}"></div></div>
+  <label>Минимальный остаток (для предупреждения)</label><input id="p_min" type="number" step="any" value="${p.min||''}">
+  <button class="btn full" onclick="saveProd(${id?`'${id}'`:'null'})">Сохранить</button>
+  ${id?`<button class="btn red full" style="margin-top:8px" onclick="if(confirm('Удалить товар?')){put('products/${id}',null);closeM()}">Удалить</button>`:''}`);
+}
+function saveProd(id){
+  const name=$('#p_name').value.trim();if(!name){toast('Введите название');return}
+  put('products/'+(id||uid()),{name,branch:$('#p_branch').value,qty:parseFloat($('#p_qty').value)||0,unit:$('#p_unit').value.trim()||'шт',cost:parseFloat($('#p_cost').value)||0,price:parseFloat($('#p_price').value)||0,min:parseFloat($('#p_min').value)||0});closeM();
+}
+
+/* ---------- отчёты ---------- */
+function viewRep(){
+  const list=inPeriod(),st=stats(list),pl=prevList(),ps=pl?stats(pl):null;
+  const cats={};for(const t of list)if(t.type==='expense'&&!t.productId){cats[t.cat]=(cats[t.cat]||0)+t.base}
+  const cl=Object.entries(cats).sort((a,b)=>b[1]-a[1]),cmax=Math.max(1,...cl.map(x=>x[1]));
+  const prods={};for(const t of list)if(t.type==='income'&&t.productId){const p=prods[t.productId]=prods[t.productId]||{q:0,r:0,c:0};p.q+=t.qty;p.r+=t.base;p.c+=t.cogs||0}
+  const pr=Object.entries(prods).sort((a,b)=>(b[1].r-b[1].c)-(a[1].r-a[1].c)).slice(0,8);
+  const m={};for(const t of list){(m[t.branch]=m[t.branch]||[]).push(t)}
+  return`<h2>Отчёты</h2>${filterBar()}
+  <div class="card"><table>
+   <tr><td>Доход</td><td class="ok">${money(st.inc)}</td></tr>
+   <tr><td>Себестоимость проданного</td><td>${money(st.cogs)}</td></tr>
+   <tr><td>Прочие расходы</td><td class="bad">${money(st.exp-st.stockBuy)}</td></tr>
+   <tr><td><b>Прибыль</b></td><td><b>${money(st.profit)}</b> ${delta(st.profit,ps&&ps.profit)}</td></tr>
+   <tr><td>Закупки товара (склад)</td><td>${money(st.stockBuy)}</td></tr>
+   <tr><td>Движение денег</td><td>${money(st.cash)}</td></tr>
+   ${st.inc?`<tr><td>Рентабельность</td><td>${Math.round(st.profit/st.inc*100)}%</td></tr>`:''}
+  </table></div>
+  <div class="card"><b>Динамика</b>${chart(list)}</div>
+  <div class="card"><b>Отрасли: сравнение</b><table><tr><th></th><th>Доход</th><th>Расход</th><th>Прибыль</th></tr>${ent(S.branches).map(([id,b])=>{const s=stats(m[id]||[]);return`<tr><td>${esc(b.icon||'')} ${esc(b.name)}</td><td>${money(s.inc)}</td><td>${money(s.exp)}</td><td><b>${money(s.profit)}</b></td></tr>`}).join('')}</table></div>
+  <div class="card"><b>Куда уходят деньги</b>${cl.length?cl.map(([k,v])=>`<div style="margin-top:8px"><div class="row"><span>${esc(k)}</span><span style="text-align:right">${money(v)}</span></div><div class="bar"><i style="width:${v/cmax*100}%;background:var(--bad)"></i></div></div>`).join(''):'<div class="muted">Нет расходов</div>'}</div>
+  ${pr.length?`<div class="card"><b>Лучшие товары по прибыли</b>${pr.map(([id,p])=>`<div class="item"><div class="m"><div>${esc(S.products[id]?S.products[id].name:'товар удалён')}</div><div class="muted">продано ${p.q}</div></div><b class="ok">${money(p.r-p.c)}</b></div>`).join('')}</div>`:''}`;
+}
+
+/* ---------- ИИ ---------- */
+function ctxJSON(){
+  const list=inPeriod(),st=stats(list),pl=prevList(),ps=pl?stats(pl):null,m={},cats={};
+  for(const t of list){(m[t.branch]=m[t.branch]||[]).push(t);if(t.type==='expense'&&!t.productId)cats[t.cat]=(cats[t.cat]||0)+t.base}
+  return{период:PER[period],фильтр_отрасль:branchF==='all'?'все':bname(branchF),итого:st,прошлый_период:ps,
+   отрасли:ent(S.branches).map(([id,b])=>({название:b.name,итого:stats(m[id]||[])})),расходы_по_категориям:cats,
+   товары_мало:ent(S.products).filter(([,p])=>p.min>0&&p.qty<=p.min).map(([,p])=>({название:p.name,остаток:p.qty})),
+   долги:ent(S.debts).map(([,d])=>({кто:d.who,направление:d.dir==='in'?'мне должны':'я должен',остаток:d.amount-(d.paid||0)})),ставка_налога:cfg().taxRate};
+}
+async function askAI(system,user){
+  if(!AI_PROXY_URL)throw new Error('noai');
+  const r=await fetch(AI_PROXY_URL,{method:'POST',headers:{'content-type':'application/json','x-app-token':AI_TOKEN},body:JSON.stringify({model:AI_MODEL,max_tokens:1500,json:true,system,messages:[{role:'user',content:user}]})});
+  const j=await r.json();if(j.error)throw new Error(typeof j.error==='string'?j.error:(j.error.message||'ошибка ИИ'));const tx=(j.content&&j.content[0]&&j.content[0].text)||j.text||j.reply||'';
+  if(!tx)throw new Error('Пустой ответ ИИ');return tx;
+}
+function localInsights(){
+  const list=inPeriod(),st=stats(list);if(!list.length)return'За выбранный период нет операций.';
+  const out=[`За период: доход ${money(st.inc)}, расход ${money(st.exp)}, прибыль ${money(st.profit)}.`];
+  if(st.inc)out.push(`Рентабельность: ${Math.round(st.profit/st.inc*100)}%.`);
+  const m={};for(const t of list)(m[t.branch]=m[t.branch]||[]).push(t);
+  const br=ent(m).map(([id,l])=>[bname(id),stats(l).profit]).sort((a,b)=>b[1]-a[1]);
+  if(br.length>1)out.push(`Лучшая отрасль: ${br[0][0]} (${money(br[0][1])}), слабее всех: ${br[br.length-1][0]} (${money(br[br.length-1][1])}).`);
+  const cats={};for(const t of list)if(t.type==='expense'&&!t.productId)cats[t.cat]=(cats[t.cat]||0)+t.base;
+  const c=Object.entries(cats).sort((a,b)=>b[1]-a[1])[0];if(c)out.push(`Больше всего расходов: «${c[0]}» — ${money(c[1])}.`);
+  const low=ent(S.products).filter(([,p])=>p.min>0&&p.qty<=p.min);if(low.length)out.push('Пора закупить: '+low.map(([,p])=>p.name).join(', ')+'.');
+  return out.join('\n');
+}
+/* ---------- ИИ меняет вид сайта: план → подтверждение → применение ---------- */
+function planActions(raw){
+  let ui=getUI();const lines=[],errs=[],extra={branches:[],tax:null};
+  const tabId=x=>{const s=String(x||'').toLowerCase().trim();const d=TAB_DEF.find(t=>t[0]===s||t[2].toLowerCase()===s);return d?d[0]:(TAB_ALIAS[s]||null)};
+  const tn=id=>ui.labels[id]||TAB_DEF.find(t=>t[0]===id)[2];
+  const findB=x=>ui.blocks.find(b=>b.id===x)||ui.blocks.find(b=>b.t===x);
+  const brId=x=>{if(x==null||x===''||['all','все'].includes(String(x).toLowerCase()))return'all';const e=ent(S.branches).find(([id,b])=>id===x||b.name.toLowerCase()===String(x).toLowerCase());return e?e[0]:null};
+  for(const a of(Array.isArray(raw)?raw:[]).slice(0,12)){
+    if(!a||typeof a.op!=='string')continue;
+    try{switch(a.op){
+    case'set_title':{const v=String(a.title||'').trim().slice(0,30);if(!v){errs.push('Пустое название');break}ui.title=v;lines.push('Название сайта: «'+v+'»');break}
+    case'set_theme':{
+      const th=Object.assign({},ui.theme);let ch=0;
+      for(const k of['accent','bg','card','txt'])if(HEX.test(a[k]||'')){th[k]=a[k].toLowerCase();ch++}
+      if(!ch){errs.push('Не указаны цвета');break}
+      if(Math.abs(lum(th.bg)-lum(th.txt))<.45||Math.abs(lum(th.card)-lum(th.txt))<.4){errs.push('Цвета слишком близки — текст не читался бы');break}
+      if(Math.abs(lum(th.accent)-lum(th.bg))<.15){errs.push('Акцентный цвет сливается с фоном');break}
+      ui.theme=th;lines.push('Цвета: акцент '+th.accent+', фон '+th.bg+', карточки '+th.card);break}
+    case'tab_hide':case'tab_show':{
+      const id=tabId(a.tab);if(!id){errs.push('Нет вкладки «'+a.tab+'»');break}
+      if(a.op==='tab_hide'){if(LOCKED.includes(id)){errs.push('Вкладку «'+tn(id)+'» скрыть нельзя');break}ui.hidden[id]=true;lines.push('Скрыть вкладку «'+tn(id)+'»')}
+      else{delete ui.hidden[id];lines.push('Показать вкладку «'+tn(id)+'»')}break}
+    case'tab_rename':{const id=tabId(a.tab),v=String(a.label||'').trim().slice(0,12);if(!id||!v){errs.push('Не понял переименование');break}lines.push('Вкладка «'+tn(id)+'» → «'+v+'»');ui.labels[id]=v;break}
+    case'tab_icon':{const id=tabId(a.tab),v=[...String(a.icon||'').trim()].slice(0,2).join('');if(!id||!v){errs.push('Не понял значок');break}ui.icons[id]=v;lines.push('Значок вкладки «'+tn(id)+'»: '+v);break}
+    case'tab_move':{const id=tabId(a.tab),to=parseInt(a.to);if(!id||isNaN(to)){errs.push('Не понял перемещение');break}
+      ui.order=ui.order.filter(x=>x!==id);ui.order.splice(Math.max(0,Math.min(to,ui.order.length)),0,id);lines.push('Вкладка «'+tn(id)+'» на позицию '+(to+1));break}
+    case'block_add':{
+      const t=a.type||a.t;if(!BLOCK_TYPES[t]){errs.push('Неизвестный блок «'+t+'»');break}
+      if(SINGLE.includes(t)&&ui.blocks.some(b=>b.t===t)){errs.push('Блок «'+BLOCK_TYPES[t]+'» уже есть на главной');break}
+      if(ui.blocks.length>=24){errs.push('Слишком много блоков');break}
+      const nb=cleanBlock(Object.assign({},a,{t,id:uid()}));delete nb.branch;
+      if(a.branch!=null){const bi=brId(a.branch);if(bi==null){errs.push('Нет отрасли «'+a.branch+'»');break}if(bi!=='all')nb.branch=bi}
+      const ix=parseInt(a.index);ui.blocks.splice(isNaN(ix)?ui.blocks.length:Math.max(0,Math.min(ix,ui.blocks.length)),0,nb);
+      lines.push('Добавить блок «'+(nb.title||BLOCK_TYPES[t])+'»'+(isNaN(ix)?'':' на позицию '+(ix+1)));break}
+    case'block_remove':{const b=findB(a.id||a.type);if(!b){errs.push('Нет такого блока на главной');break}ui.blocks=ui.blocks.filter(x=>x!==b);lines.push('Убрать блок «'+(b.title||BLOCK_TYPES[b.t])+'»');break}
+    case'block_move':{const b=findB(a.id),to=parseInt(a.to);if(!b||isNaN(to)){errs.push('Не понял перемещение блока');break}
+      ui.blocks=ui.blocks.filter(x=>x!==b);ui.blocks.splice(Math.max(0,Math.min(to,ui.blocks.length)),0,b);lines.push('Блок «'+(b.title||BLOCK_TYPES[b.t])+'» на позицию '+(to+1));break}
+    case'block_set':{
+      const b=findB(a.id);if(!b){errs.push('Нет такого блока');break}
+      const nb=cleanBlock(Object.assign({},b,a,{t:b.t,id:b.id}));
+      if(a.branch!=null){const bi=brId(a.branch);if(bi==null){errs.push('Нет отрасли «'+a.branch+'»');break}if(bi==='all')delete nb.branch;else nb.branch=bi}
+      ui.blocks=ui.blocks.map(x=>x===b?nb:x);lines.push('Изменить блок «'+(nb.title||BLOCK_TYPES[nb.t])+'»');break}
+    case'cat_add':{
+      const nm=String(a.name||'').trim().slice(0,30),inc=a.kind==='income';if(!nm){errs.push('Пустая категория');break}
+      const arr=inc?ui.catsInc:ui.catsExp;
+      if((inc?INC:EXP).concat(arr).some(x=>x.toLowerCase()===nm.toLowerCase())){errs.push('Категория «'+nm+'» уже есть');break}
+      if(arr.length>=20){errs.push('Слишком много своих категорий');break}
+      arr.push(nm);lines.push('Новая категория '+(inc?'дохода':'расхода')+': «'+nm+'»');break}
+    case'branch_add':{
+      const nm=String(a.name||'').trim().slice(0,30);if(!nm){errs.push('Пустое название отрасли');break}
+      if(ent(S.branches).some(([,b])=>b.name.toLowerCase()===nm.toLowerCase())||extra.branches.some(b=>b.name.toLowerCase()===nm.toLowerCase())){errs.push('Отрасль «'+nm+'» уже есть');break}
+      extra.branches.push({name:nm,icon:ICONS.includes(a.icon)?a.icon:'🏪'});lines.push('Новая отрасль: «'+nm+'»');break}
+    case'tax_set':{
+      const r=parseFloat(a.rate);if(isNaN(r)&&typeof a.on!=='boolean'){errs.push('Не указана ставка');break}
+      extra.tax={rate:isNaN(r)?null:Math.min(100,Math.max(0,r)),on:typeof a.on==='boolean'?a.on:true};
+      lines.push('Налог по упрощёнке: '+(extra.tax.on?'считать':'не считать')+(extra.tax.rate!=null?', ставка '+extra.tax.rate+'%':''));break}
+    case'ui_reset':{const k={i:ui.catsInc,e:ui.catsExp};ui=DEF_UI();ui.catsInc=k.i;ui.catsExp=k.e;lines.push('Вернуть стандартный вид сайта (свои категории сохранятся)');break}
+    default:errs.push('Не умею: '+a.op);
+    }}catch(e){errs.push('Ошибка действия «'+a.op+'»')}
+  }
+  return{ui,lines,errs,extra};
+}
+function commitPlan(pv){
+  const old=(S.settings||{}).uiJson||'',nu=JSON.stringify(pv.ui);
+  if(nu!==old){put('settings/uiPrevJson',old||'null');put('settings/uiJson',nu)}
+  pv.extra.branches.forEach(b=>put('branches/'+uid(),b));
+  if(pv.extra.tax){if(pv.extra.tax.rate!=null)put('settings/taxRate',pv.extra.tax.rate);put('settings/taxOn',pv.extra.tax.on)}
+}
+function undoUI(){
+  const p=(S.settings||{}).uiPrevJson;if(p==null){toast('Нечего отменять');return}
+  const cur=(S.settings||{}).uiJson||'null';
+  put('settings/uiJson',p==='null'?null:p);put('settings/uiPrevJson',cur);toast('Вид сайта возвращён');
+}
+function resetUI(){commitPlan(planActions([{op:'ui_reset'}]));toast('Вид сайта сброшен')}
+function applyChat(i){const c=chat[i];if(!c||!c.raw)return;commitPlan(planActions(c.raw));c.st='done';toast('Применено');render()}
+
+/* без ИИ-сервера: простые команды по ключевым словам */
+function localCommand(q){
+  const l=q.toLowerCase().replace(/ё/g,'е'),acts=[],W='[а-яa-z]';
+  let m=q.match(new RegExp('добавь\\s+категори'+W+'*\\s+[«"\']?(.+?)[»"\']?(?:\\s+(?:в|для)\\s+(доход|расход)'+W+'*)?\\s*$','i'));
+  if(m)return[{op:'cat_add',name:m[1],kind:m[2]&&/^доход/i.test(m[2])?'income':'expense'}];
+  m=q.match(new RegExp('добавь\\s+отрасл'+W+'*\\s+[«"\']?(.+?)[»"\']?\\s*$','i'));
+  if(m)return[{op:'branch_add',name:m[1]}];
+  if(new RegExp('сброс'+W+'*\\s+(вид|сайт|интерфейс|оформлен)').test(l))return[{op:'ui_reset'}];
+  const TABW=[[/главн/,'home'],[/операц/,'ops'],[/склад/,'stock'],[/отчет/,'rep'],[/еще/,'more'],[/помощник|\bии\b/,'ai']];
+  const tab=(TABW.find(([r])=>r.test(l))||[])[1];
+  const isTab=/вкладк|раздел/.test(l),isBlock=/карточк|блок|виджет/.test(l);
+  const del=/(убери|удали|скрой|спрячь|отключи)/.test(l),add=/(добавь|покажи|верни|включи|сделай)/.test(l);
+  const themeWord=/(тему|тема|темы|фон|режим|оформлен)/.test(l);
+  if(/светл/.test(l)&&themeWord)acts.push({op:'set_theme',bg:'#f6f1e4',card:'#ffffff',txt:'#1d1a12'});
+  else if(/темн/.test(l)&&themeWord)acts.push({op:'set_theme',bg:'#14110b',card:'#201a0f',txt:'#f4ecd8'});
+  else if(/цвет|акцент|тем[ауые]/.test(l)){
+    const COL=[[/золот/,'#f5b301'],[/син|голуб/,'#3b82f6'],[/зелен/,'#22c55e'],[/красн/,'#ef4444'],[/фиолет/,'#a855f7'],[/оранж/,'#fb923c'],[/розов/,'#ec4899'],[/бирюз/,'#14b8a6']];
+    const c=COL.find(([r])=>r.test(l));if(c)acts.push({op:'set_theme',accent:c[1]});
+  }
+  if(tab&&!isBlock){if(del)acts.push({op:'tab_hide',tab});else if(add&&isTab)acts.push({op:'tab_show',tab})}
+  const BW=[[/график/,'chart'],[/налог/,'tax'],[/долг/,'debts'],[/отрасл/,'branches'],[/мало|заканчив|остатк/,'lowstock'],[/показател|итог/,'kpi']];
+  if(del&&!(tab&&!isBlock)){const b=BW.find(([r])=>r.test(l));if(b)acts.push({op:'block_remove',id:b[1]})}
+  if(add&&!del){
+    const l2=l.replace(/дням недели/g,'');
+    const per=/сегодня/.test(l2)?'today':/недел/.test(l2)?'week':/квартал/.test(l2)?'quarter':/месяц/.test(l2)?'month':/все время/.test(l2)?'all':/год/.test(l2)?'year':undefined;
+    const br=ent(S.branches).find(([,b])=>l.includes(b.name.toLowerCase().replace(/ё/g,'е')));
+    const ex=Object.assign(per?{period:per}:{},br?{branch:br[1].name}:{});
+    if(/дням недели/.test(l))acts.push(Object.assign({op:'block_add',type:'weekday'},ex));
+    else if(/расход/.test(l)&&/топ|категори/.test(l))acts.push(Object.assign({op:'block_add',type:'topcats'},ex));
+    else if(/доли|долю|доля/.test(l)&&/отрасл/.test(l))acts.push(Object.assign({op:'block_add',type:'share'},ex));
+    else if(new RegExp('последни'+W+'+\\s+операц').test(l))acts.push(Object.assign({op:'block_add',type:'recent'},ex));
+    else if(isBlock&&/доход|выручк|расход|прибыл|деньги/.test(l))acts.push(Object.assign({op:'block_add',type:'metric',metric:/прибыл/.test(l)?'profit':/расход/.test(l)?'expense':/доход|выручк/.test(l)?'income':'cash'},ex));
+    else if(/график/.test(l)&&!tab)acts.push({op:'block_add',type:'chart'});
+    else if(/налог/.test(l)&&isBlock)acts.push({op:'block_add',type:'tax'});
+    else if(/долг/.test(l)&&isBlock)acts.push({op:'block_add',type:'debts'});
+  }
+  m=q.match(new RegExp('(?:назови|переименуй)\\s+(?:приложение|сайт|его)?\\s*[«"\'](.+?)[»"\']','i'))||q.match(new RegExp('(?:назови|переименуй)\\s+(?:приложение|сайт)\\s+(.+)$','i'));
+  if(m)acts.push({op:'set_title',title:m[1]});
+  m=l.match(new RegExp('налог'+W+'*\\s+(?:ставк'+W+'*\\s+)?(\\d+(?:[.,]\\d+)?)\\s*%'));
+  if(m)acts.push({op:'tax_set',rate:parseFloat(m[1].replace(',','.')),on:true});
+  return acts.length?acts:null;
+}
+
+/* с ИИ-сервером: модель возвращает JSON {reply, actions} */
+function aiSys(){
+  const U=getUI();
+  return`Ты встроенный ИИ-помощник сайта учёта «Dastan Финансы» для малого бизнеса в Казахстане. Отвечай ТОЛЬКО JSON без markdown: {"reply":"короткий ответ по-русски","actions":[]}.
+Если пользователь просит изменить сайт — верни действия в "actions". Если это вопрос о деньгах — actions пустой, ответь по данным (суммы в тенге, конкретные советы). Налог по упрощёнке = доход × ставка, напоминай проверить ставку.
+Допустимые действия (других нет, писать код нельзя):
+{"op":"set_title","title":""}
+{"op":"set_theme","accent":"#rrggbb","bg":"#rrggbb","card":"#rrggbb","txt":"#rrggbb"} (любые поля; фон и текст должны сильно контрастировать)
+{"op":"tab_hide","tab":"home|ops|stock|rep"} {"op":"tab_show","tab":""} (вкладки ai и more скрыть нельзя)
+{"op":"tab_rename","tab":"","label":""} {"op":"tab_icon","tab":"","icon":"эмодзи"} {"op":"tab_move","tab":"","to":0}
+{"op":"block_add","type":"kpi|chart|tax|branches|debts|lowstock|metric|weekday|topcats|share|recent|note","title":"","metric":"income|expense|profit|cash","period":"today|week|month|quarter|year|all","branch":"название отрасли или all","limit":5,"text":"","index":0}
+{"op":"block_remove","id":""} {"op":"block_move","id":"","to":0} {"op":"block_set","id":"", ...поля как у block_add}
+{"op":"cat_add","kind":"income|expense","name":""} {"op":"branch_add","name":"","icon":"эмодзи"} {"op":"tax_set","rate":4,"on":true} {"op":"ui_reset"}
+Если просят то, чего нет в списке (новый тип блока, своя формула, чужой код) — честно скажи об этом в reply, предложи ближайшее из списка, actions оставь пустым. Не применяй изменений сам — пользователь подтверждает.
+Текущий вид: `+JSON.stringify({вкладки:U.order.map(id=>({id,название:U.labels[id]||TAB_DEF.find(t=>t[0]===id)[2],скрыта:!!U.hidden[id]})),блоки:U.blocks.map(b=>({id:b.id,тип:b.t,заголовок:b.title||null})),отрасли:ent(S.branches).map(([,b])=>b.name),цвета:U.theme})+'\nДанные бизнеса: '+JSON.stringify(ctxJSON());
+}
+function parseAI(tx){
+  try{const m=tx.match(/\{[\s\S]*\}/);if(m){const j=JSON.parse(m[0]);if(j&&typeof j.reply==='string')return{reply:j.reply,actions:Array.isArray(j.actions)?j.actions:[]}}}catch(e){}
+  return{reply:tx,actions:[]};
+}
+function chatMsg(c,i){
+  let x=`<div class="msg ${c.r}">${esc(c.t)}`;
+  if(c.lines&&c.lines.length)x+=`<div class="card" style="margin:8px 0 0;white-space:normal"><b>Изменения:</b>${c.lines.map(l=>`<div>• ${esc(l)}</div>`).join('')}${c.st==='pending'?`<div class="row" style="margin-top:10px"><button class="btn sm" onclick="applyChat(${i})">Применить</button><button class="btn ghost sm" onclick="chat[${i}].st='cancel';render()">Отмена</button></div>`:c.st==='done'?'<div class="ok" style="margin-top:6px">✅ Применено</div>':'<div class="muted" style="margin-top:6px">Отменено</div>'}</div>`;
+  if(c.errs&&c.errs.length)x+=`<div class="bad" style="margin-top:6px;white-space:normal">${c.errs.map(e=>'⚠️ '+esc(e)).join('<br>')}</div>`;
+  return x+'</div>';
+}
+function viewAI(){
+  const prev=(S.settings||{}).uiPrevJson;
+  return`<h2>✨ ИИ-помощник</h2>
+  <div class="chips">${['Как дела с прибылью?','Где я теряю деньги?','Добавь доходы по дням недели','Сделай тему светлой','Убери вкладку Склад'].map(q=>`<button class="chip" onclick="aiAsk('${q}')">${q}</button>`).join('')}</div>
+  <div id="chat">${chat.length?chat.map(chatMsg).join(''):'<div class="card muted">Спросите про свои деньги, запишите операцию («продал 3 куртки по 15000») или попросите изменить сайт: цвета, вкладки, блоки на главной, категории. Изменения применяются только после вашего «Применить».</div>'}</div>
+  ${prev!=null?'<button class="btn ghost sm" style="margin:8px 0" onclick="undoUI()">↩️ Отменить последнее изменение вида</button>':''}
+  ${AI_PROXY_URL?'':'<div class="muted" style="margin:6px 0">ИИ-сервер не подключён (AI_PROXY_URL): понимаю простые команды вроде «убери вкладку Склад», «добавь карточку прибыль за неделю», «сделай тему светлой».</div>'}
+  <textarea id="aiin" placeholder="Вопрос, операция или просьба изменить сайт..." oninput="aiText=this.value">${esc(aiText)}</textarea>
+  <div class="row"><button class="btn" onclick="aiAsk()">Спросить</button><button class="btn ghost" onclick="aiRecord()">Записать операцию</button></div>`;
+}
+async function aiAsk(q){
+  q=q||$('#aiin').value.trim();if(!q)return;aiText='';chat.push({r:'u',t:q});render();
+  let reply='',acts=[];
+  if(AI_PROXY_URL){
+    try{const j=parseAI(await askAI(aiSys(),q));reply=j.reply;acts=j.actions}
+    catch(e){const la=localCommand(q);if(la){acts=la;reply='ИИ недоступен ('+e.message+'). Но эту команду я понял:'}else reply=localInsights()+'\n\n(ИИ недоступен: '+e.message+')'}
+  }else{
+    const la=localCommand(q);if(la){acts=la;reply='Понял. Вот что изменю:'}else reply=localInsights();
+  }
+  const e={r:'a',t:reply};
+  if(acts.length){const pv=planActions(acts);e.raw=acts;e.lines=pv.lines;e.errs=pv.errs;e.st=pv.lines.length?'pending':'none'}
+  chat.push(e);render();
+}
+async function aiRecord(){
+  const q=$('#aiin').value.trim();if(!q)return;let pre=null;
+  if(AI_PROXY_URL){
+    try{
+      const brs=ent(S.branches).map(([,b])=>b.name).join(', '),prs=ent(S.products).map(([,p])=>p.name).join(', ');
+      const r=await askAI('Извлеки финансовую операцию из текста. Верни ТОЛЬКО JSON: {"type":"income|expense","amount":число,"cur":"KZT|USD|EUR|RUB","branch":"название из списка или null","cat":"категория","qty":число или null,"product":"название или null","date":"YYYY-MM-DD","note":"кратко"}. Сегодня '+iso(new Date())+'. Отрасли: '+brs+'. Товары: '+prs+'. Категории дохода: '+incCats().join(', ')+'. Категории расхода: '+expCats().join(', ')+'.',q);
+      const j=JSON.parse(r.match(/\{[\s\S]*\}/)[0]);pre=fromParsed(j);
+    }catch(e){pre=null}
+  }
+  if(!pre)pre=parseLocal(q);
+  if(!pre||!(pre.amount>0)){toast('Не нашёл сумму — уточните');return}
+  aiText='';txForm(null,pre);
+}
+function fromParsed(j){
+  const bid=ent(S.branches).find(([,b])=>j.branch&&b.name.toLowerCase()===String(j.branch).toLowerCase());
+  const pid=ent(S.products).find(([,p])=>j.product&&p.name.toLowerCase()===String(j.product).toLowerCase());
+  return{type:j.type==='income'?'income':'expense',amount:+j.amount,cur:SYM[j.cur]?j.cur:cfg().cur,branch:bid?bid[0]:undefined,cat:j.cat,qty:j.qty||'',productId:pid?pid[0]:undefined,date:/^\d{4}-\d\d-\d\d$/.test(j.date)?j.date:iso(new Date()),note:j.note||''};
+}
+function parseLocal(s){
+  const low=s.toLowerCase().replace(/(\d)[ \u00a0](?=\d{3}(\D|$))/g,'$1');
+  const type=/прода|доход|получил|заработал|выручк|принёс|принес|оплатил клиент/.test(low)?'income':'expense';
+  const num=(x,mu)=>{let v=parseFloat(x.replace(',','.'));if(/^тыс|^к$/.test(mu||''))v*=1000;else if(/^млн/.test(mu||''))v*=1e6;return v};
+  const tok=[...low.matchAll(/(\d+(?:[.,]\d+)?)\s*(тыс\w*|млн|к(?![а-яё]))?/g)];
+  let qty='',amount=0;
+  const mq=low.match(/(\d+(?:[.,]\d+)?)\s*(шт|штук\w*|кг|ед\w*)/),mp=low.match(/по\s*(\d+(?:[.,]\d+)?)\s*(тыс\w*|млн|к(?![а-яё]))?/);
+  const mq2=low.match(/(\d+(?:[.,]\d+)?)\s*[а-яёa-z.]+\s+по\s*\d/),qm=mq||mq2;
+  if(qm&&mp){qty=parseFloat(qm[1].replace(',','.'));amount=qty*num(mp[1],mp[2])}
+  else if(tok.length){const l=tok[tok.length-1];amount=num(l[1],l[2])}
+  let cur=cfg().cur;if(/доллар|\$|usd/.test(low))cur='USD';else if(/евро|eur/.test(low))cur='EUR';else if(/руб/.test(low))cur='RUB';
+  const br=ent(S.branches).find(([,b])=>low.includes(b.name.toLowerCase().slice(0,Math.max(4,b.name.length-2))));
+  const pr=ent(S.products).find(([,p])=>low.includes(p.name.toLowerCase().slice(0,Math.max(4,p.name.length-2))));
+  let cat=type==='income'?'Продажа':'Прочее';
+  const kw=[[/зарплат|оклад/,'Зарплата'],[/аренд/,'Аренда'],[/налог|ипн|сн /,'Налоги'],[/свет|вод|газ|коммунал|интернет/,'Коммунальные'],[/реклам|таргет/,'Реклама'],[/бензин|такси|доставк|транспорт/,'Транспорт'],[/закуп|купил товар|товар/,'Закупка товара']];
+  if(type==='expense')for(const[r,c]of kw)if(r.test(low)){cat=c;break}
+  if(type==='income'&&/услуг/.test(low))cat='Услуга';
+  const d=new Date();if(/вчера/.test(low))d.setDate(d.getDate()-1);
+  return{type,amount,cur,branch:br?br[0]:undefined,cat,qty,productId:pr?pr[0]:undefined,date:iso(d),note:s.slice(0,80)};
+}
+
+/* ---------- «Ещё»: отрасли, долги, настройки ---------- */
+function viewMore(){
+  const c=cfg();
+  return`<h2>Ещё</h2>
+  <div class="card"><div class="row" style="align-items:center"><b>Отрасли</b><button class="btn sm" style="flex:0 0 auto" onclick="branchForm()">+ Добавить</button></div>
+   ${ent(S.branches).map(([id,b])=>`<div class="item" onclick="branchForm('${id}')"><div class="ic">${esc(b.icon||'🏪')}</div><div class="m">${esc(b.name)}</div><span class="muted">изменить</span></div>`).join('')||'<div class="muted">Пока нет</div>'}</div>
+  <div class="card"><div class="row" style="align-items:center"><b>Долги</b><button class="btn sm" style="flex:0 0 auto" onclick="debtForm()">+ Добавить</button></div>
+   ${ent(S.debts).map(([id,d])=>{const rest=d.amount-(d.paid||0);return`<div class="item"><div class="m" onclick="debtForm('${id}')"><div>${d.dir==='in'?'⬅️ Мне должен':'➡️ Я должен'} ${esc(d.who)}</div><div class="muted">${d.due?'до '+d.due+' · ':''}всего ${money(d.amount)}${d.note?' · '+esc(d.note):''}</div></div><div style="text-align:right"><b class="${rest>0?(d.dir==='in'?'ok':'bad'):'muted'}">${rest>0?money(rest):'закрыт'}</b>${rest>0?`<br><button class="btn ghost sm" onclick="payForm('${id}')">Оплата</button>`:''}</div></div>`}).join('')||'<div class="muted">Долгов нет</div>'}</div>
+  <div class="card"><b>Вид сайта</b><p class="muted">Вкладки, блоки на главной, цвета и категории меняются через ИИ-помощника на вкладке ✨. Каждое изменение можно отменить.</p>${(S.settings||{}).uiPrevJson!=null?'<button class="btn ghost full" onclick="undoUI()">↩️ Отменить последнее изменение вида</button>':''}<button class="btn red full" style="margin-top:8px" onclick="if(confirm('Вернуть стандартный вид?'))resetUI()">Сбросить вид сайта</button></div>
+  <div class="card"><b>Настройки</b>
+   <label>Валюта по умолчанию</label><select onchange="put('settings/cur',this.value)">${opt(Object.keys(SYM),c.cur)}</select>
+   <label>Курсы к тенге (обновляйте вручную)</label>
+   <div class="row">${['USD','EUR','RUB'].map(k=>`<div><small class="muted">${k}</small><input type="number" step="any" value="${c.rates[k]}" onchange="put('settings/rates/${k}',parseFloat(this.value)||1)"></div>`).join('')}</div>
+   <label>Ставка налога по упрощёнке, %</label><input type="number" step="any" value="${c.taxRate}" onchange="put('settings/taxRate',parseFloat(this.value)||0)">
+   <label><input type="checkbox" style="width:auto;margin-right:8px" ${c.taxOn?'checked':''} onchange="put('settings/taxOn',this.checked)">Всегда считать налог на главной</label></div>
+  <div class="card"><b>Безопасность</b>
+   <label>Новый пароль</label><input id="np" type="password" placeholder="Новый пароль">
+   <button class="btn full" onclick="chPw()">Сменить пароль</button>
+   <button class="btn ghost full" style="margin-top:8px" onclick="logout()">Выйти</button>
+   <p class="muted">Данные хранятся: ${local?'только на этом телефоне (Firebase не подключён)':'в вашем Firebase Realtime Database, узел /fin'}.</p></div>`;
+}
+async function chPw(){const v=$('#np').value;if(v.length<4){toast('Минимум 4 символа');return}const h=await sha(v);put('auth/hash',h);localStorage.setItem('finOk',h);$('#np').value='';toast('Пароль изменён')}
+function branchForm(id){
+  const b=id?S.branches[id]:{icon:'🏪'};
+  modal(`<h3>${id?'Отрасль':'Новая отрасль'}</h3><label>Название</label><input id="b_name" value="${esc(b.name||'')}">
+  <label>Значок</label><div class="chips" style="flex-wrap:wrap">${ICONS.map(i=>`<button class="chip ${i===b.icon?'on':''}" onclick="document.querySelectorAll('#modal .chip').forEach(x=>x.classList.remove('on'));this.classList.add('on');window._ic='${i}'">${i}</button>`).join('')}</div>
+  <button class="btn full" onclick="saveBranch(${id?`'${id}'`:'null'},'${b.icon||'🏪'}')">Сохранить</button>
+  ${id?`<button class="btn red full" style="margin-top:8px" onclick="delBranch('${id}')">Удалить</button>`:''}`);window._ic=null;
+}
+function saveBranch(id,oldIc){const name=$('#b_name').value.trim();if(!name){toast('Введите название');return}put('branches/'+(id||uid()),{name,icon:window._ic||oldIc});closeM()}
+function delBranch(id){
+  if(allTx().some(t=>t.branch===id)||ent(S.products).some(([,p])=>p.branch===id)){toast('В отрасли есть операции или товары — удалить нельзя');return}
+  if(confirm('Удалить отрасль?')){put('branches/'+id,null);closeM()}
+}
+function debtForm(id){
+  const d=id?S.debts[id]:{dir:'in',date:iso(new Date())};
+  modal(`<h3>${id?'Долг':'Новый долг'}</h3>
+  <label>Кто</label><input id="d_who" value="${esc(d.who||'')}">
+  <label>Направление</label><select id="d_dir"><option value="in" ${d.dir==='in'?'selected':''}>Мне должны</option><option value="out" ${d.dir==='out'?'selected':''}>Я должен</option></select>
+  <label>Сумма, ₸</label><input id="d_amt" type="number" step="any" value="${d.amount||''}">
+  <label>Срок (необязательно)</label><input id="d_due" type="date" value="${d.due||''}">
+  <label>Заметка</label><input id="d_note" value="${esc(d.note||'')}">
+  <button class="btn full" onclick="saveDebt(${id?`'${id}'`:'null'})">Сохранить</button>
+  ${id?`<button class="btn red full" style="margin-top:8px" onclick="if(confirm('Удалить?')){put('debts/${id}',null);closeM()}">Удалить</button>`:''}`);
+}
+function saveDebt(id){
+  const who=$('#d_who').value.trim(),amount=parseFloat($('#d_amt').value);if(!who||!(amount>0)){toast('Укажите кого и сумму');return}
+  const old=id?S.debts[id]:null;
+  put('debts/'+(id||uid()),{who,dir:$('#d_dir').value,amount,paid:old?old.paid||0:0,due:$('#d_due').value,note:$('#d_note').value.trim(),date:old?old.date:iso(new Date())});closeM();
+}
+function payForm(id){
+  const d=S.debts[id],rest=d.amount-(d.paid||0);
+  modal(`<h3>Оплата: ${esc(d.who)}</h3><p class="muted">Остаток ${money(rest)}</p><label>Сумма оплаты, ₸</label><input id="pay" type="number" step="any" value="${rest}">
+  <button class="btn full" onclick="doPay('${id}')">Внести</button>`);
+}
+function doPay(id){const v=parseFloat($('#pay').value);if(!(v>0))return;const d=S.debts[id];put('debts/'+id,Object.assign({},d,{paid:Math.min(d.amount,(d.paid||0)+v)}));closeM()}
+
+/* ---------- каркас ---------- */
+const VIEWS={home:viewHome,ops:viewOps,stock:viewStock,rep:viewRep,ai:viewAI,more:viewMore};
+function visTabs(){const U=getUI();return U.order.filter(id=>!U.hidden[id]).map(id=>{const d=TAB_DEF.find(t=>t[0]===id);return[id,U.icons[id]||d[1],U.labels[id]||d[2]]})}
+function go(t){tab=t;render();window.scrollTo(0,0)}
+function render(){
+  if(!ready||!authed)return;
+  applyTheme();
+  const vt=visTabs();if(!vt.some(t=>t[0]===tab))tab=vt[0][0];
+  const focus=document.activeElement&&document.activeElement.id;
+  $('#app').innerHTML=VIEWS[tab]();
+  $('#nav').innerHTML=vt.map(x=>`<button class="${tab===x[0]?'on':''}" onclick="go('${x[0]}')"><span>${esc(x[1])}</span>${esc(x[2])}</button>`).join('');
+  if(focus==='aiin'&&$('#aiin'))$('#aiin').focus();
+}
+initDB();
+<\/script>
+</body>
+</html>
+</script>
 <script>
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
@@ -577,7 +1349,9 @@ onValue(ref(db,'deliveries'),snap=>{window._deliveries=snap.val()||{};renderDeli
 
 <script>
 const CL_CLOUD="dv9zm4x4o",CL_PRESET="dastan_shop";
-const ANTHROPIC_API="https://api.anthropic.com/v1/messages";
+// ===== ИИ: впишите после настройки Cloudflare Worker =====
+var AI_URL="https://steep-salad-7eab.dastankasenov811.workers.dev";   // адрес вашего Worker в Cloudflare
+var AI_TOKEN="dastan-dad75afecd734d2bdd11da3b61b59923"; // та же строка, что APP_TOKEN в Worker
 const BARCODE_LOOKUP_URL="https://id-preview--86a93b32-22ec-4ee4-8b42-a47783797301.lovable.app/api/public/product-lookup";
 const P_EMOJIS=["📦","🍦","🧃","🍞","🥛","🧈","🥩","🍎","🥦","🧀","🍗","🥚","🍫","🥤","🫙","🧂","🍬","🍪","🥜","🍋","🧁","🎂","🍕","🥗","🫐"];
 const C_EMOJIS=["🗂️","🍦","🧃","🍞","🥛","🥩","🍎","🥦","🍫","🥤","🍬","🍪","🧁","🎂","🍕","🛒","⭐","🔥","🆕","🧂","🥜","🍋","🥗","🫙","🧀"];
@@ -688,8 +1462,7 @@ function onAddBtn(){
   else openProductModal(null);
 }
 function onChatBtn(){
-  // placeholder — по просьбе пока не трогать функционал этой кнопки
-  showToast('Скоро 💬');
+  openChat();
 }
 
 // ---- HOME SEARCH ----
@@ -1150,10 +1923,11 @@ async function lookupBarcodeExternal(barcode){
 
 // ИИ-поиск товара по штрихкоду через интернет (название, вес, фото упаковки)
 async function aiLookupBarcode(barcode){
+  if(!AI_URL)return null;
   try{
-    const resp=await fetch(ANTHROPIC_API,{
+    const resp=await fetch(AI_URL,{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json','x-app-token':AI_TOKEN},
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',
         max_tokens:1000,
@@ -1168,7 +1942,7 @@ async function aiLookupBarcode(barcode){
         }]
       })
     });
-    const data=await resp.json();
+    const data=await resp.json();if(data.error)throw new Error(typeof data.error==='string'?data.error:(data.error.message||'ошибка ИИ'));
     const textBlock=(data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
     const clean=textBlock.replace(/```json|```/g,'').trim();
     const jsonMatch=clean.match(/\{[\s\S]*\}/);
@@ -1334,22 +2108,24 @@ function camRetake(){
 
 async function runCamAnalysis(){
   if(!camImageB64)return;
+  if(!AI_URL){camPhase='preview';renderCamBody();const ee=document.getElementById('cam-err');if(ee){ee.style.display='block';ee.textContent='⚠️ ИИ не подключён: впишите AI_URL и AI_TOKEN в начале скрипта сайта';}return;}
   camPhase='analyzing';renderCamBody();
 
   try{
+    const imgSend=await shrinkB64(camImageB64,1024);
     const allProds=Object.entries(window._products).map(([id,p])=>({id,...p}));
     const prodList=allProds.map((p,i)=>`${i+1}. [ID:${p.id}] ${p.name}${p.weight?' ('+p.weight+')':''}`).join('\n');
 
-    const resp=await fetch(ANTHROPIC_API,{
+    const resp=await fetch(AI_URL,{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json','x-app-token':AI_TOKEN},
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',
         max_tokens:1000,
         messages:[{
           role:'user',
           content:[
-            {type:'image',source:{type:'base64',media_type:'image/jpeg',data:camImageB64}},
+            {type:'image',source:{type:'base64',media_type:'image/jpeg',data:imgSend}},
             {type:'text',text:`Ты сканер товаров для кассира. Внимательно изучи фото упаковки:
 - Прочитай весь текст на упаковке (название, бренд, состав, вес)
 - Запомни цвет упаковки, логотип, дизайн
@@ -1368,7 +2144,7 @@ matches отсортируй по score от высокого к низкому.
         }]
       })
     });
-    const data=await resp.json();
+    const data=await resp.json();if(data.error)throw new Error(typeof data.error==='string'?data.error:(data.error.message||'ошибка ИИ'));
     const text=data.content?.[0]?.text||'';
     const clean=text.replace(/```json|```/g,'').trim();
     const parsed=JSON.parse(clean);
@@ -1408,7 +2184,7 @@ matches отсортируй по score от высокого к низкому.
           <img class="cam-results-img" src="data:image/jpeg;base64,${camImageB64}">
           <div class="cam-ai-tag">
             <span style="font-size:20px">🤖</span>
-            <div><div class="cam-ai-label">Claude определил</div><div class="cam-ai-name">${aiName}</div></div>
+            <div><div class="cam-ai-label">ИИ определил</div><div class="cam-ai-name">${aiName}</div></div>
           </div>
           <div class="cam-results-title">Найдено в каталоге — ${found.length}</div>
           ${itemsHtml}
@@ -1422,7 +2198,7 @@ matches отсортируй по score от высокого к низкому.
           <div class="cam-notfound">
             <div class="cam-notfound-icon">🔍</div>
             <div class="cam-notfound-title">Товар не найден</div>
-            ${aiName?`<div class="cam-notfound-ai">Claude определил: <strong>${aiName}</strong></div>`:''}
+            ${aiName?`<div class="cam-notfound-ai">ИИ определил: <strong>${aiName}</strong></div>`:''}
             <div class="cam-notfound-sub">Этого товара нет в базе</div>
             <button class="cam-open-btn" onclick="camRetake()">📷 Попробовать снова</button>
           </div>
@@ -1495,9 +2271,11 @@ function sendDeliveryNotification(){
 // на главную, а не закрывает сайт. На главном экране первое "назад" открывает
 // диалог подтверждения выхода вместо мгновенного закрытия сайта.
 function anyOverlayOpen(){
-  return !!document.querySelector('.modal-overlay.open, #cam-modal.open, #cam-live-wrap.open, #barcode-overlay.open');
+  return !!document.querySelector('.modal-overlay.open, #cam-modal.open, #cam-live-wrap.open, #barcode-overlay.open, #ai-chat.open, #fin-panel.open');
 }
 function closeTopOverlay(){
+  if(document.getElementById('fin-panel').classList.contains('open')){closeFin();return;}
+  if(document.getElementById('ai-chat').classList.contains('open')){closeChat();return;}
   if(document.getElementById('barcode-overlay').classList.contains('open')){closeBarcodeScanner();return;}
   if(document.getElementById('cam-live-wrap').classList.contains('open')){stopCamLive();return;}
   if(document.getElementById('cam-modal').classList.contains('open')){closeCamModal();return;}
@@ -1528,6 +2306,108 @@ window.addEventListener('popstate',function(){
 });
 history.pushState({dastanShop:true},'');
 
+// ---- ИИ-ПОМОЩНИК (чат) + ФИНАНСЫ ----
+let aiChat=[],aiBusy=false,finLoaded=false;
+function esc2(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function aiFmt(t){return esc2(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');}
+
+function shopCtx(){
+  const P=Object.entries(window._products||{}),C=window._categories||{},D=Object.values(window._deliveries||{});
+  const cn=id=>C[id]?C[id].name:'';
+  const today=getTodayStr();
+  const upcoming=D.filter(d=>d.date>=today).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,15);
+  const past=D.filter(d=>d.date<today).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);
+  const noPhoto=P.filter(([,p])=>!p.imageUrl).map(([,p])=>p.name);
+  const noBar=P.filter(([,p])=>!p.barcode&&!p.barcodes).map(([,p])=>p.name);
+  const noPrice=P.filter(([,p])=>!p.price).map(([,p])=>p.name);
+  const dl=d=>({дата:d.date,компания:d.company,сумма:d.amount,заметка:d.note||''});
+  return{
+    сегодня:today,
+    всего_товаров:P.length,
+    категории:Object.values(C).map(c=>c.name+(c.parentId&&C[c.parentId]?' (в '+C[c.parentId].name+')':'')),
+    товары:P.slice(0,350).map(([,p])=>[p.name,p.weight||'',(p.price||0)+' ₸',cn(p.catId),p.variants?'варианты: '+Object.values(p.variants).map(v=>v.weight+'='+v.price).join('; '):''].filter(Boolean).join(' | ')),
+    ближайшие_поставки:upcoming.map(dl),
+    прошлые_поставки:past.map(dl),
+    без_фото:{количество:noPhoto.length,примеры:noPhoto.slice(0,15)},
+    без_штрихкода:{количество:noBar.length,примеры:noBar.slice(0,15)},
+    без_цены:{количество:noPrice.length,примеры:noPrice.slice(0,15)}
+  };
+}
+function aiSystem(){
+  return 'Ты ИИ-помощник магазина Dastan Shop (Алматинская область, Казахстан, цены в тенге ₸). Помогаешь владельцу и кассирам: найти товар и цену, увидеть ближайшие поставки, найти пробелы в каталоге, придумать описания товаров и идеи акций. Отвечай коротко и по-русски, используй только данные ниже. В каталоге НЕТ остатков и продаж — если спрашивают об этом, скажи прямо. Финансовые данные тебе недоступны: они в разделе «Финансы» (кнопка справа сверху). Не выдумывай товары и цены.\n\nДанные магазина: '+JSON.stringify(shopCtx());
+}
+function localShopSummary(){
+  const x=shopCtx(),L=[];
+  L.push('📦 Товаров в каталоге: '+x.всего_товаров+', категорий: '+x.категории.length+'.');
+  if(x.ближайшие_поставки.length)L.push('🚚 Ближайшие поставки:\n'+x.ближайшие_поставки.slice(0,5).map(d=>'• '+formatDate(d.дата)+' — '+d.компания+', '+fmt(d.сумма)+' ₸').join('\n'));
+  else L.push('🚚 Ближайших поставок нет.');
+  const gaps=[];
+  if(x.без_фото.количество)gaps.push('без фото: '+x.без_фото.количество);
+  if(x.без_штрихкода.количество)gaps.push('без штрихкода: '+x.без_штрихкода.количество);
+  if(x.без_цены.количество)gaps.push('без цены: '+x.без_цены.количество);
+  L.push(gaps.length?'⚠️ Чего не хватает: '+gaps.join(', ')+'.':'✅ У всех товаров есть фото, штрихкод и цена.');
+  return L.join('\n\n');
+}
+function aiRender(){
+  const box=document.getElementById('ai-msgs');if(!box)return;
+  let h='';
+  if(!aiChat.length)h='<div class="aim a">'+aiFmt(AI_URL?'Привет! Я знаю ваш каталог, цены и поставки. Спросите, например: «сколько стоит …», «какие поставки на этой неделе?» или «придумай описание для …». Деньги и отчёты — в разделе «Финансы» справа сверху.':'Привет! ИИ-сервер ещё не подключён, но краткую сводку по каталогу я покажу. Нажмите «Сводка по каталогу». Деньги и отчёты — в разделе «Финансы» справа сверху.')+'</div>';
+  h+=aiChat.map(m=>'<div class="aim '+(m.role==='user'?'u':'a')+'">'+aiFmt(m.content)+'</div>').join('');
+  if(aiBusy)h+='<div class="aim a w">Думаю…</div>';
+  box.innerHTML=h;box.scrollTop=box.scrollHeight;
+  document.getElementById('ai-chips').innerHTML=['Сводка по каталогу','Ближайшие поставки','Чего не хватает в каталоге?','Идеи для акций'].map(t=>'<button class="aic-chip" onclick="aiSend(\''+t+'\')">'+t+'</button>').join('');
+  const b=document.getElementById('ai-send-btn');if(b)b.disabled=aiBusy;
+}
+async function aiSend(q){
+  const inp=document.getElementById('ai-input');
+  q=(typeof q==='string'&&q?q:inp.value).trim();
+  if(!q||aiBusy)return;
+  inp.value='';
+  aiChat.push({role:'user',content:q});aiBusy=true;aiRender();
+  let reply='';
+  if(!AI_URL){
+    reply=localShopSummary()+'\n\n(Чтобы я отвечал на любые вопросы, подключите ИИ: впишите AI_URL и AI_TOKEN в начале скрипта сайта.)';
+  }else{
+    try{
+      let hist=aiChat.slice(-6);
+      while(hist.length&&hist[0].role!=='user')hist.shift();
+      const r=await fetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json','x-app-token':AI_TOKEN},body:JSON.stringify({max_tokens:1500,system:aiSystem(),messages:hist.map(m=>({role:m.role,content:m.content}))})});
+      const j=await r.json();
+      if(j.error)throw new Error(typeof j.error==='string'?j.error:(j.error.message||'ошибка ИИ'));
+      reply=(j.content&&j.content[0]&&j.content[0].text)||'';
+      if(!reply)throw new Error('пустой ответ');
+    }catch(e){reply='⚠️ ИИ сейчас недоступен ('+e.message+').\n\n'+localShopSummary();}
+  }
+  aiChat.push({role:'assistant',content:reply});aiBusy=false;aiRender();
+}
+function openChat(){document.getElementById('ai-chat').classList.add('open');aiRender();}
+function closeChat(){closeFin();document.getElementById('ai-chat').classList.remove('open');}
+function openFin(){
+  if(!finLoaded){
+    const src=document.getElementById('fin-src').textContent.replace(/<\\\/script>/g,'<'+'/script>');
+    document.getElementById('fin-frame').srcdoc=src;
+    finLoaded=true;
+  }
+  document.getElementById('fin-panel').classList.add('open');
+}
+function closeFin(){document.getElementById('fin-panel').classList.remove('open');}
+
+// уменьшаем фото перед отправкой ИИ (быстрее и дешевле)
+function shrinkB64(b64,max){
+  return new Promise(res=>{
+    const img=new Image();
+    img.onload=()=>{
+      const s=Math.min(1,max/Math.max(img.width,img.height));
+      if(s>=1&&b64.length<900000){res(b64);return;}
+      const c=document.createElement('canvas');c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      res(c.toDataURL('image/jpeg',0.8).split(',')[1]);
+    };
+    img.onerror=()=>res(b64);
+    img.src='data:image/jpeg;base64,'+b64;
+  });
+}
+
 // ---- UTILS ----
 function getTodayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function fmt(n){return Number(n).toLocaleString('ru-RU');}
@@ -1535,6 +2415,7 @@ function formatDate(str){if(!str)return'—';const[y,m,d]=str.split('-');const m
 function closeIfOutside(e,id){if(e.target===document.getElementById(id))document.getElementById(id).classList.remove('open');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
+window.openChat=openChat;window.closeChat=closeChat;window.openFin=openFin;window.closeFin=closeFin;window.aiSend=aiSend;
 window.switchView=switchView;window.goBack=goBack;window.onAddBtn=onAddBtn;window.onChatBtn=onChatBtn;
 window.onHomeSearch=onHomeSearch;window.onHeaderSearch=onHeaderSearch;
 window.installApp=installApp;window.allowPush=allowPush;
@@ -1559,3 +2440,5 @@ window.setWeightUnit=setWeightUnit;window.confirmExitYes=confirmExitYes;window.c
 </script>
 </body>
 </html>
+
+  
