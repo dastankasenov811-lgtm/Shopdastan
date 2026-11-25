@@ -37,9 +37,9 @@ function invFileB64(f){
   });
 }
 function invCatalogLines(){return Object.entries(window._products||{}).slice(0,400).map(([id,p])=>id+' | '+p.name+(p.weight?' | '+p.weight:'')).join('\n');}
-async function invAnalyze(b64){
+async function invAnalyze(b64s){
   const sys='Ты читаешь фото накладной поставщика для магазина в Казахстане (валюта — тенге ₸). Верни ТОЛЬКО JSON такого вида: {"company":"поставщик или null","date":"YYYY-MM-DD или null","doc_no":"номер или null","total":число или null,"items":[{"name":"название товара как в накладной","weight":"вес или объём (например 1 л, 500 г), если указан, иначе null","unit":"единица измерения (шт, кг, л, уп) или null","qty":число или null,"price":число (цена за единицу) или null,"sum":число или null,"barcode":"штрихкод только цифрами или null","match_id":"ID из каталога, если это тот же товар, иначе null"}]}. Правила: не выдумывай позиции и числа, нечитаемое ставь null; числа пиши без пробелов и без знака валюты. В накладных часто есть колонка со штрихкодами (ШК, EAN, штрих-код): читай каждую цифру внимательно, обычно 13 цифр (иногда 8 или 12); если цифры нечёткие, ставь null и не угадывай. match_id ставь только при уверенном совпадении (тот же вид товара, бренд и вес). Сегодня '+getTodayStr()+'.';
-  const r=await fetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json','x-app-token':AI_TOKEN},body:JSON.stringify({max_tokens:4096,json:true,system:sys,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:'image/jpeg',data:b64}},{type:'text',text:'Каталог магазина (ID | название | вес):\n'+invCatalogLines()}]}]})});
+  const r=await fetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json','x-app-token':AI_TOKEN},body:JSON.stringify({max_tokens:4096,json:true,system:sys,messages:[{role:'user',content:b64s.map(b=>({type:'image',source:{type:'base64',media_type:'image/jpeg',data:b}})).concat([{type:'text',text:(b64s.length>1?'Фото накладной: '+b64s.length+' шт. Это одна накладная (страницы или части). Объедини позиции со всех фото, не дублируй одинаковые строки.\n':'')+'Каталог магазина (ID | название | вес):\n'+invCatalogLines()}])}]})});
   const j=await r.json();
   if(j.error)throw new Error(typeof j.error==='string'?j.error:(j.error.message||'ошибка ИИ'));
   const txt=(j.content&&j.content[0]&&j.content[0].text)||'';
@@ -72,24 +72,36 @@ async function invLoadFinBranches(d){
   const pref=d.finBranches.find(b=>/магаз/i.test(b.name))||d.finBranches[0];
   d.finBranch=pref?pref.id:'__new';
 }
+const invSleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function invAnalyzeRetry(b64s,msg){
+  const waits=[2,4,6,8,10,12,15,20];let last=null;
+  for(let i=0;i<=waits.length;i++){
+    try{return await invAnalyze(b64s);}catch(err){
+      last=err;
+      if(/forbidden|bad origin|AI_URL/i.test(err.message))break;
+      if(i<waits.length){msg.content='⏳ Читаю накладную… ИИ занят, пробую снова (попытка '+(i+2)+')';aiRender();await invSleep(waits[i]*1000);}
+    }
+  }
+  throw last;
+}
 async function invPick(e){
-  const f=e.target.files&&e.target.files[0];e.target.value='';if(!f)return;
+  const files=Array.from(e.target.files||[]).slice(0,4);e.target.value='';if(!files.length)return;
   if(!AI_URL){aiChat.push({role:'assistant',content:'Чтобы читать накладные, нужен ИИ-сервер (AI_URL).',x:1});aiRender();return;}
-  aiChat.push({role:'user',content:'📄 Фото накладной',x:1});aiBusy=true;aiRender();
+  aiChat.push({role:'user',content:'📄 Фото накладной'+(files.length>1?' ('+files.length+' шт.)':''),x:1});aiBusy=true;aiRender();
+  const msg={role:'assistant',content:'⏳ Читаю накладную…',x:1};aiChat.push(msg);aiBusy=false;aiRender();
   try{
-    const d=await invAnalyze(await invFileB64(f));
+    const b64s=[];for(const f of files)b64s.push(await invFileB64(f));
+    const d=await invAnalyzeRetry(b64s,msg);
     await invLoadFinBranches(d);
     invPending=d;
     const found=d.items.filter(i=>i.matchId).length,fresh=d.items.length-found,withBc=d.items.filter(i=>i.barcode).length,pref=invPref();
-    aiBusy=false;
-    aiChat.push({role:'assistant',x:1,inv:1,content:'Накладная прочитана',html:
+    msg.inv=1;msg.content='Накладная прочитана';msg.html=
       '<b>📄 Накладная прочитана</b><br>'+(d.company?esc2(d.company)+' · ':'')+d.items.length+' поз. на сумму '+fmt(Math.round(d.total))+' ₸<br>✅ Есть в каталоге: <b>'+found+'</b> · ➕ Новых: <b>'+fresh+'</b> · 🔖 Со штрихкодом: <b>'+withBc+'</b>'+
       '<div class="inv-ask">Рассчитать цены с наценкой? <span class="inv-pct"><input id="inv-pct" type="number" inputmode="decimal" min="0" step="any" value="'+pref.markup+'"> %</span>'+
-      '<div class="inv-btns"><button class="aic-chip" onclick="invAsk(true)">Рассчитать</button><button class="aic-chip" onclick="invAsk(false)">Без наценки</button></div></div>'});
+      '<div class="inv-btns"><button class="aic-chip" onclick="invAsk(true)">Рассчитать</button><button class="aic-chip" onclick="invAsk(false)">Без наценки</button></div></div>';
     aiRender();
   }catch(err){
-    aiBusy=false;
-    aiChat.push({role:'assistant',x:1,content:'⚠️ Не получилось прочитать накладную: '+err.message+'\nСфотографируйте ровнее и ближе, чтобы текст и штрихкоды читались.'});
+    msg.content='Не смог прочитать накладную даже после нескольких попыток. Нажмите 📄 и отправьте фото ещё раз чуть позже. Лучше снимать ровно и близко.';
     aiRender();
   }
 }
@@ -213,7 +225,13 @@ async function invSave(){
   btn.disabled=true;btn.textContent='Записываю…';
   const ok=[],bad=[],ref=p=>window._ref(window._db,p);
   try{
-    const nr=window._push(ref('deliveries'));
+    // Фото накладной = машина уже приехала. Если эта поставка была запланирована, отмечаем её как приехавшую, а не создаём вторую
+    const nm=company.toLowerCase();
+    const plan=Object.entries(window._deliveries||{}).filter(([,x])=>x&&x.date>=getTodayStr()&&(String(x.company||'').toLowerCase().includes(nm)||nm.includes(String(x.company||'').toLowerCase())&&x.company)).sort((a,b)=>a[1].date.localeCompare(b[1].date))[0];
+    let nr;
+    if(plan&&d.date<=getTodayStr()&&confirm('У вас запланирована поставка «'+plan[1].company+'» на '+formatDate(plan[1].date)+'. Отметить её как приехавшую сегодня (и не создавать вторую)?\n\nОК — да, обновить её\nОтмена — создать новую')){
+      nr=window._ref(window._db,'deliveries/'+plan[0]);
+    }else nr=window._push(ref('deliveries'));
     await window._set(nr,{company,date:d.date,amount:d.total,note:'Накладная'+(d.docNo?' №'+d.docNo:'')+', '+d.items.length+' поз.',docNo:invNz(d.docNo),invoiceDate:invNz(d.invDate),
       items:d.items.map(it=>({name:it.name,weight:invNz(it.weight),unit:invNz(it.unit),qty:invNz(it.qty),price:invNz(it.price),sum:invNz(it.sum),barcode:invBarcodeUsable(it)?it.barcode:null,salePrice:invNz(invSaleOf(it,d)),productId:it.matchId||null})),updatedAt:Date.now()});
     ok.push('Поставка «'+company+'» на '+fmt(Math.round(d.total))+' ₸ записана ('+formatDate(d.date)+')');
@@ -268,3 +286,5 @@ async function invSave(){
   showToast(bad.length?'Записано не всё — смотрите чат':'Накладная записана ✓');
 }
 
+
+(function(){var f=document.getElementById('inv-file');if(f)f.multiple=true;})();
