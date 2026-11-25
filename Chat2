@@ -1,0 +1,45 @@
+// chat2.js — дополнение к index.html: имя dastan.gpt, свободные ответы ИИ, понятное сообщение при перегрузке
+(function(){
+  // ---- 1. ИИ отвечает на любые вопросы, а данные магазина использует, когда вопрос про магазин ----
+  window.aiSystem=function(){
+    return 'Тебя зовут dastan.gpt. Ты умный универсальный помощник владельца магазина Dastan Shop (Алматинская область, Казахстан, валюта — тенге ₸). Если спросят, как тебя зовут, отвечай: dastan.gpt. Отвечай по-русски, понятно и по делу, на ЛЮБЫЕ вопросы: бизнес, товары, цены, тексты, переводы, расчёты, советы, повседневные вопросы. Если вопрос про магазин — опирайся на данные ниже и не выдумывай товары и цены. В каталоге НЕТ остатков и продаж — если спрашивают о них, скажи прямо. Финансовые данные тебе недоступны: они в разделе «Финансы» (кнопка справа сверху). Для вопросов не про магазин данные ниже не нужны.\n\nДанные магазина: '+JSON.stringify(shopCtx());
+  };
+  var NEEDS_WEB=/сегодня|сейчас|новост|курс|погод|последн|актуальн|в интернете|найди в сети|2026|2027/i;
+  window.aiSend=async function(q){
+    var inp=document.getElementById('ai-input');
+    q=(typeof q==='string'&&q?q:inp.value).trim();
+    if(!q||aiBusy)return;
+    inp.value='';
+    aiChat.push({role:'user',content:q});aiBusy=true;aiRender();
+    var reply='';
+    if(!AI_URL){
+      reply=localShopSummary()+'\n\n(Чтобы я отвечал на любые вопросы, подключите ИИ: впишите AI_URL и AI_TOKEN.)';
+    }else{
+      try{
+        var hist=aiChat.filter(function(m){return !m.x;}).slice(-6);
+        while(hist.length&&hist[0].role!=='user')hist.shift();
+        var body={max_tokens:2000,system:aiSystem(),messages:hist.map(function(m){return{role:m.role,content:m.content};})};
+        if(NEEDS_WEB.test(q))body.tools=[{type:'web_search'}];
+        var tries=[0,2000,4000,7000,10000],lastErr=null;
+        for(var k=0;k<tries.length&&!reply;k++){
+          if(tries[k])await new Promise(function(res){setTimeout(res,tries[k]);});
+          try{
+            var r=await fetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json','x-app-token':AI_TOKEN},body:JSON.stringify(body)});
+            var j=await r.json();
+            if(j.error)throw new Error(typeof j.error==='string'?j.error:(j.error.message||'ошибка ИИ'));
+            reply=(j.content&&j.content[0]&&j.content[0].text)||'';
+            if(!reply)throw new Error('пустой ответ');
+          }catch(e2){lastErr=e2;if(/forbidden|bad origin/i.test(e2.message))break;}
+        }
+        if(!reply)throw lastErr||new Error('нет ответа');
+      }catch(e){
+        reply='⏳ '+(/бесплатные ИИ/.test(e.message)?e.message:'ИИ сейчас недоступен ('+e.message+'). Попробуйте чуть позже.');
+      }
+    }
+    aiChat.push({role:'assistant',content:reply});aiBusy=false;aiRender();
+  };
+
+  // ---- имя ----
+  var tt=document.querySelector('.aic-title span');if(tt)tt.textContent='dastan.gpt';
+  var ph=document.getElementById('ai-input');if(ph)ph.placeholder='Спросите dastan.gpt…';
+})();
